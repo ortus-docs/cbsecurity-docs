@@ -5,7 +5,7 @@
 <-- <
 Declare as many rule elements as you want, order is important 
 Remember that the securelist can contain a list of regular
-expression if you want
+expressions if you want
 
 ex: All events in the user handler
  user\..*
@@ -14,7 +14,7 @@ ex: All events
 ex: All events that start with admin
  ^admin
 
-If you are not using regular expression, just write the text
+If you are not using regular expressions, just write the text
 that can be found in an event.
 -->
 <rules>
@@ -57,7 +57,7 @@ As you can see from the sample, the first rule has the following elements
 <match>event</match>
 ```
 
-So it will match the icoming event.
+So it will match the incoming event.
 
 ```text
 <whitelist>user\.login,user\.logout,^main.*</whitelist>
@@ -69,7 +69,7 @@ This means that the following events will not be verified for security: user.log
 <securelist>^user\..*, ^admin</securelist>
 ```
 
-This means that any event that starts with the word user. will be secured and anything that starts with the word admin will also be secured, unless the incoming event matches a pattern in the whitelist element.
+This means that any event that starts with the word user will be secured and anything that starts with the word admin will also be secured, unless the incoming event matches a pattern in the whitelist element.
 
 ```text
 <roles>admin</roles>
@@ -97,7 +97,7 @@ The second rule has the following elements:
 <match>event</match>
 ```
 
-So it will match the icoming event.
+So it will match the incoming event.
 
 ```text
 <whitelist></whitelist>
