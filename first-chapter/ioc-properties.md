@@ -1,7 +1,3 @@
----
-description: Inversion of Control Properties
----
-
 # IOC Properties
 
 The following are properties used when the source of the rules is ioc or coming from an IoC module
