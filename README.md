@@ -8,7 +8,7 @@ This module will provide your application with a security rule engine.
 
 ### IMPORTANT LINKS
 
-* [http://www.coldbox.org/forgebox/view/cbsecurity](http://www.coldbox.org/forgebox/view/cbsecurity)
+* [https://www.forgebox.io/view/cbsecurity](https://www.forgebox.io/view/cbsecurity)
 
 ### SYSTEM REQUIREMENTS
 
