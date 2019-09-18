@@ -31,6 +31,6 @@
 
 ## Security Validators
 
-* [CFSecurity Validator](security-validators/default-security.md)
+* [CFML Security Validator](security-validators/default-security.md)
 * [Custom Validator](security-validators/custom-security-validator-object.md)
 
