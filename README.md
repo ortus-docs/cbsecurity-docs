@@ -1,9 +1,10 @@
 # Introduction
 
-This module will enhance your ColdBox applications by providing out of the box security in the form of:
+The ColdBox `cbsecurity` module will enhance your ColdBox applications by providing out of the box security in the form of:
 
-* A security rule engine for incoming requests
+* A security rule engine for protecting incoming requests
 * Annotation driven security for handlers and actions
+* Authentication services
 
 The module also has the capability to distinguish between invalid authentication and invalid authorization and determine an outcome of the process. The module also supports the ability to load/unload security rules from contributing modules. So you can create a nice HMVC hierarchy of security.
 
@@ -24,7 +25,7 @@ The module also has the capability to distinguish between invalid authentication
 
 ## Versioning <a id="versioning"></a>
 
-The ColdBox ORM Module is maintained under the [Semantic Versioning](http://semver.org/) guidelines as much as possible.Releases will be numbered with the following format:
+The ColdBox Security Module is maintained under the [Semantic Versioning](http://semver.org/) guidelines as much as possible.  Releases will be numbered with the following format:
 
 ```text
 <major>.<minor>.<patch>

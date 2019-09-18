@@ -4,7 +4,7 @@ In this section you will find the release notes for each version we release unde
 
 ## Version 2.0
 
-Version 2 is a major release of cbsecurity.  We completely refactored the engine to make it more modern and to adhere to our new coding standards.  We then proceeded to enhance it to tap into our HMVC approach and allow rules to be contributed from modules themselves. We also added annotation driven security to complete the ability to secure not only incoming requests by rules but also by easy annotations.
+Version 2 is a major release of our security module.  We completely refactored the engine to make it more modern and to adhere to our new coding standards.  We then proceeded to enhance it to tap into our HMVC approach and allow rules to be contributed from modules themselves. We also added annotation driven security to complete the ability to secure not only incoming requests by rules but also by easy annotations.
 
 We have made great strides in this release to make it a one-stop-shop for security concerns within ColdBox applications.
 
