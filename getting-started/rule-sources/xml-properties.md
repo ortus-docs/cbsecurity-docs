@@ -1,4 +1,4 @@
-# XML Properties
+# XML Rules
 
 The following are properties used when the source of the rules is xml
 

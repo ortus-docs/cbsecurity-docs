@@ -1,4 +1,4 @@
-# Declaring the Interceptor
+# Configuration
 
 In order to enable ColdBox security you must register the Security interceptor in your parent or other module configuration's `interceptors` section:
 
@@ -18,7 +18,7 @@ interceptors = [
 **IMPORTANT** If you are using SES or URL mappings in your ColdBox 4 application, make sure that you declare the security interceptor after the SES interceptor. Interceptors require order, so security needs for the URL to be translated first. In coldbox 5 SES is handled by the Routing service, so you don't need this SES interceptor.
 {% endhint %}
 
-### Global Properties
+## Global Properties
 
 | Property | Type | Required | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |

@@ -1,4 +1,4 @@
-# JSON Properties
+# JSON Rules
 
 The following are properties used when the source of the rules is json
 

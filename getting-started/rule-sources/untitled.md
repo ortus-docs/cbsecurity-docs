@@ -1,4 +1,4 @@
-# DB Properties
+# DB Rules
 
 The following are properties used when the source of the rules is db or coming from the database.
 

@@ -28,7 +28,7 @@ that can be found in an event.
     </rule>
 
     <rule>
-       	<match>event</match>
+           <match>event</match>
         <whitelist></whitelist>
         <securelist>^moderator</securelist>
         <roles>admin,moderator</roles>
@@ -37,7 +37,7 @@ that can be found in an event.
     </rule>
 
     <rule>
-       	<match>url</match>
+           <match>url</match>
         <whitelist></whitelist>
         <securelist>/secured.*</securelist>
         <roles>admin,paid_subscriber</roles>
@@ -49,7 +49,7 @@ that can be found in an event.
 
 > **IMPORTANT** Please remember to white list your main events \(implicit\), login and logout events if you will be securing the entire application.
 
-### First Rule Analysis
+## First Rule Analysis
 
 As you can see from the sample, the first rule has the following elements
 
@@ -89,7 +89,7 @@ This probably means that I am doing my own security validation and apart from ha
 
 Then if it does not validate it will use this redirect element to relocate via `setNextEvent()`
 
-### Second Rule Analysis
+## Second Rule Analysis
 
 The second rule has the following elements:
 
@@ -129,7 +129,7 @@ This probably means that I am doing my own security validation and apart from ha
 
 Then if it does not validate it will use this redirect element to relocate via `setNextEvent()`
 
-### Third Rule Analysis
+## Third Rule Analysis
 
 The third rule has the following elements:
 
