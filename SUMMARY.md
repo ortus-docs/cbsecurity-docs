@@ -15,19 +15,22 @@
 * [Overview](getting-started/untitled-1.md)
 * [Configuration](getting-started/first-chapter.md)
 * [Rule Sources](getting-started/rule-sources/README.md)
+  * [DB Rules](getting-started/rule-sources/untitled.md)
   * [Inline Rules](getting-started/rule-sources/inline-rules.md)
   * [JSON Rules](getting-started/rule-sources/json-properties.md)
-  * [XML Rules](getting-started/rule-sources/xml-properties.md)
-  * [DB Rules](getting-started/rule-sources/untitled.md)
   * [Model Rules](getting-started/rule-sources/model-rules.md)
   * [Module Rules](getting-started/rule-sources/module-rules.md)
+  * [XML Rules](getting-started/rule-sources/xml-properties.md)
 
 ## Usage
 
-* [Security Rules](usage/untitled-1/README.md)
-  * [Sample JSON Rules](usage/untitled-1/sample-json-rules.md)
-  * [Sample XML Rules](usage/untitled-1/sample-xml-rules.md)
-* [\_securedURL key](usage/_securedurl-key.md)
-* [Default Security](usage/default-security.md)
-* [Custom Security Validator Object](usage/custom-security-validator-object.md)
+* [Security Rules](usage/untitled-1.md)
+* [Security Annotations](usage/security-annotations.md)
+* [Secured URL](usage/_securedurl-key.md)
+* [Interceptions](usage/interceptions.md)
+
+## Security Validators
+
+* [CFSecurity Validator](security-validators/default-security.md)
+* [Custom Validator](security-validators/custom-security-validator-object.md)
 

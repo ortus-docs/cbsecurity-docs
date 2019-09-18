@@ -1,10 +1,6 @@
 # Overview
 
-The topic of security is always an interesting and essential one. However, most MVC frameworks offer very loose security when it comes down to an event-oriented architecture. ColdBox [Interceptors](https://coldbox.ortusbooks.com/digging-deeper/interceptors) change this behavior as we have the ability to intercept requests at any point in time during our application executions. With this feature we introduce our **Security Module** that implements what we call **ColdBox Security**. 
-
-With the ColdBox security module you will be able to **secure** all your ColdBox events from execution. However, as we all know, every application has different requirements and since we are keen on extensibility, the module can be configured to work with whatever security authentication and authorization mechanism you might have.  We call this, the security validator.
-
-
+With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations. However, as we all know, every application has different requirements and since we are keen on extensibility, the module can be configured to work with whatever security **authentication** and **authorization** mechanism you might have.  We call this, the security validator.
 
 ![](https://github.com/ColdBox/cbox-security/wiki/ColdBoxSecurity.jpg)
 
@@ -16,7 +12,7 @@ The `preProcess` interception point happens before any event executes in a ColdB
 
 ## How Does Validation Happen?
 
-How does the interceptor know a user doesn't or does have access? Well, here is where you register a Validator CFC \(`validator` setting\) with the interceptor that implements two validation functions: `ruleValidator() and annotationValidator()` that will allow the module to know if the user is logged in and has the right authorizations.
+How does the interceptor know a user doesn't or does have access? Well, here is where you register a Validator CFC \(`validator` setting\) with the interceptor that implements two validation functions: `ruleValidator()` and `annotationValidator()` that will allow the module to know if the user is logged in and has the right authorizations to continue with the execution.
 
 {% hint style="info" %}
 You can find an interface for these methods in `cbsecurity.interfaces.IUserValidator`
@@ -30,19 +26,19 @@ The validator's job is to tell back to the firewall if they are allowed access a
 
 ## Validation Process
 
-Once the firewall has the results and the user is NOT allowed access. Then the following will occur:
+Once the firewall has the results and the user is **NOT** allowed access. Then the following will occur:
 
-* The request that was blocked will be logged via LogBox
+* The request that was blocked will be logged via LogBox with the offending IP and extra metadata
 * The current requested URL will be flashed as `_securedURL` so it can be used in relocations
 * If using a rule, the rule will be stored in `prc` as `cbsecurity_matchedRule`
 * The validator results will be stored in `prc` as `cbsecurity_validatorResults`
 * If the type of invalidation is `authentication` the `cbSecurity_onInvalidAuthentication` interception will be announced
 * If the type of invalidation is `authorization` the `cbSecurity_onInvalidAuthorization` interception will be announced
-* If the type is `authentication` the default action for that type will be executed \(An override or a relocation\) `invalidAuthenticationEvent`
-* If the type is `authorization` the default action for that type will be executed \(An override or a relocation\) `invalidAuthorizationEvent`
+* If the type is `authentication` the default action \(`defaultAuthenticationAction`\) for that type will be executed \(An override or a relocation\) will occur against the setting `invalidAuthenticationEvent` which can be an event or a destination URL.
+* If the type is `authorization` the default action \(`defaultAuthorizationAction`\) for that type will be executed \(An override or a relocation\) `invalidAuthorizationEvent` which can be an event or a destination URL.
 
 {% hint style="warning" %}
-If you are securing a module, then the module has the capability to override the global settings if it declares them in its ModuleConfig.cfc
+If you are securing a module, then the module has the capability to override the global settings if it declares them in its `ModuleConfig.cfc`
 {% endhint %}
 
 ## Security Rules
@@ -139,7 +135,7 @@ cbSecurity : {
 
 ## Annotation Security
 
-The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action or both. The default value of the `secured` annotation is a boolean `true`. Which means, we need a user to be authenticated in order to access it.
+The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action or both. The default value of the `secured` annotation is a Boolean `true`. Which means, we need a user to be authenticated in order to access it.
 
 {% code-tabs %}
 {% code-tabs-item title="handlers" %}
@@ -204,7 +200,7 @@ By having the ability to annotate the handler and also the action you create a c
 
 ## Security Validations
 
-As we mentioned at the beginning of this overview, the security module will use a Validator object in order to determine if the user has access/authorization or not.  This setting is the `validator` setting and will point to the object that implements the following methods: `ruleValidator() and annotationValidator().`
+As we mentioned at the beginning of this overview, the security module will use a Validator object in order to determine if the user has authentication/authorization or not.  This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
 
 {% code-tabs %}
 {% code-tabs-item title="models/MyValidator.cfc" %}
@@ -238,7 +234,7 @@ struct function annotationValidator( required securedValue, required controller 
 
 Each validator must return a `struct` with the following keys:
 
-* `allow:boolean` A boolean indicator if authentication or authorization was violated
+* `allow:boolean` A Boolean indicator if authentication or authorization was violated
 * `type:stringOf(authentication|authorization)` A string that indicates the type of violation: authentication or authorization.
 
 ### CFValidator
@@ -250,6 +246,41 @@ The default security is based on what ColdFusion gives you for basic security us
 {% embed url="https://cfdocs.org/cfloginuser" %}
 
 {% embed url="https://cfdocs.org/cflogin" %}
+
+{% code-tabs %}
+{% code-tabs-item title="cbsecurity/models/CFValidator.cfc" %}
+```javascript
+struct function ruleValidator( required rule, required controller ){
+	return validateSecurity( arguments.rule.roles );
+}
+
+struct function annotationValidator( required securedValue, required controller ){
+	return validateSecurity( arguments.securedValue );
+}
+
+private function validateSecurity( required roles ){
+	var results = { "allow" : false, "type" : "authentication" };
+
+	// Are we logged in?
+	if( isUserLoggedIn() ){
+
+		// Do we have any roles?
+		if( listLen( arguments.roles ) ){
+			results.allow 	= isUserInAnyRole( arguments.roles );
+			results.type 	= "authorization";
+		} else {
+			// We are satisfied!
+			results.allow.true;
+		}
+	}
+
+	return results;
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+
 
 ### Custom Validators
 
@@ -292,7 +323,10 @@ component singleton{
 
 ## Authentication vs Authorization
 
-The security module can distinguish between authentication issues and authorization issues.  Once these actions are identified, the security module can act upon the result of these actions.  These actions are based on the following 4 settings, but they all come down to two outcomes: a relocation, or an event override.
+The security module can distinguish between authentication issues and authorization issues.  Once these actions are identified, the security module can act upon the result of these actions.  These actions are based on the following 4 settings, but they all come down to two outcomes: 
+
+* a relocation to another event or URL
+* an event override
 
 | Setting | Default | Description |
 | :--- | :--- | :--- |
@@ -303,19 +337,19 @@ The security module can distinguish between authentication issues and authorizat
 
 ## Interceptions
 
-When invalid access or authorizations occur the interceptor will announce the following events:
+When invalid authentication or authorizations occur the interceptor will announce the following events:
 
 * `cbSecurity_onInvalidAuthentication`
 * `cbSecurity_onInvalidAuthorization`
 
 You will receive the following data in the `interceptData` struct:
 
-* `ip` : The offending Ip address
+* `ip` : The offending IP address
 * `rule` : The security rule intercepted or empty if annotations
 * `settings` : The firewall settings
 * `validatorResults` : The validator results
 * `annotationType` : The annotation type intercepted, `handler` or `action` or empty if rule driven
-* `processActions` : A boolean indicator that defaults to true. If you change this to false, then the interceptor won't fire the invalid actions. Usually this means, you manually will do them.
+* `processActions` : A Boolean indicator that defaults to **true**. If you change this to **false**, then the interceptor won't fire the invalid actions. Usually this means, you manually will do them.
 
 You can use these security listeners to do auditing, logging, or even override the result of the operation.
 

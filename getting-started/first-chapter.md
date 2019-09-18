@@ -1,5 +1,7 @@
 # Configuration
 
+## Security Settings
+
 By Default, the security module will register itself for you using the module configuration settings you define in the`config/ColdBox.cfc.`  Below you can find all the settings with their default value and description.
 
 {% code-tabs %}
@@ -49,7 +51,39 @@ moduleSettings = {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-## Custom Interceptor
+## Automatic Firewall
+
+Please note that by default, the security firewall will be auto-registered for you.  If you do NOT want the firewall to be automatically registered for you, then use the `autoLoadFirewall` setting and make it false.  Then you can use the **Custom Firewall** approach below to register the firewall manually in the order of the interceptors that you would like.
+
+```javascript
+autoLoadFirewall : false
+```
+
+## Annotation Security
+
+By default, annotation security is enabled.  This will inspect ALL incoming event executions for the security annotations.  If you do not want to use annotation security we recommend you turn it off to avoid the inspection of events.
+
+```javascript
+handlerAnnotationSecurity : false
+```
+
+## Security Visualizer
+
+ColdBox security comes with a nice graphical visualizer for all the registered security rules and settings in your global firewall.  You can enable it by using the enableSecurityVisualizer setting.  
+
+```javascript
+enableSecurityVisualizer :  true
+```
+
+You can then visit the `/cbsecurity` URL and you will be presented with this magical tool:
+
+![](https://raw.githubusercontent.com/coldbox-modules/cbsecurity/development/test-harness/visualizer.png)
+
+{% hint style="danger" %}
+**Important** The visualizer is **disabled** by default and if it detects an environment of production, it will disable itself.
+{% endhint %}
+
+## Custom Firewalls
 
 You can also register multiple instances of the `cbsecurity` module using different configurations by just adding them to your app's config or even your module's configuration.  This will register a NEW firewall apart from the global security firewall registered using the global settings as defined above.
 
@@ -60,6 +94,7 @@ interceptors = [
 
     {
         class="cbsecurity.interceptors.Security",
+        name="FirewallName",
         properties={
             // All Settings from above
         }

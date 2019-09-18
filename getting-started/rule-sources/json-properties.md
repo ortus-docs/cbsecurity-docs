@@ -1,20 +1,46 @@
 # JSON Rules
 
-The following are properties used when the source of the rules is json
+If you have already a JSON file with your rules, then all you need to do is add the path \(relative or absolute\) to that file in the `rules` configuration key.  However, the path MUST include the keyword `json` in it.
 
-| Property | Type | Required | Default | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `rulesfile` | string | true if rulesSource = JSON | --- | The location of the security rules json file |
-
+{% code-tabs %}
+{% code-tabs-item title="config/Coldbox.cfc" %}
 ```javascript
-interceptors = [
-    {class="cbsecurity.interceptors.Security", name="ApplicationSecurity", properties={
-        useRegex = true, rulesSource = "json", validatorModel = "SecurityService",
-        rulesFile = "config/security.json.cfm"
-    }}
-];
+moduleSettings = {
+	// CB Security
+	cbSecurity : {
+		"rules" : "config/security.json.cfm"
+};
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
   
+Then your file can be something like this:
 
+{% code-tabs %}
+{% code-tabs-item title="config/security.json.cfm" %}
+```javascript
+[
+    {
+        "whitelist": "user\\.login,user\\.logout,^main.*",
+        "securelist": "^user\\.*, ^admin",
+        "match": "event",
+        "roles": "admin",
+        "permissions": "",
+        "redirect": "user.login",
+        "useSSL": false
+    },
+    {
+        "whitelist": "",
+        "securelist": "^shopping",
+        "match": "url",
+        "roles": "",
+        "permissions": "shop,checkout",
+        "redirect": "user.login",
+        "useSSL": true
+    }
+]
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
