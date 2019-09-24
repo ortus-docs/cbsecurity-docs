@@ -38,8 +38,8 @@
 
 ## JWT
 
-* [JWT Services](jwt/untitled.md)
+* [JWT Services](jwt/jwt-services.md)
 * [JWT Validator](jwt/jwt-validator.md)
-* [Token Storage](jwt/jwt-subject-inter.md)
-* [Interceptions](jwt/interceptions.md)
+* [Token Storage](jwt/jwt-token-storage.md)
+* [Interceptions](jwt/jwt-interceptions.md)
 
