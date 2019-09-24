@@ -28,9 +28,16 @@
 * [Security Annotations](usage/security-annotations.md)
 * [Secured URL](usage/_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
+* [Authentication Services](usage/authentication-services.md)
 
 ## Security Validators
 
 * [CFML Security Validator](security-validators/default-security.md)
 * [Custom Validator](security-validators/custom-security-validator-object.md)
+
+## JWT
+
+* [JWT Services](jwt/untitled.md)
+* [JWT Validator](jwt/jwt-validator.md)
+* [Token Storage](jwt/jwt-subject-inter.md)
 

@@ -38,6 +38,12 @@ moduleSettings = {
 		"rules"							: [],
 		// The validator is an object that will validate rules and annotations and provide feedback on either authentication or authorization issues.
 		"validator"						: "CFValidator@cbsecurity",
+		// The WireBox ID of the authentication service to use in cbSecurity which must adhere to the cbsecurity.interfaces.IAuthService interface.
+		"authenticationService"  		: "authenticationService@cbauth",
+		// WireBox ID of the user service to use
+		"userService"             		: "",
+		// The name of the variable to use to store an authenticated user in prc scope if using a validator that supports it.
+		"prcUserVariable"         		: "oCurrentUser",
 		// If source is model, the wirebox Id to use for retrieving the rules
 		"rulesModel"					: "",
 		// If source is model, then the name of the method to get the rules, we default to `getSecurityRules`
@@ -59,7 +65,37 @@ moduleSettings = {
 		// Activate handler/action based annotation security
 		"handlerAnnotationSecurity"		: true,
 		// Activate security rule visualizer, defaults to false by default
-		"enableSecurityVisualizer"		: false
+		"enableSecurityVisualizer"		: false,
+		// JWT Settings
+		"jwt"                     		: {
+			// The jwt secret encoding key to use
+			"secretKey"               : getSystemSetting( "JWT_SECRET", "" ),
+			// by default it uses the authorization bearer header, but you can also pass a custom one as well or as an rc variable.
+			"customAuthHeader"        : "x-auth-token",
+			// The expiration in minutes for the jwt tokens
+			"expiration"              : 60,
+			// If true, enables refresh tokens, longer lived tokens (not implemented yet)
+			"enableRefreshTokens"     : false,
+			// The default expiration for refresh tokens, defaults to 30 days
+			"refreshExpiration"       : 43200,
+			// encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
+			"algorithm"               : "HS512",
+			// Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
+			"requiredClaims"          : [] ,
+			// The token storage settings
+			"tokenStorage"            : {
+				// enable or not, default is true
+				"enabled"       : true,
+				// A cache key prefix to use when storing the tokens
+				"keyPrefix"     : "cbjwt_",
+				// The driver to use: db, cachebox or a WireBox ID
+				"driver"        : "cachebox",
+				// Driver specific properties
+				"properties"    : {
+					"cacheName" : "default"
+				}
+			}
+		}
 	}
 };
 ```

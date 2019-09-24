@@ -81,7 +81,7 @@ struct function annotationValidator( required securedValue, required controller 
 }
 
 private function permissionValidator( permissions, controller, rule ){
-	var results = { "allow" : false, "type" : "authentication" };
+	var results = { "allow" : false, "type" : "authentication", "messages" : "" };
 	var user 	= security.getCurrentUser();
 
 	// First check if user has been authenticated.

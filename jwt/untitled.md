@@ -1,0 +1,332 @@
+# JWT Services
+
+CBSecurity also provides you with a JWT \(Json Web Tokens\) authentication and authorization system. The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service \(`JwtService@cbsecurity`\) or using our helper method \(`jwtAuth()`\).
+
+```javascript
+// Injection
+property name="jwtService" inject="JwtService@cbsecurity";
+
+// Helper Method in any handler/layout/interceptors/views
+jwtAuth()
+```
+
+In order to begin exploring the JWT capabilities, let's explore how to configure it first.
+
+{% embed url="https://jwt.io/" %}
+
+## Configuration
+
+Our JWT services have several configuration settings, let's explore them:
+
+```javascript
+cbsecurity : {
+    // The WireBox ID of the authentication service to use in cbSecurity which must adhere to the cbsecurity.interfaces.IAuthService interface.
+    authenticationService  : "authenticationService@cbauth",
+    // WireBox ID of the user service to use
+    userService             : "",
+    // The name of the variable to use to store an authenticated user in prc scope if using a validator that supports it.
+    prcUserVariable         : "oCurrentUser",
+    // JWT Settings
+    jwt                     : {
+        // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
+        secretKey               : getSystemSetting( "JWT_SECRET", "" ),
+        // by default it uses the authorization bearer header, but you can also pass a custom one as well.
+        customAuthHeader        : "x-auth-token",
+        // The expiration in minutes for the jwt tokens
+        expiration              : 60, 
+        // encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
+		algorithm               : "HS512",
+        // Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
+        requiredClaims          : [] ,
+        // The token storage settings
+        tokenStorage            : {
+            // enable or not, default is true
+            "enabled"       : true
+            // A cache key prefix to use when storing the tokens
+            "keyPrefix"     : "cbjwt_", 
+            // The driver to use: db, cachebox or a WireBox ID
+            "driver"        : "cachebox",
+            // Driver specific properties
+            "properties"    : {
+                cacheName : "default"
+            }
+        }
+    }
+}
+```
+
+### Authentication Service
+
+The WireBox Id of the service to provide our authentication. cbauth is our default provider.
+
+### User Service
+
+The WireBox Id of the service to provide our user retrieval and validation functions
+
+### prcUserVariable
+
+The default variable name in the `prc` scope that will be used to store an authenticated user object if the jwt request is valid. The default is `prc.oCurrentUser`
+
+### secretKey
+
+The secret key is mandatory and its the way to sign the JWT tokens.  By default it will try to load an environment variable called `JWT_SECRET` if the setting is ommitted.
+
+### customAuthHeader
+
+By default, our jwt services will look into the `authorization` header for a bearer token. However, it can also look in a custom header by this name, which defaults to `x-auth-token`.  Finally, if not found, it will also look into the `rc` scope for a `rc[ 'x-auth-token' ]` as well.
+
+### Expiration
+
+The default expiration in minutes for the JWT tokens. Defaults to 60 minutes
+
+### Algorithm
+
+The encryption algorithm to use for the tokens.  The default is **HS512**, but the available ones for now are:
+
+* HS256
+* HS384
+* HS512
+
+### RequiredClaims
+
+This is an array of claim names that each token MUST have in order to be authenticated.  If a token comes in but does not have these claims in the payload structure, it will be deemed invalid.
+
+### Token Storage
+
+By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them and in the future provide refresh tokens.  We ship with two providers for token storage: db and cachebox.
+
+#### Enabled
+
+By default the token storage is enabled.
+
+#### KeyPrefix
+
+The key prefix to use when storing the keys in the permanent storage. Defaults to `cbjwt_`
+
+#### Driver
+
+The driver to use. Can be either **db** or **cachebox** or your own WireBox Id for using a custom storage.
+
+#### Properties
+
+A struct of properties to configure each storage with.
+
+## JWT Subject Interface
+
+The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements.  So your User object must implement our `JWTSubject` interface with the following functions:
+
+{% code-tabs %}
+{% code-tabs-item title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
+```javascript
+interface{
+
+    /**
+     * A struct of custom claims to add to the JWT token
+     */
+    struct function getJwtCustomClaims();
+
+    /**
+     * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
+     */
+    array function getJwtScopes();
+
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+Basically, it's two functions:
+
+* `getJwtCustomClaims()` - This is a struct of custom claims to incorporate into the token payload at construction time.  This can be ANYTHING you like
+* `getJwtScopes()` - We will also call this at construction time in order to incorporate the right permission scopes into the token according to your user. This must be an array of scopes/permissions.
+
+Since also the authentication services will be used with JWT, your user object might end up looking like this:
+
+{% code-tabs %}
+{% code-tabs-item title="models/User.cfc" %}
+```javascript
+component accessors="true" {
+
+	property name="auth" inject="authenticationService@cbauth";
+
+	property name="id";
+	property name="firstName";
+	property name="lastName";
+	property name="username";
+	property name="password";
+
+	function init(){
+		variables.id        = "";
+		variables.firstName = "";
+		variables.lastName  = "";
+		variables.username  = "";
+		variables.password  = "";
+
+		variables.permissions = [ "write", "read" ];
+
+		return this;
+	}
+
+	boolean function isLoaded(){
+		return ( !isNull( variables.id ) && len( variables.id ) );
+	}
+
+	/**
+	 * A struct of custom claims to add to the JWT token
+	 */
+	struct function getJWTCustomClaims(){
+		return { "role" : "admin" };
+	}
+
+	/**
+	 * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
+	 */
+	array function getJWTScopes(){
+		return variables.permissions;
+	}
+
+	/**
+	 * Verify if the user has one or more of the passed in permissions
+	 *
+	 * @permission One or a list of permissions to check for access
+	 *
+	 */
+	boolean function hasPermission( required permission ){
+		if ( isSimpleValue( arguments.permission ) ) {
+			arguments.permission = listToArray( arguments.permission );
+		}
+
+		return arguments.permission
+			.filter( function(item){
+				return ( variables.permissions.findNoCase( item ) );
+			} )
+			.len();
+	}
+
+	/**
+	 * Shortcut to verify it the user is logged in or not.
+	 */
+	boolean function isLoggedIn(){
+		return auth.isLoggedIn();
+	}
+
+}
+
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+## Authentication and User Services
+
+Please note that the JWT validators must talk to the authentication and user services.  Please refer to the [Authentication Services](../usage/authentication-services.md) page to configure and create them.
+
+## JWT Methods
+
+Ok, now we can focus on all the wonderful methods the JWT service offers:
+
+* `attempt( username, password, [ customClaims:struct ] ):token` - Attempt to authenticate a user with the authentication service and if successful, return the token using the identifier and custom claims. Exception if invalid authentication.
+* `fromUser( user, [ customClaims:struct ] ):token` - Generate a token according to the passed user object and custom claims.
+* `encode( struct payload ):token` - Generate a raw jwt token from a native payload struct.
+* `verify( required token ):boolean` - Verify a token string or throws exception
+* `decode( required token ):struct` - Decode and retrieve the passed in token to CFML struct
+* `parseToken():struct` - Get the decoded token using the headers strategy and store it in the `prc.jwt_token` and the decoded data as `prc.jwt_payload` if it verifies correctly. Throws: `TokenExpiredException` if the token is expired, `TokenInvalidException` if the token doesn't verify decoding, `TokenNotFoundException` if not found
+* `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty string.
+* `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty struct.
+* `setToken( token ):JWTService` - Store the token in `prc.jwt_token`, and store the decoded version in `prc.jwt_payload`
+* `getuser()` - Get the authenticated user
+* `authenticate( [token] ):User` - Calls the auth service using the parsed token or optional passed token, to get the user by subject claim else throw an exception
+* `invalidate( token )` - Invalidates the incoming token by removing it from the permanent storage, no key in storage, it's invalid.
+* `logout()` - Logout a user and invalidate their token
+
+## Tokens
+
+The tokens created by the JWT services will have the following structure as the base structure.  Remember you can incorporate custom claims.
+
+A JSON Web Token encodes a series of claims in a JSON object. Some of these claims have specific meaning, while others are left to be interpreted by the users. Our base claims are:
+
+* Issuer \(`iss`\) - The issuer of the token \(defaults to the application's base URL\)
+* Issued At \(`iat`\) - When the token was issued \(unix timestamp\)
+* Subject \(`sub`\) - This holds the identifier for the token \(defaults to user id\)
+* Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
+* JWT ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
+* Scopes \(`scopes)` - An array of scopes attached to the token
+
+{% code-tabs %}
+{% code-tabs-item title="mytoken.json" %}
+```javascript
+{
+  "iat": 1569340662,
+  "scopes": [],
+  "iss": "http://127.0.0.1:56596/",
+  "sub": 123,
+  "exp": 1569344262,
+  "jti": "12954F907C0535ABE97F761829C6BD11"
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+## Putting it Together
+
+That's it, we are ready to put it all together.  Now cbsecurity knows about your authentication/user services, can talk to your user to create tokens and can guard the incoming requests via the JWT Validator.  Here is a sample controller for login, logout and user registration:
+
+Let's configure some routes first:
+
+```javascript
+post( "/api/login" , "api.auth.login" );
+post( "/api/logout" , "api.auth.logout" );
+post( "/api/register" , "api.auth.register" );
+```
+
+Then build out the `Auth` controller
+
+```javascript
+component{
+
+	function login( event, rc, prc ){
+		param rc.username = "";
+		param rc.password = "";
+	
+		try {
+			var token = jwtAuth().attempt( rc.username, rc.password );
+			return {
+				"error"   : true,
+				"data"    : token,
+				"message" : "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
+			};
+		} catch ( "InvalidCredentials" e ) {
+			event.setHTTPHeader( statusCode = 401, statusText = "Not Authorized" );
+			return { "error" : true, "data" : "", "message" : "Invalid Credentials" };
+		}
+	}
+	
+	function register( event, rc, prc ){
+		param rc.firstName = "";
+		param rc.lastName  = "";
+		param rc.username  = "";
+		param rc.password  = "";
+	
+		prc.oUser = populateModel( "User" );
+		userService.create( prc.oUser );
+	
+		var token = jwtAuth().fromuser( prc.oUser );
+		return {
+			"error"   : true,
+			"data"    : token,
+			"message" : "User registered correctly and Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
+		};
+	}
+	
+	function logout( event, rc, prc ){
+		jwtAuth().logout();
+		return { "error" : false, "data" : "", "message" : "Successfully logged out" };
+	}
+}
+```
+
+{% hint style="danger" %}
+Make sure you add validation!
+{% endhint %}
+
+That's it, we now can login a user, give them a token, register a new user and give them their token, and also log them out.  The next step is for you to build your rules and/or security annotations and make sure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
+

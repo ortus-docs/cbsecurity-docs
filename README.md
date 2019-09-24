@@ -2,11 +2,9 @@
 
 The ColdBox `cbsecurity` module will enhance your ColdBox applications by providing out of the box security in the form of:
 
-* A security rule engine for protecting incoming requests
+* A security rule engine for incoming requests
 * Annotation driven security for handlers and actions
-* Authentication services
-
-The module also has the capability to distinguish between invalid authentication and invalid authorization and determine an outcome of the process. The module also supports the ability to load/unload security rules from contributing modules. So you can create a nice HMVC hierarchy of security.
+* JWT \(Json Web Tokens\) generator, decoder and authentication services
 
 ### Features
 
@@ -22,6 +20,10 @@ The module also has the capability to distinguish between invalid authentication
 * The rules can be configured to use regular expressions or simple snippets
 * Can use ColdFusion authentication security
 * Can leverage any custom authentication provider
+* Plug any Authentication service or can leverage [cbauth](https://github.com/elpete/cbauth) by default
+* Capability to distinguish between invalid **authentication** and invalid **authorization** and determine an outcome of the process.  
+* Ability to load/unload security rules from contributing modules.
+* Ability for each module to define it's own `validator`
 
 ## Versioning <a id="versioning"></a>
 
