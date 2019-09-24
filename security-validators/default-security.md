@@ -1,6 +1,16 @@
 # CFML Security Validator
 
-ColdBox security has had this security validator since version 1, in which it will talk to the ColdFusion engine's security methods to authenticate and authorize users.  To activate this validator you do nothing, it is the default setting for the `validator` key.  With it you will be able to authenticate users and also do role base authorization.
+ColdBox security has had this security validator since version 1, in which it will talk to the ColdFusion engine's security methods to authenticate and authorize users.  With it you will be able to authenticate users and also do **role** base authorization.
+
+All you need to do is use the WireBox ID of `CFValidator@cbsecurity` in your `validator` setting:
+
+```javascript
+cbsecurity = {
+
+    validator = "CFValidator@cbsecurity"
+
+}
+```
 
 {% hint style="info" %}
 The default value is of `CFValidator@cbsecurity` which is the WireBox ID for the object.

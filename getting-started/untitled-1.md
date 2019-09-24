@@ -237,11 +237,21 @@ Each validator must return a `struct` with the following keys:
 * `allow:boolean` A Boolean indicator if authentication or authorization was violated
 * `type:stringOf(authentication|authorization)` A string that indicates the type of violation: authentication or authorization.
 
+### CBAuthValidator
+
+ColdBox security ships with the `CBAuthValidator@cbsecurity` which is the default validator in the configuration setting `validator` setting.
+
+```javascript
+cbsecurity = {
+    validator = "CBAuthValidator@cbsecurity"
+}
+```
+
 ### CFValidator
 
-ColdBox security ships with a default authentication and authorization validator called `CFSecurity` which is the default validator with the following WireBox ID: `CFValidator@cbsecurity` and can be found at `cbsecurity.models.CFSecurity`
+ColdBox security ships also with a CFML authentication and authorization validator called `CFSecurity` which has the following WireBox ID: `CFValidator@cbsecurity` and can be found at `cbsecurity.models.CFSecurity`
 
-The default security is based on what ColdFusion gives you for basic security using their [security functionality](https://cfdocs.org/cfloginuser). You basically use `cfloginuser` to log in a user and set their appropriate **roles** in the system. The module can then match to these roles via the security rules you have created.
+You basically use `cfloginuser` to log in a user and set their appropriate **roles** in the system. The module can then match to these roles via the security rules you have created.
 
 {% embed url="https://cfdocs.org/cfloginuser" %}
 

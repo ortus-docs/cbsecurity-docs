@@ -32,6 +32,7 @@
 
 ## Security Validators
 
+* [CBAuth Validator](security-validators/cbauth-validator.md)
 * [CFML Security Validator](security-validators/default-security.md)
 * [Custom Validator](security-validators/custom-security-validator-object.md)
 

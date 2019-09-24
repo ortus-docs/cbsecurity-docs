@@ -22,7 +22,7 @@ moduleSettings = {
 		// You can define your security rules here or externally via a source
 		"rules"							: [],
 		// The validator is an object that will validate rules and annotations and provide feedback on either authentication or authorization issues.
-		"validator"						: "CFValidator@cbsecurity",
+		"validator"						: "CBAuthValidator@cbsecurity",
 		// The WireBox ID of the authentication service to use in cbSecurity which must adhere to the cbsecurity.interfaces.IAuthService interface.
 		"authenticationService"  		: "authenticationService@cbauth",
 		// WireBox ID of the user service to use
@@ -89,7 +89,7 @@ moduleSettings = {
 
 ## Validator
 
-You can place a global validator in the configuration settings, but you can also override the validator on a module by module basis as well.  The default validator is using [CF Security.](../security-validators/default-security.md)
+You can place a global validator in the configuration settings, but you can also override the validator on a module by module basis as well.  The default validator is using the [CBAuth Validator.](../security-validators/cbauth-validator.md)
 
 ## Authentication Services
 
