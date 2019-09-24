@@ -1,6 +1,67 @@
 # JWT Services
 
-CBSecurity also provides you with a JWT \(Json Web Tokens\) authentication and authorization system. The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service \(`JwtService@cbsecurity`\) or using our helper method \(`jwtAuth()`\).
+CBSecurity also provides you with a JWT \(Json Web Tokens\) authentication and authorization system.
+
+JSON Web Token \(JWT\) is an open standard \([RFC 7519](https://tools.ietf.org/html/rfc7519)\) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret \(with the **HMAC** algorithm\) or a public/private key pair using **RSA** or **ECDSA**. 
+
+![](../.gitbook/assets/68747470733a2f2f63646e2e61757468302e636f6d2f636f6e74656e742f6a77742f6a77742d6469616772616d2e706e67.png)
+
+Signed tokens can verify the _integrity_ of the **claims** contained within it, while encrypted tokens _hide_ those claims from other parties. When tokens are signed using public/private key pairs, the signature also certifies that only the party holding the private key is the one that signed it.
+
+![](../.gitbook/assets/why-cant-i-just-send-jwts-without-oauth-jwt.png)
+
+You can find much more information about JWT at [jwt.io](https://jwt.io/introduction/).
+
+{% embed url="https://jwt.io/introduction/" %}
+
+## When should you use JSON Web Tokens?
+
+JSON Web Tokens have become the standard for authenticating and authorizing API requests.  They can be used on their own or with an oauth/single sign-on server as well.
+
+* **Authorization**: This is the most common scenario for using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token.
+* **Information Exchange**: JSON Web Tokens are a good way of securely transmitting information between parties. Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are. Additionally, as the signature is calculated using the header and the payload, you can also verify that the content hasn't been tampered with.
+
+The ColdBox Security module will assist you with all the generation, decoding, encoding and security aspects of JWT.  All you need to do is, configure it, create a few standard files and off you go.
+
+## Tokens
+
+The tokens created by the JWT services will have the mandatory headers, but also will have a standardizes payload structure.  This payload structure can also be customized as you see fit.
+
+![](../.gitbook/assets/screen-shot-2019-09-24-at-1.42.21-pm.png)
+
+A JSON Web Token encodes a series of claims in a JSON object. Some of these claims have specific meaning, while others are left to be interpreted by the users. You can consider claims to be the keys of the payload structure and it can contain, well, pretty much anything you like.
+
+### Base Claims
+
+Here are the base claims that the ColdBox Security JWT token creates for you automatically:
+
+* Issuer \(`iss`\) - The issuer of the token \(defaults to the application's base URL\)
+* Issued At \(`iat`\) - When the token was issued \(unix timestamp\)
+* Subject \(`sub`\) - This holds the identifier for the token \(defaults to user id\)
+* Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
+* Unique ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
+* Scopes \(`scopes)` - An array of scopes attached to the token
+
+{% code-tabs %}
+{% code-tabs-item title="mytoken.json" %}
+```javascript
+{
+  "iat": 1569340662,
+  "scopes": [],
+  "iss": "http://127.0.0.1:56596/",
+  "sub": 123,
+  "exp": 1569344262,
+  "jti": "12954F907C0535ABE97F761829C6BD11"
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+You can add much more to this payload via the JWT service methods or via the User that models the token.
+
+## Our JwtService
+
+The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service \(`JwtService@cbsecurity`\) or using our helper method \(`jwtAuth()`\).
 
 ```javascript
 // Injection
@@ -11,8 +72,6 @@ jwtAuth()
 ```
 
 In order to begin exploring the JWT capabilities, let's explore how to configure it first.
-
-{% embed url="https://jwt.io/" %}
 
 ## Configuration
 
@@ -57,15 +116,15 @@ cbsecurity : {
 
 ### Authentication Service
 
-The WireBox Id of the service to provide our authentication. cbauth is our default provider.
+The WireBox Id of the service to provide our authentication. **cbauth** is our default provider, but you can use any authentication service that [adheres to our interface](../usage/authentication-services.md).
 
 ### User Service
 
-The WireBox Id of the service to provide our user retrieval and validation functions
+The WireBox Id of the service to provide our user retrieval and validation functions. You can use any service that [adheres to our interface](../usage/authentication-services.md).
 
 ### prcUserVariable
 
-The default variable name in the `prc` scope that will be used to store an authenticated user object if the jwt request is valid. The default is `prc.oCurrentUser`
+The default variable name in the `prc` scope that will be used to store an authenticated user object if the JWT request is valid. The default is `prc.oCurrentUser`
 
 ### secretKey
 
@@ -237,34 +296,6 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 * `authenticate( [token] ):User` - Calls the auth service using the parsed token or optional passed token, to get the user by subject claim else throw an exception
 * `invalidate( token )` - Invalidates the incoming token by removing it from the permanent storage, no key in storage, it's invalid.
 * `logout()` - Logout a user and invalidate their token
-
-## Tokens
-
-The tokens created by the JWT services will have the following structure as the base structure.  Remember you can incorporate custom claims.
-
-A JSON Web Token encodes a series of claims in a JSON object. Some of these claims have specific meaning, while others are left to be interpreted by the users. Our base claims are:
-
-* Issuer \(`iss`\) - The issuer of the token \(defaults to the application's base URL\)
-* Issued At \(`iat`\) - When the token was issued \(unix timestamp\)
-* Subject \(`sub`\) - This holds the identifier for the token \(defaults to user id\)
-* Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
-* JWT ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
-* Scopes \(`scopes)` - An array of scopes attached to the token
-
-{% code-tabs %}
-{% code-tabs-item title="mytoken.json" %}
-```javascript
-{
-  "iat": 1569340662,
-  "scopes": [],
-  "iss": "http://127.0.0.1:56596/",
-  "sub": 123,
-  "exp": 1569344262,
-  "jti": "12954F907C0535ABE97F761829C6BD11"
-}
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## Putting it Together
 

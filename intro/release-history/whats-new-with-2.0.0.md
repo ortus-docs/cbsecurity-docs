@@ -18,37 +18,9 @@
 * If a rule is matched we will store the validator results in `prc` as `cbSecurity_validatorResults`
 * Ability for modules to register cbSecurity rules and setting overrides by registering a `settings.cbSecurity` key.
 * New security rule visualizer for graphically seeing you rules and configuration.  Can be locked down via the `enableSecurityVisualizer` setting. Disabled by default.
-
-```javascript
-// module settings - stored in modules.name.settings
-settings = {
-    // CB Security Rules to append to global rules
-    cbsecurity = {
-        // The module invalid authentication event or URI or URL to go if an invalid authentication occurs
-        "invalidAuthenticationEvent"    : "",
-        // Default Auhtentication Action: override or redirect when a user has not logged in
-        "defaultAuthenticationAction"    : "redirect",
-        // The module invalid authorization event or URI or URL to go if an invalid authorization occurs
-        "invalidAuthorizationEvent"        : "",
-        // Default Authorization Action: override or redirect when a user does not have enough permissions to access something
-        "defaultAuthorizationAction"    : "redirect",
-        // You can define your security rules here or externally via a source
-        "rules"                            : [
-            {
-                "secureList"     : "mod1:home"
-            },
-            {
-                "secureList"     : "mod1/modOverride",
-                "match"            : "url",
-                "action"        : "override"
-            }
-        ]
-    }
-};
-```
-
 * Annotation based security for handlers and actions using the `secured` annotation.  Which can be boolean or a list of permissions, roles or whatever you like.
 * You can disable annotation based security by using the `handlerAnnotationSecurity` boolean setting.
+* JWT Token Security Support
 
 ## Improvements
 

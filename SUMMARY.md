@@ -40,4 +40,5 @@
 * [JWT Services](jwt/untitled.md)
 * [JWT Validator](jwt/jwt-validator.md)
 * [Token Storage](jwt/jwt-subject-inter.md)
+* [Interceptions](jwt/interceptions.md)
 
