@@ -1,6 +1,6 @@
 # Authentication Services
 
-You can register ANY authentication provider with **cbsecurity** by using the `authenticationService` setting. The value must be a valid WireBox Id and the object must adhere to the following interface. The authentication services can be used in conjunction with our JWT services and more featires coming in the future.
+You can register ANY authentication provider with **cbsecurity** by using the `authenticationService` setting. The value must be a valid WireBox Id and the object must adhere to the following interface. The authentication services can be used in conjunction with our JWT services and more features coming in the future.
 
 {% hint style="info" %}
 Please note that **cbauth** already implements this interface and is included with **cbsecurity** as a dependency.
@@ -97,7 +97,8 @@ If you will be using cbauth or any of our jwt features, then we will also requir
 {% code-tabs %}
 {% code-tabs-item title="cbsecurity.interfaces.IUserService.cfc" %}
 ```javascript
-interface{
+
+interface{
 
 	/**
 	 * Verify if the incoming username/password are valid credentials.
