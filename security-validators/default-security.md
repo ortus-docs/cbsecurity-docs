@@ -33,8 +33,7 @@ The code for this validator can be found at `cbsecurity.models.CFValidator`
 
 ### Example:
 
-{% code-tabs %}
-{% code-tabs-item title="handlers/security.cfc" %}
+{% code title="handlers/security.cfc" %}
 ```javascript
 component{
 
@@ -74,8 +73,7 @@ component{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 For more information about `cflogin, cfloginuser and cflogout`, please visit the docs [http://cfdocs.org/security-functions](http://cfdocs.org/security-functions)
 

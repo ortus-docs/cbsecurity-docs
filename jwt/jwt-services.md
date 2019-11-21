@@ -42,8 +42,7 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
 * Unique ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
 * Scopes \(`scopes)` - An array of scopes attached to the token
 
-{% code-tabs %}
-{% code-tabs-item title="mytoken.json" %}
+{% code title="mytoken.json" %}
 ```javascript
 {
   "iat": 1569340662,
@@ -54,8 +53,7 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
   "jti": "12954F907C0535ABE97F761829C6BD11"
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 You can add much more to this payload via the JWT service methods or via the User that models the token.
 
@@ -174,8 +172,7 @@ A struct of properties to configure each storage with.
 
 The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements.  So your User object must implement our `JWTSubject` interface with the following functions:
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
+{% code title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
 ```javascript
 interface{
 
@@ -191,8 +188,7 @@ interface{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Basically, it's two functions:
 
@@ -201,8 +197,7 @@ Basically, it's two functions:
 
 Since also the authentication services will be used with JWT, your user object might end up looking like this:
 
-{% code-tabs %}
-{% code-tabs-item title="models/User.cfc" %}
+{% code title="models/User.cfc" %}
 ```javascript
 component accessors="true" {
 
@@ -272,8 +267,7 @@ component accessors="true" {
 }
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Authentication and User Services
 

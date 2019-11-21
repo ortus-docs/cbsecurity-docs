@@ -10,8 +10,7 @@ Please note that **cbauth** already implements this interface and is included wi
 
 This interface has been provided by convenience and it is not mandatory at runtime \(`cbsecurity.interfaces.IAuthService`\)
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity.interfaces.IAuthService.cfc" %}
+{% code title="cbsecurity.interfaces.IAuthService.cfc" %}
 ```javascript
 interface{
 
@@ -53,17 +52,15 @@ interface{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 You can find the information for cbauth at their website: [https://github.com/elpete/cbauth/](https://github.com/elpete/cbauth/)
 
 ## User Interface
 
-As you can see from above, the authentication services all expect a user object to model your user in the system.  So your user object must also adhere to the following methods modeled by the `cbsecurity.interfaces.IAuthUser` interface.  This will allow the validators and jwt services to get the appropriate data it needs.
+As you can see from above, the authentication services all expect a user object to model your user in the system. So your user object must also adhere to the following methods modeled by the `cbsecurity.interfaces.IAuthUser` interface. This will allow the validators and jwt services to get the appropriate data it needs.
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity.interfaces.IAuthUser.cfc" %}
+{% code title="cbsecurity.interfaces.IAuthUser.cfc" %}
 ```javascript
 interface{
 
@@ -87,44 +84,40 @@ interface{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## User Services
 
-If you will be using cbauth or any of our jwt features, then we will also require you register a user service class that can provide us with the right data to encapsulate security using the `userService` setting.  We have provided this interface for your usage:
+If you will be using cbauth or any of our jwt features, then we will also require you register a user service class that can provide us with the right data to encapsulate security using the `userService` setting. We have provided this interface for your usage:
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity.interfaces.IUserService.cfc" %}
+{% code title="cbsecurity.interfaces.IUserService.cfc" %}
 ```javascript
-
 interface{
 
-	/**
-	 * Verify if the incoming username/password are valid credentials.
-	 *
-	 * @username The username
-	 * @password The password
-	 */
-	boolean function isValidCredentials( required username, required password );
+    /**
+     * Verify if the incoming username/password are valid credentials.
+     *
+     * @username The username
+     * @password The password
+     */
+    boolean function isValidCredentials( required username, required password );
 
-	/**
-	 * Retrieve a user by username
-	 *
-	 * @return User that implements JWTSubject and/or IAuthUser
-	 */
-	function retrieveUserByUsername( required username );
+    /**
+     * Retrieve a user by username
+     *
+     * @return User that implements JWTSubject and/or IAuthUser
+     */
+    function retrieveUserByUsername( required username );
 
-	/**
-	 * Retrieve a user by unique identifier
-	 *
-	 * @id The unique identifier
-	 *
-	 * @return User that implements JWTSubject and/or IAuthUser
-	 */
-	function retrieveUserById( required id );
+    /**
+     * Retrieve a user by unique identifier
+     *
+     * @id The unique identifier
+     *
+     * @return User that implements JWTSubject and/or IAuthUser
+     */
+    function retrieveUserById( required id );
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

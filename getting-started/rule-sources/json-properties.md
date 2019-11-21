@@ -2,8 +2,7 @@
 
 If you have already a JSON file with your rules, then all you need to do is add the path \(relative or absolute\) to that file in the `rules` configuration key.  However, the path MUST include the keyword `json` in it.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
 	// CB Security
@@ -11,14 +10,12 @@ moduleSettings = {
 		"rules" : "config/security.json.cfm"
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
   
 Then your file can be something like this:
 
-{% code-tabs %}
-{% code-tabs-item title="config/security.json.cfm" %}
+{% code title="config/security.json.cfm" %}
 ```javascript
 [
     {
@@ -41,6 +38,5 @@ Then your file can be something like this:
     }
 ]
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

@@ -2,8 +2,7 @@
 
 Inline rules will be used by declaring them in your configuration for **cbsecurity** in the `config/ColdBox.cfc.`  This is done by making the `rules` key an array of rule structures.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
 	// CB Security
@@ -52,6 +51,5 @@ moduleSettings = {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

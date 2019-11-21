@@ -86,8 +86,7 @@ This event has the following data in the `interceptData` struct
 
 ## Example
 
-{% code-tabs %}
-{% code-tabs-item title="interceptors/SecurityAudit.cfc" %}
+{% code title="interceptors/SecurityAudit.cfc" %}
 ```javascript
 component extends="coldbox.system.Interceptor"{
 
@@ -97,6 +96,5 @@ component extends="coldbox.system.Interceptor"{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

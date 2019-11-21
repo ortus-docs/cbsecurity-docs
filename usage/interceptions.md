@@ -16,8 +16,7 @@ You will receive the following data in the `interceptData` struct in each interc
 
 With these interceptions you can build a nice auditing system, login tracking and much more.
 
-{% code-tabs %}
-{% code-tabs-item title="interceptors/SecurityAudit.cfc" %}
+{% code title="interceptors/SecurityAudit.cfc" %}
 ```javascript
 component extends="coldbox.system.Interceptor"{
 
@@ -31,8 +30,7 @@ component extends="coldbox.system.Interceptor"{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Stop Processing Actions
 

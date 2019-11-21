@@ -2,8 +2,7 @@
 
 If you have already an XML file with your rules, then all you need to do is add the path \(relative or absolute\) to that file in the `rules` configuration key.  However, the path MUST include the keyword `XML` in it.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
 	// CB Security
@@ -11,13 +10,11 @@ moduleSettings = {
 		"rules" : "config/security.xml.cfm"
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Then your xml file can look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="config/security.xml.cfm" %}
+{% code title="config/security.xml.cfm" %}
 ```markup
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <-- <
@@ -64,6 +61,5 @@ that can be found in an event.
     </rule>
 </rules>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

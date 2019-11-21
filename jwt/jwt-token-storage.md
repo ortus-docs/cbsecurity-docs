@@ -52,8 +52,7 @@ The columns it will create are:
 
 If you would like to create your own token storage, just add your own WireBox ID to the `driver`, `properties` and implement the following interface: `cbsecurity.interfaces.jwt.IJwtStorage`
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity.interfaces.jwt.IJwtStorage.cfc" %}
+{% code title="cbsecurity.interfaces.jwt.IJwtStorage.cfc" %}
 ```javascript
 interface{
 
@@ -122,6 +121,5 @@ interface{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

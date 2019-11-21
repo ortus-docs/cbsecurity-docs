@@ -4,8 +4,7 @@
 
 In order to register your own custom security validator just open the `config/Coldbox.cfc` and add the `validator` key with the value being a WireBox ID that points to your object that will provide the validation.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
     cbSecurity = {
@@ -13,15 +12,13 @@ moduleSettings = {
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Validator Interface
 
 A security validator object is a simple CFC that implements the following functions
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity/interfaces/IUserValidator.cfc" %}
+{% code title="cbsecurity/interfaces/IUserValidator.cfc" %}
 ```javascript
 /**
  * Copyright since 2016 by Ortus Solutions, Corp
@@ -57,8 +54,7 @@ interface{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Each validator must return a **struct** with the following keys:
 
@@ -69,8 +65,7 @@ Each validator must return a **struct** with the following keys:
 
 Here is a sample validator using permission based security in both rules and annotation context
 
-{% code-tabs %}
-{% code-tabs-item title="models/SecurityService.cfc" %}
+{% code title="models/SecurityService.cfc" %}
 ```javascript
 struct function ruleValidator( required rule, required controller ){
 	return permissionValidator( rule.permissions, controller, rule );
@@ -98,8 +93,7 @@ private function permissionValidator( permissions, controller, rule ){
 	return results;
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 That's it!  Go validate!
 

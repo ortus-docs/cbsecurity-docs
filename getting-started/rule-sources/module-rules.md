@@ -2,8 +2,7 @@
 
 Every module in ColdBox has the capability to contribute their own rules to `cbsecurity` by registering them in the `ModuleConfig.cfc` within the `settings` struct.  Just create another struct called `cbsecurity` with the following allowed keys:
 
-{% code-tabs %}
-{% code-tabs-item title="ModuleConfig.cfc" %}
+{% code title="ModuleConfig.cfc" %}
 ```javascript
 settings = {
 	// CB Security Rules to append to global rules
@@ -30,8 +29,7 @@ settings = {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 As you can see each module can have it's own overrides for authentication and authorization events as well as their own rules.
 

@@ -4,8 +4,7 @@
 
 By Default, the security module will register itself for you using the module configuration settings you define in the`config/ColdBox.cfc.`  Below you can find all the settings with their default value and description.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 // Module Settings
 moduleSettings = {
@@ -84,8 +83,7 @@ moduleSettings = {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Validator
 
@@ -135,8 +133,7 @@ You can then visit the `/cbsecurity` URL and you will be presented with this mag
 
 Each module can override some settings for cbsecurity according to its needs.  You will create a `cbsecurity` struct within the module's `settings` struct in the `ModuleConfig.cfc`
 
-{% code-tabs %}
-{% code-tabs-item title="module/ModuleConfig.cfc" %}
+{% code title="module/ModuleConfig.cfc" %}
 ```javascript
 settings = {
 	// CB Security Module Settings
@@ -156,8 +153,7 @@ settings = {
 	}
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The settings you see above are the only ones that module's support as of now.
 
@@ -165,8 +161,7 @@ The settings you see above are the only ones that module's support as of now.
 
 You can also register multiple instances of the `cbsecurity` module using different configurations by just adding them to your app's config or even your module's configuration.  This will register a NEW firewall apart from the global security firewall registered using the global settings as defined above.
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 interceptors = [
 
@@ -179,8 +174,7 @@ interceptors = [
 
 ]
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 
 

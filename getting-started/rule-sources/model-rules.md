@@ -9,8 +9,7 @@ If you prefer to store your rules your way, then that's perfectly fine.  Just ma
 
 
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
 	// CB Security
@@ -20,8 +19,7 @@ moduleSettings = {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
   
 

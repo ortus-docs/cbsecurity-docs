@@ -1,16 +1,16 @@
 # JWT Validator
 
-Now that we have all the pieces in place for JWT, we can now register the JWT validator as our validator of choice for requests: `cbsecurity.models.JwtValidator` or `JwtValidator@cbsecurity`. The validator will inspect the incoming requests for valid jwt authorization headers. It will be in charge of verifying their expiration, their required claims, and the user it represents. Once that is done, it goes in the same rule/annotation security flow that cbsecurity leverages.
+Now that we have all the pieces in place for JWT, we can now register the JWT validator as our validator of choice for requests which in our case it is the same JWT Service that will take care of the validation: `JWTService@cbsecurity`. 
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+The validator will inspect the incoming requests for valid jwt authorization headers. It will be in charge of verifying their expiration, their required claims, and the user it represents. Once that is done, it goes in the same rule/annotation security flow that cbsecurity leverages.
+
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 cbsecurity = {
-    validator = "JwtValidator@cbsecurity"
+    validator = "JWTService@cbsecurity"
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Module Override
 
@@ -19,7 +19,7 @@ Each module can also override their validator via it's configuration setting `cb
 ```javascript
 settings = {
     cbsecurity = {
-         validator = "JwtValidator@cbsecurity"
+         validator = "JWTService@cbsecurity"
     }
 }
 ```

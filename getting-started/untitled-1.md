@@ -75,8 +75,7 @@ rules = [
 
 Rules can be declared globally in your `config/ColdBox.cfc` or they can also be place in any custom module in your application:
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 // CB Security
 cbSecurity : {
@@ -130,15 +129,13 @@ cbSecurity : {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Annotation Security
 
 The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action or both. The default value of the `secured` annotation is a Boolean `true`. Which means, we need a user to be authenticated in order to access it.
 
-{% code-tabs %}
-{% code-tabs-item title="handlers" %}
+{% code title="handlers" %}
 ```javascript
 // Secure this handler
 component secured{
@@ -168,15 +165,13 @@ component{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Authorization Context
 
 You can also give the annotation some value, which can be anything you like: A list of roles, a role, a list of permissions, metadata, etc. Whatever it is, this is the **authorization context** and the user validator must be able to not only authenticate but authorize the context or an invalid authorization will occur.
 
-{% code-tabs %}
-{% code-tabs-item title="handler/users.cfc" %}
+{% code title="handler/users.cfc" %}
 ```javascript
 // Secure this handler
 component secured="admin,users"{
@@ -191,8 +186,7 @@ component secured="admin,users"{
 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Cascading Security
 
@@ -202,8 +196,7 @@ By having the ability to annotate the handler and also the action you create a c
 
 As we mentioned at the beginning of this overview, the security module will use a Validator object in order to determine if the user has authentication/authorization or not.  This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
 
-{% code-tabs %}
-{% code-tabs-item title="models/MyValidator.cfc" %}
+{% code title="models/MyValidator.cfc" %}
 ```javascript
 /**
  * This function is called once an incoming event matches a security rule.
@@ -229,8 +222,7 @@ struct function ruleValidator( required rule, required controller );
  */
 struct function annotationValidator( required securedValue, required controller );
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Each validator must return a `struct` with the following keys:
 
@@ -257,8 +249,7 @@ You basically use `cfloginuser` to log in a user and set their appropriate **rol
 
 {% embed url="https://cfdocs.org/cflogin" %}
 
-{% code-tabs %}
-{% code-tabs-item title="cbsecurity/models/CFValidator.cfc" %}
+{% code title="cbsecurity/models/CFValidator.cfc" %}
 ```javascript
 struct function ruleValidator( required rule, required controller ){
 	return validateSecurity( arguments.rule.roles );
@@ -287,8 +278,7 @@ private function validateSecurity( required roles ){
 	return results;
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 
 
@@ -296,8 +286,7 @@ private function validateSecurity( required roles ){
 
 The second method of authentication is based on your custom security logic. You will be able to register a validation object with the module. Once a rule is matched, the module will call your validation object, send in the rule/annotation value and ask if the user can access it or not. It will be up to your logic to determine if the rule is satisfied or not.  Below is a sample permission based security validator:
 
-{% code-tabs %}
-{% code-tabs-item title="models/MySecurity.cfc" %}
+{% code title="models/MySecurity.cfc" %}
 ```javascript
 component singleton{
 
@@ -328,8 +317,7 @@ component singleton{
 	}
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Authentication vs Authorization
 

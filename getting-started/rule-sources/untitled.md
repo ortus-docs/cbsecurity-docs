@@ -11,8 +11,7 @@ If you have your security rules in a database, then cbsecurity can read the rule
 | `rulesSQL` | string | false | `select* from rulesTable` | The custom SQL statement to use to retrieve the rules according to the rulesTable property. If not set, the default of select\* from rulesTable will be used. |
 | `rulesOrderBy` | string | false | --- | The column to order the rules by. If not chosen, the interceptor will not order the query, just select it. |
 
-{% code-tabs %}
-{% code-tabs-item title="config/Coldbox.cfc" %}
+{% code title="config/Coldbox.cfc" %}
 ```javascript
 moduleSettings = {
 	// CB Security
@@ -24,6 +23,5 @@ moduleSettings = {
 	}
 };
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
