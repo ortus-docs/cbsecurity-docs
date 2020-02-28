@@ -85,7 +85,9 @@ cbsecurity : {
     prcUserVariable         : "oCurrentUser",
     // JWT Settings
     jwt                     : {
-        // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
+        // The issuer authority for the tokens, placed in the `iss` claim
+				issuer				          : "",
+				// The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
         secretKey               : getSystemSetting( "JWT_SECRET", "" ),
         // by default it uses the authorization bearer header, but you can also pass a custom one as well.
         customAuthHeader        : "x-auth-token",
@@ -124,9 +126,21 @@ The WireBox Id of the service to provide our user retrieval and validation funct
 
 The default variable name in the `prc` scope that will be used to store an authenticated user object if the JWT request is valid. The default is `prc.oCurrentUser`
 
+### issuer
+
+The issuer authority for the tokens, placed in the `iss` claim of the token. If empty, we will use the `event.buildLink()` to create the issuer. By default, our validators also check that tokens are created by the same issuer.
+
 ### secretKey
 
-The secret key is mandatory and its the way to sign the JWT tokens.  By default it will try to load an environment variable called `JWT_SECRET` if the setting is ommitted.
+The secret key is used to sign the JWT tokens.  By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts.  So technically, your secret will rotate according to this setting.
+
+{% hint style="success" %}
+Your secret key will auto-rotate every application scope rotation.  Please note that all tokens used after that scope rotation will automatically become invalid.
+
+Please note that we use the jwt-cfml library for encoding/decoding tokens.  Please [refer to it's documentation](https://forgebox.io/view/jwt-cfml) in order to leverage RS and ES algorithms with certificates.
+
+[https://forgebox.io/view/jwt-cfml](https://forgebox.io/view/jwt-cfml)
+{% endhint %}
 
 ### customAuthHeader
 
@@ -138,11 +152,30 @@ The default expiration in minutes for the JWT tokens. Defaults to 60 minutes
 
 ### Algorithm
 
-The encryption algorithm to use for the tokens.  The default is **HS512**, but the available ones for now are:
+The encryption algorithm to use for the tokens.  The default is **HS512**, but the available ones for are:
 
 * HS256
 * HS384
-* HS512
+* **HS512**
+* RS256
+* RS384
+* RS512
+* ES256
+* ES384
+* ES512
+
+In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format \(in the latter case first deserialize the JWK to a CFML struct\). When using PEM, private keys need to be encoded in PKCS\#8 format.
+
+If your private key is not currently in this format, conversion should be straightforward:
+
+```text
+$ openssl pkcs8 -topk8 -nocrypt -in privatekey.pem -out privatekey.pk8
+
+```
+
+When decoding tokens, either a public key or certificate can be provided. \(If a certificate is provided, the public key will be extracted from it.\)
+
+{% embed url="https://forgebox.io/view/jwt-cfml" %}
 
 ### RequiredClaims
 
