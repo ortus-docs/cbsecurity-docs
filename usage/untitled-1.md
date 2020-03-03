@@ -43,7 +43,7 @@ Please remember that by default the secure and white lists are evaluated as regu
 
 ## Rule Overrides
 
-As we saw from the overview and our configuration sections. We can declare the default actions for authorizations and authentication issues and to which events/URLs to go if that happens.  There can be a time where you can override those global/module settings directly within a rule.  Let's explore those overrideds:
+As we saw from the overview and our configuration sections. We can declare the default actions for authorizations and authentication issues and to which events/URLs to go if that happens.  There can be a time where you can override those global/module settings directly within a rule.  Let's explore those overrides:
 
 #### Redirect
 
