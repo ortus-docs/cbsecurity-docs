@@ -32,6 +32,11 @@
 * [Secured URL](usage/_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
 * [Authentication Services](usage/authentication-services.md)
+* [cbSecurity Model](usage/cbsecurity-model/README.md)
+  * [secure\(\) Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
+  * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
+  * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
+  * [Securing Views](usage/cbsecurity-model/securing-views.md)
 
 ## Security Validators
 

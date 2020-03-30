@@ -1,6 +1,8 @@
 # Overview
 
-With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations. However, as we all know, every application has different requirements and since we are keen on extensibility, the module can be configured to work with whatever security **authentication** and **authorization** mechanism you might have.  We call this, the security validator.
+With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations.  You will also be able to leverage our `CBSecurity` service model to secure any context anywhere.
+
+However, as we all know, every application has different requirements and since we are keen on extensibility, the module can be configured to work with whatever security **authentication** and **authorization** mechanism you might have.  We call this, the security validator.
 
 ![](https://github.com/ColdBox/cbox-security/wiki/ColdBoxSecurity.jpg)
 
@@ -350,6 +352,127 @@ You will receive the following data in the `interceptData` struct:
 * `processActions` : A Boolean indicator that defaults to **true**. If you change this to **false**, then the interceptor won't fire the invalid actions. Usually this means, you manually will do them.
 
 You can use these security listeners to do auditing, logging, or even override the result of the operation.
+
+## CBSecurity Model
+
+The `CBSecurity` model was introduced in version 2.3.0 and it provides you with a way to provide authorization checks and contexts anywhere you like: handlers, layouts, views, interceptors and even models.
+
+Getting access to the model is easy via our `cbSecure()` mixin \(handlers/layouts/views/interceptors\) or injecting it via WireBox:
+
+```javascript
+// Mixin approach
+cbSecure()
+
+// Injection
+property name="cbSecurity" inject="@CBSecurity";
+```
+
+Once injected you can leverage it using our awesome methods listed below:
+
+### **Blocking Methods**
+
+When certain permission context is met, if not throws `NotAuthorized`
+
+* `secure( permissions, [message] )`
+* `secureAll( permissions, [message] )`
+* `secureNone( permissions, [message] )`
+* `secureWhen( context, [message] )`
+
+```javascript
+// Only allow access to user_admin
+cbSecure().secure( "USER_ADMIN" );
+
+// Only allow access if you have all of these permissions
+cbSecure().secureAll( "EDITOR, POST_PUBLISH" )
+
+// YOu must not have this permission, if you do, kick you out
+cbSecure().secureNone( "FORGEBOX_USER" )
+
+// Secure using security evaluations
+// Kick out if you do not have the AUTHOR_ADMIN or you are not the same incoming author
+cbSecurity.secureWhen( 
+    cbSecurity.none( "AUTHOR_ADMIN" ) && 
+    !cbSecurity.sameUser( oAuthor )  
+)
+
+// Secure using a closure 
+cbSecurity.secureWhen( ( user ) => !user.isConfirmed() );
+```
+
+### **Action Context Methods**
+
+When certain permission context is met, execute the success function/closure, else if a `fail` closure is defined, execute that instead.
+
+* `when( permissions, success, fail )`
+* `whenAll( permissions, success, fail )`
+* `whenNone( permissions, success, fail )`
+
+```javascript
+var oAuthor = authorService.getOrFail( rc.authorId );
+prc.data = userService.getData();
+
+// Run Security Contexts
+cbSecure()
+    // Only user admin can change to the incoming role
+    .when( "USER_ADMIN", ( user ) => oAuthor.setRole( roleService.get( rc.roleID ) ) )
+    // The system admin can set a super admin
+    .when( "SYSTEM_ADMIN", ( user ) => oAuthor.setRole( roleService.getSystemAdmin() ) )
+    // Filter the data to be shown to the user
+    .when( "USER_READ_ONLY", ( user ) => prc.data.filter( ( i ) => !i.isClassified ) )
+
+// Calling with a fail closure
+cbSecurity.when(
+    "USER_ADMIN",
+    ( user ) => user.setRole( "admin" ), //success
+    ( user ) => relocate( "Invaliduser" ) //fail
+);
+```
+
+### **Verification Methods**
+
+Verify permissions or user equality
+
+* `has( permissions ):boolean`
+* `all( permissions ):boolean`
+* `none( permissions ):boolean`
+* `sameUser( user ):boolean`
+
+```javascript
+function edit( event, rc, prc ){
+    var oUser = userService.getOrFail( rc.id ?: "" );
+    if( !sameUser( oUser ) ){
+        relocate( "/users" );
+    }
+}
+
+<cfif cbsecure().all( "USER_ADMIN,USER_EDITOR" )>
+    This is only visible to user admins!
+</cfif>
+
+<cfif cbsecure().has( "SYSTEM_ADMIN" )>
+    <a href="/user/impersonate/#prc.user.getId()#">Impersonate User</a>
+</cfif>
+
+<cfif cbsecure().sameUser( prc.user )>
+    <i class="fa fa-star">This is You!</i>
+</cfif>
+```
+
+### **Request Context Methods**
+
+* `secureView( permissions, successView, failView )`
+
+{% code title="handlers/users.cfc" %}
+```javascript
+component{
+
+    function index( event, rc, prc ){
+     event.secureView( "USER_ADMIN", "users/admin/index", "users/index" ); 
+    }
+
+}
+```
+{% endcode %}
 
 ## Security Visualizer
 
