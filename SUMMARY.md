@@ -38,7 +38,7 @@
   * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
   * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
   * [Securing Views](usage/cbsecurity-model/securing-views.md)
-* [Cross-Site Request Forgery \(cbcsrf\)](cross-site-request-forgery-cbcsrf.md)
+* [Cross Site Request Forgery](usage/cross-site-request-forgery-cbcsrf.md)
 
 ## Security Validators
 

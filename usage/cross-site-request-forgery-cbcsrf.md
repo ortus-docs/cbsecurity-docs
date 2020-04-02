@@ -1,4 +1,4 @@
-# Cross-Site Request Forgery \(cbcsrf\)
+# Cross Site Request Forgery
 
 Since version 2.4.x we have included the `cbcsrf` module into cbSecurity.  Below is how you can use it:
 
