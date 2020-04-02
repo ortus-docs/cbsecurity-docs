@@ -5,6 +5,7 @@
 ## Intro
 
 * [Release History](intro/release-history/README.md)
+  * [What's New With 2.4.0](intro/release-history/whats-new-with-2.4.0.md)
   * [What's New With 2.3.0](intro/release-history/whats-new-with-2.3.0.md)
   * [What's New With 2.2.0](intro/release-history/whats-new-with-2.2.0.md)
   * [What's New With 2.1.0](intro/release-history/whats-new-with-2.1.0.md)
@@ -37,6 +38,7 @@
   * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
   * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
   * [Securing Views](usage/cbsecurity-model/securing-views.md)
+* [Cross-Site Request Forgery \(cbcsrf\)](cross-site-request-forgery-cbcsrf.md)
 
 ## Security Validators
 
