@@ -17,7 +17,7 @@
 ## Getting Started
 
 * [Installation](getting-started/installation.md)
-* [Overview](getting-started/untitled-1.md)
+* [Overview](getting-started/overview.md)
 * [Configuration](getting-started/first-chapter.md)
 * [Rule Sources](getting-started/rule-sources/README.md)
   * [DB Rules](getting-started/rule-sources/untitled.md)
