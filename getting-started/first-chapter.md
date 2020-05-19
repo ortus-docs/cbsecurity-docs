@@ -19,6 +19,7 @@ moduleSettings = {
 		// Default Authorization Action: override or redirect when a user does not have enough permissions to access something
 		"defaultAuthorizationAction"	: "redirect",
 		// You can define your security rules here or externally via a source
+		// specify an array for inline, or a string (db|json|xml|model) for externally
 		"rules"							: [],
 		// The validator is an object that will validate rules and annotations and provide feedback on either authentication or authorization issues.
 		"validator"						: "CBAuthValidator@cbsecurity",
