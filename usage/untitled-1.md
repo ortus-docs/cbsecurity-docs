@@ -10,13 +10,13 @@ Each rule is modeled by a struct with keys in it:
 {
     "whitelist"     : "", 
     "securelist"    : "", 
-    "match"            : "event", 
+    "match"            : "event",  // or url
     "roles"            : "", 
     "permissions"    : "", 
     "redirect"         : "", 
     "overrideEvent"    : "", 
     "useSSL"        : false, 
-    "action"        : "", 
+    "action"        : "redirect", // or override 
     "module"        : ""
 };
 ```
@@ -31,7 +31,7 @@ Please remember that by default the secure and white lists are evaluated as regu
 
 | Property | Type | Description |
 | :--- | :--- | :--- |
-| `match` | event or URI | Determines if it needs to match the incoming URI or the incoming event. By default it matches the incoming event. |
+| `match` | event or URL | Determines if it needs to match the incoming URL or the incoming event. By default it matches the incoming event. |
 | `whitelist` | varchar | A comma delimited list of events or regex patterns to whitelist or to bypass security on if a match is made on the `secureList` |
 | `securelist` | varchar | A comma delimited list of events or regex patterns to secure |
 | `roles` | varchar | A comma delimited list of roles that can access these secure events |
