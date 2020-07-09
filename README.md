@@ -1,13 +1,22 @@
 # Introduction
 
-The ColdBox `cbsecurity` module will enhance your ColdBox applications by providing out of the box security in the form of:
+The ColdBox `cbsecurity` module is a collection of modules to help secure your applications.
 
-* A security rule engine for validating incoming requests
-* Annotation driven security for validating incoming events to handlers and actions
-* JWT \(Json Web Tokens\) generator, decoder and authentication services
-* A security service to provide you with functional approaches to security context authorization
+The major areas of concern are:
 
-### Features
+* A **security authentication/authorization firewall** \( `cbsecurity` \) which can secure your application based on:
+  * Security rules and a rule engine for validation incoming events or URL's
+  * Handler annotations
+* A **security service** for explicit authorizations \( `cbsecurity` \) to provide you with functional approaches to security context authorization in **any** layer of your application.
+* A **JWT generator, decoder and authentication services** \( `jwtcfml` \) 
+* Cross Site Request Forgery **\(CSRF\) Protection** \( `cbcsrf` \)
+* An **authentication manage**r \( `cbauth` \)
+
+## Module composition
+
+![Cbsecurity consumes several other modules and leverages cbstorages for storage.](.gitbook/assets/cbsecurity-modules.png)
+
+## Features
 
 * Ability to have global security rules
 * Ability for modules to add their own security rules and action overrides

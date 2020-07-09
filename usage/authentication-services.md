@@ -132,3 +132,7 @@ interface{
 ```
 {% endcode %}
 
+{% hint style="warning" %}
+If using `cbauth`, you also have to specify the `UserServiceClass` key in the cbauth module settings.
+{% endhint %}
+

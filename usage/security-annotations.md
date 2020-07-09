@@ -1,12 +1,16 @@
 # Security Annotations
 
-The security module also allows you to secure your events via annotations instead of using security rules.  The setting that controls this security feature is the `handlerAnnotationSecurity` which can see in the [configuration section.](../getting-started/first-chapter.md#annotation-security)
+The security module also allows you to secure your events via annotations instead of using security rules.  The setting that controls this security feature is the `handlerAnnotationSecurity` which can see in the [configuration section.](../getting-started/first-chapter/#annotation-security)
 
 The security module has a tiered approach to annotation security as it will check the handler component first and then the requested action method second.  You can apply different security contexts to each level as you see fit.
 
 {% hint style="warning" %}
 Please note that the security rules will be inspected first, annotations second.
 {% endhint %}
+
+See the diagram below for inspecting security based on annotations:
+
+![Annotation based security](../.gitbook/assets/annotationprocess.png)
 
 ## `Secure` Annotation
 

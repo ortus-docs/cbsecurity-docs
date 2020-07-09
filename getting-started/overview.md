@@ -1,16 +1,22 @@
 # Overview
 
+For about any security system you need to know who is authenticated and what this user is allowed to do. `cbsecurity` is no different, so it provides an:
+
+* **Authentication system** which performs the following functions:
+  * Validates user credentials
+  * Logs them in and out
+  * Tracks their sessions
+* **Authorization** system which:
+  * validates permissions or roles
+
 With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations.  You will also be able to leverage our `CBSecurity` service model to secure any context anywhere.
 
-However, as we all know, every application has different requirements and since we are keen on extensibility, the module can be configured to work with whatever security **authentication** and **authorization** mechanism you might have.  We call this, the security validator.
+The module wraps itself around the `preProcess` interception point and will try to validate security rules and/or annotations on the requested handler actions through a `Validator` Through this interception point `cbsecurity` acts as a `FIREWALL`. `cbsecurity` has the following validators available:
 
-![](https://github.com/ColdBox/cbox-security/wiki/ColdBoxSecurity.jpg)
-
-The module wraps itself around the `preProcess` interception point and will try to validate security rules and/or annotations on the requested handler actions. By default, this module will register the `Security` interceptor **automatically** for you and will inspect your configuration for rules to process and activate annotation driven security.
-
-{% hint style="success" %}
-The `preProcess` interception point happens before any event executes in a ColdBox application.
-{% endhint %}
+* CBAuth Validator: this is de default \(and recommended\) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security
+* CFML Security Validator. Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods. It provides authentication and _roles_ based security.
+* JWT Validator. If you want to use Java Web Tokens the JWT Validator provides authorization and authentication.
+* Custom Validator. You can define your own authentication and authorization engine and plug it in the cbsecurity framework.
 
 ## How Does Validation Happen?
 
@@ -20,6 +26,13 @@ How does the interceptor know a user doesn't or does have access? Well, here is 
 You can find an interface for these methods in `cbsecurity.interfaces.IUserValidator`
 {% endhint %}
 
+The validator has two options to determine if the user will be allowed access:
+
+* The `ruleValidator`\(\) function will evaluate configured [security rules](../usage/untitled-1.md)
+* The  `annotationValidator()` function will look at [security annotations](../usage/security-annotations.md) in your handler and handler actions.
+
+You can use rules, annotations or even both. Rules are much more flexible, but more complex. Rules will be evaluated before annotations.
+
 The validator's job is to tell back to the firewall if they are allowed access and if they don't, what type of validation they broke: **authentication** or **authorization**.
 
 > `Authentication` is when a user is NOT logged in
@@ -28,7 +41,7 @@ The validator's job is to tell back to the firewall if they are allowed access a
 
 ## Validation Process
 
-Once the firewall has the results and the user is **NOT** allowed access. Then the following will occur:
+Once the firewall has the results and the user is **NOT** allowed access,  the following will occur:
 
 * The request that was blocked will be logged via LogBox with the offending IP and extra metadata
 * The current requested URL will be flashed as `_securedURL` so it can be used in relocations
@@ -39,11 +52,16 @@ Once the firewall has the results and the user is **NOT** allowed access. Then t
 * If the type is `authentication` the default action \(`defaultAuthenticationAction`\) for that type will be executed \(An override or a relocation\) will occur against the setting `invalidAuthenticationEvent` which can be an event or a destination URL.
 * If the type is `authorization` the default action \(`defaultAuthorizationAction`\) for that type will be executed \(An override or a relocation\) `invalidAuthorizationEvent` which can be an event or a destination URL.
 
-{% hint style="warning" %}
-If you are securing a module, then the module has the capability to override the global settings if it declares them in its `ModuleConfig.cfc`
-{% endhint %}
+## Security Rules vs Annotation Security
 
-## Security Rules
+Your application can be secured with security rules or handler and method annotations. Before making your choice, you should take the following arguments into consideration:
+
+* annotations are directly visible in your code, but very static. 
+* annotations can protect events. Rules can protect events and Url's.
+* rules allow you to change your action \(override or redirect\) and target on each rule. With annotations you can only use your configured default action and target.
+* when stored in a file or database, rules can be edited by admins at runtime.
+
+### Security Rules
 
 Global Rules can be declared in your `config/ColdBox.cfc` in plain CFML or in any module's `ModuleConfig.cfc` or they can come from the following global sources:
 
@@ -52,7 +70,7 @@ Global Rules can be declared in your `config/ColdBox.cfc` in plain CFML or in an
 * The database by adding the configuration settings for it
 * A model by executing a `getSecurityRules()` method from it
 
-### Rule Anatomy
+#### Rule Anatomy
 
 A rule is a struct that can be composed of the following elements. All of them are optional except the `secureList`.
 
@@ -73,7 +91,7 @@ rules = [
 ]
 ```
 
-### Global Rules
+#### Global Rules
 
 Rules can be declared globally in your `config/ColdBox.cfc` or they can also be place in any custom module in your application:
 
@@ -133,7 +151,7 @@ cbSecurity : {
 ```
 {% endcode %}
 
-## Annotation Security
+### Annotation Security
 
 The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action or both. The default value of the `secured` annotation is a Boolean `true`. Which means, we need a user to be authenticated in order to access it.
 
@@ -169,7 +187,7 @@ component{
 ```
 {% endcode %}
 
-### Authorization Context
+#### Authorization Context
 
 You can also give the annotation some value, which can be anything you like: A list of roles, a role, a list of permissions, metadata, etc. Whatever it is, this is the **authorization context** and the user validator must be able to not only authenticate but authorize the context or an invalid authorization will occur.
 
@@ -190,7 +208,7 @@ component secured="admin,users"{
 ```
 {% endcode %}
 
-### Cascading Security
+#### Cascading Security
 
 By having the ability to annotate the handler and also the action you create a cascading security model where they need to be able to access the handler first and only then will the action be evaluated for access as well.
 
@@ -239,6 +257,16 @@ ColdBox security ships with the `CBAuthValidator@cbsecurity` which is the defaul
 cbsecurity = {
     validator = "CBAuthValidator@cbsecurity"
 }
+```
+
+{% hint style="warning" %}
+When using the default  `CBAuthValidator@cbsecurity` you also have to configure the cbauth module.
+{% endhint %}
+
+```javascript
+  cbAuth: {
+    userServiceClass: "UserService"
+  }
 ```
 
 ### CFValidator

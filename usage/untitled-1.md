@@ -1,6 +1,6 @@
 # Security Rules
 
-We have seen how the module works on the concept of rules and how to declare them. Now let's dig deeper an decompose the rules.
+We have seen how the module works on the concept of rules and how to declare them. Before we dig  deeper and decompose the rules let's have a look at the processing of the rules first.
 
 ## Rule Anatomy
 
@@ -24,8 +24,14 @@ Each rule is modeled by a struct with keys in it:
 The only required key is the `secureList` which is what you are trying to secure. The rest are optional and described below. Please note that you can add as many keys as you like to your security rules, which can contain much more context and information for the validators to use for validation.
 
 {% hint style="warning" %}
-Please remember that by default the secure and white lists are evaluated as regular expressions. You can turn that off in your [configuration settings.](../getting-started/first-chapter.md)
+Please remember that by default the secure and white lists are evaluated as regular expressions. You can turn that off in your [configuration settings.](../getting-started/first-chapter/)
 {% endhint %}
+
+## Rules processing
+
+When processing rules, it is important to realize these rules come as an array which will be processed in **order**, so make sure your more specific rules will be processed **before** the more generic ones. 
+
+![cbsecurity rules processing](../.gitbook/assets/securityruleprocess.png)
 
 ## Rule Elements
 
@@ -84,8 +90,24 @@ If a rule has a white list, then it means that you can declare what are the exce
 
 ```javascript
 {
-    "secureList" : "*",
+    "secureList" : ".*",
     "whitelist : "^login"
 }
 ```
+
+{% hint style="danger" %}
+Please note: if a rule has a whiteList, it only applies to the **current** rule. So if the whitelist matches, it the current rule is skipped and the process continues to the next rule.
+{% endhint %}
+
+Sometimes you want to make sure ALL events are secured, expect for the ones specified, such as login events. If you add new functionality to your app it is easy to forget a new rule. To prevent unwanted access you could specify a LAST rule, which matches ALL event but NO permission at all. In that case you have to add a whitelist for all events which should still pass, for example:
+
+```javascript
+{
+    "secureList" : ".*",
+    "whitelist" : "login",
+    "permissions" : "nonExistingPermission"
+}
+```
+
+
 

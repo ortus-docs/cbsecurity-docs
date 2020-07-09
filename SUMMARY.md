@@ -18,22 +18,22 @@
 
 * [Installation](getting-started/installation.md)
 * [Overview](getting-started/overview.md)
-* [Configuration](getting-started/first-chapter.md)
-* [Rule Sources](getting-started/rule-sources/README.md)
-  * [DB Rules](getting-started/rule-sources/untitled.md)
-  * [Inline Rules](getting-started/rule-sources/inline-rules.md)
-  * [JSON Rules](getting-started/rule-sources/json-properties.md)
-  * [Model Rules](getting-started/rule-sources/model-rules.md)
-  * [Module Rules](getting-started/rule-sources/module-rules.md)
-  * [XML Rules](getting-started/rule-sources/xml-properties.md)
+* [Configuration](getting-started/first-chapter/README.md)
+  * [Rule Sources](getting-started/first-chapter/rule-sources/README.md)
+    * [DB Rules](getting-started/first-chapter/rule-sources/untitled.md)
+    * [Inline Rules](getting-started/first-chapter/rule-sources/inline-rules.md)
+    * [JSON Rules](getting-started/first-chapter/rule-sources/json-properties.md)
+    * [Model Rules](getting-started/first-chapter/rule-sources/model-rules.md)
+    * [Module Rules](getting-started/first-chapter/rule-sources/module-rules.md)
+    * [XML Rules](getting-started/first-chapter/rule-sources/xml-properties.md)
 
 ## Usage
 
+* [Authentication Services](usage/authentication-services.md)
 * [Security Rules](usage/untitled-1.md)
 * [Security Annotations](usage/security-annotations.md)
 * [Secured URL](usage/_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
-* [Authentication Services](usage/authentication-services.md)
 * [cbSecurity Model](usage/cbsecurity-model/README.md)
   * [secure\(\) Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
   * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
@@ -53,4 +53,12 @@
 * [JWT Validator](jwt/jwt-validator.md)
 * [Token Storage](jwt/jwt-token-storage.md)
 * [Interceptions](jwt/jwt-interceptions.md)
+
+## External links
+
+* [Source code](https://github.com/coldbox-modules/cbsecurity)
+* [Issue Tracker](https://ortussolutions.atlassian.net/projects/BOX/issues)
+* [cbauth](https://cbauth.ortusbooks.com/)
+* [cbcsrf](https://www.forgebox.io/view/cbcsrf)
+* [JWT CFML](https://www.forgebox.io/view/jwt-cfml)
 
