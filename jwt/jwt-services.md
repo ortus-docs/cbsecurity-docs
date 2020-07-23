@@ -40,13 +40,13 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
 * Subject \(`sub`\) - This holds the identifier for the token \(defaults to user id\)
 * Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
 * Unique ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
-* Scopes \(`scopes)` - An array of scopes attached to the token
+* Scopes \(`scope)` - A space delimited string of scopes attached to the token
 
 {% code title="mytoken.json" %}
 ```javascript
 {
   "iat": 1569340662,
-  "scopes": [],
+  "scope": "",
   "iss": "http://127.0.0.1:56596/",
   "sub": 123,
   "exp": 1569344262,
