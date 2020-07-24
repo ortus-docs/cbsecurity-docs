@@ -1,6 +1,6 @@
 # DB Rules
 
-If you have your security rules in a database, then cbsecurity can read the rules from the database for you.  Just make the `rules` key  equal to `db` and fill out the extra configuration keys shown below:
+If you have your security rules in a database, then cbsecurity can read the rules from the database for you.  Just **make** **the `rules` key  equal to `db`** and fill out the extra configuration keys shown below:
 
 
 

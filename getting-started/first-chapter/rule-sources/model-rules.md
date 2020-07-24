@@ -1,6 +1,6 @@
 # Model Rules
 
-If you prefer to store your rules your way, then that's perfectly fine.  Just make your `rules` setting point to `model` and then provide us with the object to get the rules from.
+If you prefer to store your rules your way, then that's perfectly fine.  Just **make your `rules` setting point to `model`** and then provide us with the object to get the rules from.
 
 | Property | Type | Required | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
