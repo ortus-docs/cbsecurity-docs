@@ -42,7 +42,7 @@ When processing rules, it is important to realize these rules come as an array w
 | `securelist` | varchar | A comma delimited list of events or regex patterns to secure |
 | `roles` | varchar | A comma delimited list of roles that can access these secure events |
 | `permissions` | varchar | A comma delimited list of permissions that can access these secure events |
-| `redirect` | varchar | An event or route to redirect if the user is not authentication or authorized |
+| `redirect` | varchar | An event or route to redirect if the user is not authenticated or authorized |
 | `overrideEvent` | varchar | The event to override using ColdBox's `event.overrideEvent()` if the user if not authenticated or authorized |
 | `useSSL` | Boolean | If true, force SSL, else use whatever the request protocol is |
 | `action` | string | The action to use \(redirect or override\) when no explicit overrideEvent or redirect elements are defined.  If not set, then we use the global settings. |
@@ -99,7 +99,7 @@ If a rule has a white list, then it means that you can declare what are the exce
 Please note: if a rule has a whiteList, it only applies to the **current** rule. So if the whitelist matches, it the current rule is skipped and the process continues to the next rule.
 {% endhint %}
 
-Sometimes you want to make sure ALL events are secured, expect for the ones specified, such as login events. If you add new functionality to your app it is easy to forget a new rule. To prevent unwanted access you could specify a LAST rule, which matches ALL event but NO permission at all. In that case you have to add a whitelist for all events which should still pass, for example:
+Sometimes you want to make sure ALL events are secured, except for the ones specified, such as login events. If you add new functionality to your app it is easy to forget a new rule. To prevent unwanted access you could specify a LAST rule, which matches ALL event but NO permission at all. In that case you have to add a whitelist for all events which should still pass, for example:
 
 ```javascript
 {
