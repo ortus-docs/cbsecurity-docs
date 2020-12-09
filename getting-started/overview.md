@@ -13,10 +13,10 @@ With the ColdBox security module you will be able to **secure** all your incomin
 
 The module wraps itself around the `preProcess` interception point and will try to validate security rules and/or annotations on the requested handler actions through a `Validator` Through this interception point `cbsecurity` acts as a `FIREWALL`. `cbsecurity` has the following validators available:
 
-* CBAuth Validator: this is de default \(and recommended\) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security
+* CBAuth Validator: this is the default \(and recommended\) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security.
 * CFML Security Validator. Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods. It provides authentication and _roles_ based security.
 * JWT Validator. If you want to use Java Web Tokens the JWT Validator provides authorization and authentication.
-* Custom Validator. You can define your own authentication and authorization engine and plug it in the cbsecurity framework.
+* Custom Validator. You can define your own authentication and authorization engines and plug them in to the cbsecurity framework.
 
 ## How Does Validation Happen?
 
