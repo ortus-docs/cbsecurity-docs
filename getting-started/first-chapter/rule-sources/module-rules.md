@@ -12,7 +12,7 @@ settings = {
 		// Default Authentication Action: override or redirect when a user has not logged in
 		"defaultAuthenticationAction"	: "redirect",
 		// Module override event when an invalid access is detected, instead of each rule declaring one.
-		"invalidAuthorizationEvent"		: "mod1:secure.auth",
+		"invalidAuthorizationEvent"	: "mod1:secure.auth",
 		// Default Authorization Action: override or redirect when a user does not have enough permissions to access something
 		"defaultAuthorizationAction"	: "redirect",
 		// You can define your security rules here
@@ -55,6 +55,7 @@ For example, you can load security rules specific to a module from a JSON file s
 settings = {
 	cbsecurity = {
 		"rules" : "#modulePath#/config/firewallRules.json"
+		// other config here... <---
 	}
 };
 ```
