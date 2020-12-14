@@ -34,7 +34,7 @@ settings = {
 As you can see each module can have it's own overrides for authentication and authorization events as well as their own rules.
 
 {% hint style="danger" %}
-Please note that these security rules will be **APPENDED** to the global rules
+Please note that these security rules will be **PREPENDED** to the global rules
 {% endhint %}
 
 ### Unloading/Loading
