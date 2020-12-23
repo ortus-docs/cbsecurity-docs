@@ -394,7 +394,7 @@ In order to implement JWT authentication in your application, you may need to mo
 
 ### NGINX
 
-The following configuration may be applied to NGINX `http` and `location` blocks to allow for the presence of tokens in both the request and response headers:
+The following configuration may be applied to the main NGINX `http` configuration block to allow for the presence of tokens in both the request and response headers:
 
 ```
 http {
