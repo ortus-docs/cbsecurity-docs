@@ -369,7 +369,7 @@ component{
 	
 		var token = jwtAuth().fromuser( prc.oUser );
 		return {
-			"error"   : true,
+			"error"   : false,
 			"data"    : token,
 			"message" : "User registered correctly and Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
 		};
