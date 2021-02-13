@@ -73,6 +73,12 @@ The ColdBox ORM Module is a professional open source software backed by [Ortus S
 * Code Reviews
 * [Much More](http://www.ortussolutions.com/services)
 
+### Discussion & Help 
+
+The Box products and modules community for  discussion and help can be found here: 
+
+[https://community.ortussolutions.com/c/box-modules/cbsecurity/](https://community.ortussolutions.com/c/box-modules/cbsecurity/26)
+
 ### HONOR GOES TO GOD ABOVE ALL <a id="honor-goes-to-god-above-all"></a>
 
 Because of His grace, this project exists. If you don't like this, then don't read it, it's not for you.
