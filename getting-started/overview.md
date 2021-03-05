@@ -23,7 +23,7 @@ The module wraps itself around the `preProcess` interception point and will try 
 How does the interceptor know a user doesn't or does have access? Well, here is where you register a Validator CFC \(`validator` setting\) with the interceptor that implements two validation functions: `ruleValidator()` and `annotationValidator()` that will allow the module to know if the user is logged in and has the right authorizations to continue with the execution.
 
 {% hint style="info" %}
-You can find an interface for these methods in `cbsecurity.interfaces.IUserValidator`
+You can find an interface for these methods in `cbsecurity.interfaces.ISecurityValidator`
 {% endhint %}
 
 The validator has two options to determine if the user will be allowed access:
