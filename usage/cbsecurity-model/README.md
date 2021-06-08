@@ -8,10 +8,10 @@ There will be times where you will need authorization checks outside of the inco
 
 ## `cbSecurity` Model
 
-You can inject our model or you can use our handy `cbsecure()` mixin \(interceptors/handlers/layouts/views\) and then call the appropriate security functions:
+You can inject our model or you can use our handy `cbsecure()` mixin \(handlers/layouts/views\) and then call the appropriate security functions:
 
 ```javascript
-// Mixin: Handlers/Interceptors/Layouts/Views
+// Mixin: Handlers/Layouts/Views
 cbsecure()
 
 // Injection
