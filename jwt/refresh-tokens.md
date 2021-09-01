@@ -51,7 +51,7 @@ If you enable the auto refresh validator setting, then cbsecurity will try to au
 
 #### EnableRefreshEndpoint
 
-If enabled, the REST `cbsecurit/refreshToken` endpoint will be available for the application, so users can refresh their tokens.
+If enabled, the REST `cbsecurity/refreshToken` endpoint will be available for the application, so users can refresh their tokens.
 
 ## Token Creation
 
@@ -116,7 +116,7 @@ Therefore, you no longer have a long-lived refresh token that could provide ille
 
 ## Refresh Token Header Auto Refreshment
 
-CBSecurity has the ability to refresh access tokens automatically for you when calling any secure resource that is protected by the JWT Validator. All you have to do is sent in both tokens via the appropriate headers and enable the `autoRefreshValidator` setting:
+CBSecurity has the ability to refresh access tokens automatically for you when calling any secure resource that is protected by the JWT Validator. All you have to do is send in both tokens via the appropriate headers and enable the `autoRefreshValidator` setting:
 
 * access token
   * bearer token or
@@ -124,7 +124,7 @@ CBSecurity has the ability to refresh access tokens automatically for you when c
 * refresh token
   * `x-refresh-token`
 
-If the access token has expired and the `x-refresh-token` was passed and is valid, then the access token will be re-generated, the refresh token will be rotated, the request will continue as normal and two new **response** headers will be sent back to the caller application.
+If the access token has expired and the `x-refresh-token` was passed and is valid, then the access token will be re-generated, the refresh token will be rotated, the request will continue as normal and two new **response** headers will be sent back to the calling application.
 
 * `x-auth-token` : refreshed access token
 * `x-refresh-token` : new refresh token
