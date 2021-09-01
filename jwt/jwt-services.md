@@ -41,6 +41,7 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
 * Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
 * Unique ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
 * Scopes \(`scope)` - A space delimited string of scopes attached to the token
+* Refresh Token \(`cbsecurity_refresh` \) - If you are using refresh tokens, this custom claim will be added to the payload.
 
 {% code title="mytoken.json" %}
 ```javascript
@@ -51,7 +52,21 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
   "sub": 123,
   "exp": 1569344262,
   "jti": "12954F907C0535ABE97F761829C6BD11"
-}
+}  
+```
+{% endcode %}
+
+{% code title="myRefreshToken.json" %}
+```javascript
+{
+  "iat": 1569340662,
+  "scope": "",
+  "iss": "http://127.0.0.1:56596/",
+  "sub": 2222,
+  "exp": 1569344262,
+  "jti": "234234CDDEEDD",
+  "cbsecurity_refresh" : true
+}  
 ```
 {% endcode %}
 

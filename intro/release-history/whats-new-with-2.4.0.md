@@ -1,3 +1,7 @@
+---
+description: 2020-APR-02
+---
+
 # What's New With 2.4.0
 
 This release adds the inclusion of the Cross Site Request Forgery module into cbsecurity: `cbcsrf`.  You can find all the details about this module here: [https://github.com/coldbox-modules/cbcsrf](https://github.com/coldbox-modules/cbcsrf).  Below are the major features of this module:

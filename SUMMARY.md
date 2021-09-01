@@ -5,6 +5,14 @@
 ## Intro
 
 * [Release History](intro/release-history/README.md)
+  * [What's New With 2.13.0](intro/release-history/whats-new-with-2.13.0.md)
+  * [What's New With 2.12.0](intro/release-history/whats-new-with-2.12.0.md)
+  * [What's New With 2.11.x](intro/release-history/whats-new-with-2.11.x.md)
+  * [What's New With 2.10.0](intro/release-history/whats-new-with-2.10.0.md)
+  * [What's New With 2.9.0](intro/release-history/whats-new-with-2.9.0.md)
+  * [What's New With 2.8.0](intro/release-history/whats-new-with-2.8.0.md)
+  * [What's New With 2.7.0](intro/release-history/whats-new-with-2.7.0.md)
+  * [What's New With 2.6.0](intro/release-history/whats-new-with-2.6.0.md)
   * [What's New With 2.5.0](intro/release-history/whats-new-with-2.5.0.md)
   * [What's New With 2.4.0](intro/release-history/whats-new-with-2.4.0.md)
   * [What's New With 2.3.0](intro/release-history/whats-new-with-2.3.0.md)
