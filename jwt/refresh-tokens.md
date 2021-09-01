@@ -4,7 +4,7 @@ ColdBox Security supports the concept of refresh tokens alongside the normal JWT
 
 ## What Is a Refresh Token?
 
-Access tokens may be valid for a short amount of time. Once they expire, client applications can use a refresh token to "**refresh**" the access token. _That is, a refresh token is a credential artifact that lets a client application get new access tokens without having to ask the user to log in again._
+A refresh token is a credential artifact that lets a client application get new access tokens without having to ask the user to log in again.  Access tokens may be valid for a short amount of time. Once they expire, client applications can use a refresh token to "**refresh**" the access token.
 
 The client application can get a new access token as long as the refresh token is valid and unexpired. Consequently, a refresh token that has a very long lifespan could theoretically give infinite power to the token bearer to get a new access token to access protected resources anytime. The bearer of the refresh token could be a legitimate user or a malicious user.
 
