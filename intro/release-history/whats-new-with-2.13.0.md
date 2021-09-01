@@ -4,7 +4,7 @@ description: 2021-SEP-
 
 # What's New With 2.13.0
 
-#### Added
+### Added
 
 * Adobe 2021 Support
 * Migration to github actions from travis
@@ -17,9 +17,11 @@ description: 2021-SEP-
 * Added ability to recreate the token storage using a `force` argument `getTokenStorage( force = false )`
 * Ability for the `parseToken()` to choose to store and authenticate or just parse
 
-#### Fixed
+### Fixed
 
 * Unique `jti` could have collisions if tokens created at the same time, add randomness to it
 * `TokenExpirationException` not relaeyed from the base jwt library
 * If `variables.settings.jwt.tokenStorage.enabled` is disabled all invalidations failed, make sure if the storage is disabled to not throw storage exceptions.
+
+
 
