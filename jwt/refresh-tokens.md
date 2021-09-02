@@ -120,7 +120,7 @@ CBSecurity has the ability to refresh access tokens automatically for you when c
 
 * access token
   * bearer token or
-  * ```x-auth-token``
+  * `x-auth-token`
 * refresh token
   * `x-refresh-token`
 
