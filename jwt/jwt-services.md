@@ -416,3 +416,51 @@ Make sure you add validation!
 
 That's it, we now can login a user, give them a token, register a new user and give them their token, and also log them out.  The next step is for you to build your rules and/or security annotations and make sure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
 
+## Web Server Configuration
+
+In order to implement JWT authentication in your application, you may need to modify some web server settings. Most web servers have default content length restrictions on the size of an individual header.  If your web server platform has such default enabled, you will need to increase the buffer size to accommodate the presence of JTW tokens in both the request and response headers.  The size of a JWT token header, encrypted via the default cbSecurity HMAC512 algorithm, is around 44 kilobytes.  As such you will need to allow for at least that size.   Below are some examples for common web server configurations
+
+### NGINX
+
+The following configuration may be applied to the main NGINX `http` configuration block to allow for the presence of tokens in both the request and response headers:
+
+```
+http {
+	# These settings affect outbound headers via proxy server
+	proxy_buffer_size   64k;
+	proxy_buffers   4 128k;
+	proxy_busy_buffers_size   128k;
+	# These settings affect the http client request headers
+	client_body_buffer_size     128k;
+	client_header_buffer_size   64k;
+	large_client_header_buffers 8 128k;
+	# These settings affect HTTP/2 headers, however some versions of NGINX will throw an error on HTTP/1 requests if these are not present
+	http2_max_header_size 128k;
+	http2_max_field_size 1000m;
+}
+
+```
+
+### IIS
+
+You will need to modify two registry keys:
+
+1. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxFieldLength` - Sets an upper limit, in bytes, for each header. The default value is 65534 bytes and the maximum value is 65534 bytes ( 64kb )
+2. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxRequestBytes` - Sets the upper limit for the request line and the headers, combined.  As such 128K should allow for both long URLs, as well as JWT tokens in the headers. The default value is 16384 bytes and the maximum value is 16777216 bytes ( 16 MB )
+
+
+### Apache
+
+You will need to add a `LimitRequestFieldSize` setting in each `<VirtualHost...>` entry in order increase the default header size from the default 8 kilobytes.  Example, with a setting of 128 kilobytes:
+
+```
+<VirtualHost 10.10.50.50:80>
+	ServerName www.mysite.com
+	
+	LimitRequestFieldSize 128000
+	
+	RewriteEngine On
+	...
+	...
+</VirtualHost>
+```
