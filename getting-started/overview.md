@@ -1,3 +1,9 @@
+---
+description: >-
+  In this page you will find a thorough overview of the capabilities of the
+  ColdBox Security module.
+---
+
 # Overview
 
 ## Authentication/Authorization
@@ -434,6 +440,10 @@ You will receive the following data in the `interceptData` struct:
 
 You can use these security listeners to do auditing, logging, or even override the result of the operation.
 
+{% hint style="success" %}
+There are many more interception points available to you, check them out in our [Interceptions](../usage/interceptions.md) page.
+{% endhint %}
+
 ## CBSecurity Model
 
 The `CBSecurity` model was introduced in version 2.3.0 and it provides you with a way to provide authorization checks and contexts anywhere you like: handlers, layouts, views, interceptors and even models.
@@ -564,4 +574,8 @@ This module also ships with a security visualizer that will document all your se
 {% endhint %}
 
 ![](https://raw.githubusercontent.com/coldbox-modules/cbsecurity/development/test-harness/visualizer.png)
+
+## JSON Web Tokens \(JWT\) REST Security
+
+ColdBox Security offers a comprehensive feature set for RESTFul applications that require JSON web tokens.  We offer both access and refresh token capabilities.  Check out our [JWT Section](../jwt/jwt-services.md) for an in-depth overview.
 
