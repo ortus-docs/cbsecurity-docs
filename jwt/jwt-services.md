@@ -313,7 +313,7 @@ component accessors="true" {
 
 		return arguments.permission
 			.filter( function(item){
-				return ( variables.permissions.findNoCase( item ) );
+				return ( variables.permissions.ListFindNoCase( item ) );
 			} )
 			.len();
 	}
