@@ -1,22 +1,30 @@
 # Overview
 
-For about any security system you need to know who is authenticated and what this user is allowed to do. `cbsecurity` is no different, so it provides an:
+## Authentication/Authorization
+
+For any security system you need to know **who** is authenticated \(authentication\) and **what** \(authorization\) this user is allowed to do. `cbsecurity` is no different, so it provides an:
 
 * **Authentication system** which performs the following functions:
   * Validates user credentials
   * Logs them in and out
-  * Tracks their sessions
+  * Tracks their security in sessions or any custom storage
 * **Authorization** system which:
-  * validates permissions or roles
+  * validates permissions or roles or both
 
-With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations. You will also be able to leverage our `CBSecurity` service model to secure any context anywhere.
+![](../.gitbook/assets/image%20%281%29.png)
 
-The module wraps itself around the `preProcess` interception point and will try to validate security rules and/or annotations on the requested handler actions through a `Validator` Through this interception point `cbsecurity` acts as a `FIREWALL`. `cbsecurity` has the following validators available:
+## ColdBox Security Firewall
 
-* CBAuth Validator: this is the default \(and recommended\) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security.
-* CFML Security Validator. Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods. It provides authentication and _roles_ based security.
-* JWT Validator. If you want to use Java Web Tokens the JWT Validator provides authorization and authentication.
-* Custom Validator. You can define your own authentication and authorization engines and plug them in to the cbsecurity framework.
+With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations within your code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere.
+
+![ColdBox Security Firewall](../.gitbook/assets/image.png)
+
+The module wraps itself around the `preProcess` interception point \(The first execution of a ColdBox request\) and will try to validate if the request has been authenticated and authorized to execute.  This is done via security rules and/or annotations on the requested handler actions through a CBSecurity `Validator` .  The job of the validator is to make sure user requests have been authenticated and authorized:
+
+* **CBAuth Validator**: this is the default \(and recommended\) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security.
+* **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods \(`cflogin,cflogout`\). It provides authentication and _roles_ based security.
+* **JWT Validator**: If you want to use Json Web Tokens the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens for RESTFul APIs.
+* **Custom Validator:** You can define your own authentication and authorization engines and plug them in to the cbsecurity framework.
 
 ## How Does Validation Happen?
 
@@ -33,7 +41,7 @@ The validator has two options to determine if the user will be allowed access:
 
 You can use rules, annotations or even both. Rules are much more flexible, but more complex. Rules will be evaluated before annotations.
 
-The validator's job is to tell back to the firewall if they are allowed access and if they don't, what type of validation they broke: **authentication** or **authorization**.
+The validators' job is to tell back to the firewall if they are allowed access and if they don't, what type of validation they broke: **authentication** or **authorization**.
 
 > `Authentication` is when a user is NOT logged in
 >
@@ -54,10 +62,56 @@ Once the firewall has the results and the user is **NOT** allowed access, the fo
 
 ## Security Rules vs Annotation Security
 
+{% code title="Security Rules" %}
+```javascript
+{
+    "whitelist"     : "", 
+    "securelist"    : "", 
+    "match"            : "event",  // or url
+    "roles"            : "", 
+    "permissions"    : "", 
+    "redirect"         : "", 
+    "overrideEvent"    : "", 
+    "useSSL"        : false, 
+    "action"        : "redirect", // or override 
+    "module"        : ""
+};
+```
+{% endcode %}
+
+{% code title="Annotations" %}
+```javascript
+// Secure the entire handler
+component secured{
+
+	function index(event,rc,prc){}
+	function list(event,rc,prc){}
+
+}
+// Same as this
+component secured=true{
+}
+
+// Do NOT secure the handler
+component secured=false{
+}
+// Same as this, no annotation!
+component{
+
+	function index(event,rc,prc) secured{
+	}
+
+	function list(event,rc,prc) secured="list"{
+
+	}
+	 
+```
+{% endcode %}
+
 Your application can be secured with security rules or handler and method annotations. Before making your choice, you should take the following arguments into consideration:
 
 * annotations are directly visible in your code, but very static. 
-* annotations can protect events. Rules can protect events and Url's.
+* annotations can protect events. Rules can protect events and incoming Url's.
 * rules allow you to change your action \(override or redirect\) and target on each rule. With annotations you can only use your configured default action and target.
 * when stored in a file or database, rules can be edited by admins at runtime.
 
@@ -212,7 +266,7 @@ component secured="admin,users"{
 
 By having the ability to annotate the handler and also the action you create a cascading security model where they need to be able to access the handler first and only then will the action be evaluated for access as well.
 
-## Security Validations
+## Security Validator
 
 As we mentioned at the beginning of this overview, the security module will use a Validator object in order to determine if the user has authentication/authorization or not. This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
 
@@ -248,6 +302,7 @@ Each validator must return a `struct` with the following keys:
 
 * `allow:boolean` A Boolean indicator if authentication or authorization was violated
 * `type:stringOf(authentication|authorization)` A string that indicates the type of violation: authentication or authorization.
+* `messages:string` Info or debugging messages
 
 ### CBAuthValidator
 

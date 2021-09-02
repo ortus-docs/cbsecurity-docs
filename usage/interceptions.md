@@ -36,3 +36,27 @@ component extends="coldbox.system.Interceptor"{
 
 The intercept data has a key called `processActions` which defaults to **true**.  This Boolean indicator tells the firewall to process the invalid authentication/authorization procedures.  If you change this value to **false**, then the firewall will do NOTHING because it is expecting for YOU to have done the actions.
 
+## JWT Interception
+
+If you are using our JWT facilities, then we will announce the following interceptions during JWT usage:
+
+* `cbSecurity_onJWTCreation`
+* `cbSecurity_onJWTInvalidation`
+* `cbSecurity_onJWTValidAuthentication`
+* `cbSecurity_onJWTInvalidUser`
+* `cbSecurity_onJWTInvalidClaims`
+* `cbSecurity_onJWTExpiration`
+* `cbSecurity_onJWTStorageRejection`
+* `cbSecurity_onJWTValidParsing`
+* `cbSecurity_onJWTInvalidateAllTokens`
+
+## CBAuth Interceptions
+
+You can always find the latest interception points here: [https://github.com/coldbox-modules/cbauth\#interception-points](https://github.com/coldbox-modules/cbauth#interception-points)
+
+cbauth announces several custom interception points. You can use these interception points to change request data or add additional values to session or request scopes. The `preAuthentication` and `postAuthentication` events fire during the standard `authenticate()` method call with a username and password. The `preLogin` and `postLogin` events fire during the `login()` method call. The `preLogout` and `postLogout` events fire during the `logout()` method call.
+
+{% hint style="success" %}
+The `preLogin` and `postLogin` interception points will be called during the course of `authenticate()`. The order of the calls then are `preAuthentication` -&gt; `preLogin` -&gt; `postLogin` -&gt; `postAuthentication`.
+{% endhint %}
+

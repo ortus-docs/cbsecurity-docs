@@ -1,6 +1,6 @@
 # Cross Site Request Forgery
 
-Since version 2.4.x we have included the `cbcsrf` module into cbSecurity.  Below is how you can use it:
+Since version 2.4.x we have included the `cbcsrf` module into **cbSecurity**.  Below is how you can use it:
 
 ## Settings
 
@@ -10,15 +10,18 @@ Below are the settings you can use for this module. Remember you must create the
 moduleSettings = {
     cbcsrf : {
         // By default we load up an interceptor that verifies all non-GET incoming requests against the token validations
-        enableAutoVerifier : true,
-        // A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
-        verifyExcludes : [
-        ],
-        // By default, all csrf tokens have a life-span of 30 minutes. After 30 minutes, they expire and we aut-generate new ones.
-        // If you do not want expiring tokens, then set this value to 0
-        rotationTimeout : 30,
-        // Enable the /cbcsrf/generate endpoint to generate cbcsrf tokens for secured users.
-        enableEndpoint : false
+			enableAutoVerifier     : false,
+			// A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
+			verifyExcludes         : [],
+			// By default, all csrf tokens have a life-span of 30 minutes. After 30 minutes, they expire and we aut-generate new ones.
+			// If you do not want expiring tokens, then set this value to 0
+			rotationTimeout        : 30,
+			// Enable the /cbcsrf/generate endpoint to generate cbcsrf tokens for secured users.
+			enableEndpoint         : false,
+			// The WireBox mapping to use for the CacheStorage
+			cacheStorage           : "CacheStorage@cbstorages",
+			// Enable/Disable the cbAuth login/logout listener in order to rotate keys
+			enableAuthTokenRotator : false
     }
 };
 ```
@@ -30,6 +33,7 @@ This module will add the following UDFs into any framework files:
 * `csrfToken()` : To generate a token, using the `default` or a custom key
 * `csrfVerify()` : Verify a valid token or not
 * `csrf()` : To generate a hidden field \(`csrf`\) with the token
+* `csrfField()` : Generate a random token in a hidden form element and javascript that will refresh the page automatically when the token expires
 * `csrfRotate()` : To wipe and rotate the tokens for the user
 
 Here are the method signatures:
@@ -44,6 +48,7 @@ Here are the method signatures:
  * @return csrf token
  */
 string function csrfToken( string key='', boolean forceNew=false )
+
 /**
  * Validates the given token against the same stored in the session for a specific key.
  *
@@ -53,6 +58,7 @@ string function csrfToken( string key='', boolean forceNew=false )
  * @return Valid or Invalid Token
  */
 boolean function csrfVerify( required string token='', string key='' )
+
 /**
  * Generate a random token and build a hidden form element so you can submit it with your form
  *
@@ -61,7 +67,18 @@ boolean function csrfVerify( required string token='', string key='' )
  *
  * @return HTML of the hidden field (csrf)
  */
-function csrf( string key='', boolean forceNew=false )
+string function csrf( string key='', boolean forceNew=false )
+
+/**
+ * Generate a random token in a hidden form element and javascript that will refresh the page automatically when the token expires
+ * 
+ * @key A random token is generated for the key provided. CFID is the default
+ * @forceNew If set to true, a new token is generated every time the function is called. If false, in case a token exists for the key, the same key is returned.
+ *
+ * @return HTML of the hidden field (csrf)
+ */
+string function csrfField( string key='', boolean forceNew=false )
+
 /**
  * Clears out all csrf token stored
  */

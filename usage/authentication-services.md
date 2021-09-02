@@ -65,7 +65,7 @@ interface{
 ```
 {% endcode %}
 
-You can find the information for cbauth at their website: [https://github.com/elpete/cbauth/](https://github.com/elpete/cbauth/)
+You can find the information for **cbauth** at their website: [https://github.com/elpete/cbauth/](https://github.com/elpete/cbauth/)
 
 ## User Interface
 

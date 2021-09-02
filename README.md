@@ -35,6 +35,7 @@ The major areas of concern are:
 * Capability to distinguish between invalid **authentication** and invalid **authorization** and determine an outcome of the process.  
 * Ability to load/unload security rules from contributing modules.
 * Ability for each module to define it's own `validator`
+* JWT Access and Refresh Tokens Native support
 
 ## Versioning <a id="versioning"></a>
 
