@@ -38,7 +38,7 @@ The intercept data has a key called `processActions` which defaults to **true**.
 
 ## JWT Interception
 
-If you are using our JWT facilities, then we will announce the following interceptions during JWT usage:
+If you are using our [JWT facilities](../jwt/jwt-services.md), then we will announce the following interceptions during JWT usage:
 
 * `cbSecurity_onJWTCreation`
 * `cbSecurity_onJWTInvalidation`
@@ -49,6 +49,8 @@ If you are using our JWT facilities, then we will announce the following interce
 * `cbSecurity_onJWTStorageRejection`
 * `cbSecurity_onJWTValidParsing`
 * `cbSecurity_onJWTInvalidateAllTokens`
+
+Check them all out in our [JWT Interceptions Page](../jwt/jwt-interceptions.md).
 
 ## CBAuth Interceptions
 

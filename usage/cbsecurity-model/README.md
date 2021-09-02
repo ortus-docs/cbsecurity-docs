@@ -1,3 +1,9 @@
+---
+description: >-
+  This object is used to provide you with human, fluent and explicit security
+  authorizations and contexts.
+---
+
 # cbSecurity Model
 
 ## Explicit Authorizations

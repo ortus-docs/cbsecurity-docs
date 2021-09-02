@@ -2,7 +2,7 @@
 
 Now that we have all the pieces in place for JWT, we can now register the JWT validator as our validator of choice for requests which in our case it is the same JWT Service that will take care of the validation: `JWTService@cbsecurity`. 
 
-The validator will inspect the incoming requests for valid jwt authorization headers. It will be in charge of verifying their expiration, their required claims, and the user it represents. Once that is done, it goes in the same rule/annotation security flow that cbsecurity leverages.
+The validator will inspect the incoming requests for valid jwt authorization headers. It will be in charge of verifying their expiration, their required claims, and the user it represents. Once that is done, it goes in the same rule/annotation security flow that **cbsecurity** leverages.
 
 {% code title="config/Coldbox.cfc" %}
 ```javascript
@@ -45,6 +45,7 @@ The validator will have the following validation process:
 * Verify the jwt token exists via the `authorization` header or custom header `x-auth-token` or incoming `rc[ 'x-auth-token' ]`
 * Verify we can decode it
 * Verify if it has not expired from the token itself
+  * If you have enabled auto refresh tokens, check out the [refresh tokens process](refresh-tokens.md#enableautorefreshvalidator).
 * Verify it has the required claims
 * If token storage is enabled, verify the token in the permanent storage
 * Verify the subject \(`sub`\) claim and try to retrieve the user it represents

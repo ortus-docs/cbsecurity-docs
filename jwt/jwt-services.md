@@ -101,28 +101,28 @@ cbsecurity : {
     // JWT Settings
     jwt                     : {
         // The issuer authority for the tokens, placed in the `iss` claim
-                issuer                          : "",
-                // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
+        issuer                          : "",
+        // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
         secretKey               : getSystemSetting( "JWT_SECRET", "" ),
         // by default it uses the authorization bearer header, but you can also pass a custom one as well.
         customAuthHeader        : "x-auth-token",
         // The expiration in minutes for the jwt tokens
         expiration              : 60, 
         // If true, enables refresh tokens, token creation methods will return a struct instead
-                // of just the access token. e.g. { access_token: "", refresh_token : "" }
-                enableRefreshTokens        : false,
-                // The default expiration for refresh tokens, defaults to 30 days
-                refreshExpiration          : 10080,
-                // The Custom header to inspect for refresh tokens
-                customRefreshHeader        : "x-refresh-token",
-                // If enabled, the JWT validator will inspect the request for refresh tokens and expired access tokens
-                // It will then automatically refresh them for you and return them back as
-                // response headers in the same request according to the customRefreshHeader and customAuthHeader
-                enableAutoRefreshValidator : false,
-                // Enable the POST > /cbsecurity/refreshtoken API endpoint
-                enableRefreshEndpoint      : true,
+        // of just the access token. e.g. { access_token: "", refresh_token : "" }
+        enableRefreshTokens        : false,
+        // The default expiration for refresh tokens, defaults to 30 days
+        refreshExpiration          : 10080,
+        // The Custom header to inspect for refresh tokens
+        customRefreshHeader        : "x-refresh-token",
+        // If enabled, the JWT validator will inspect the request for refresh tokens and expired access tokens
+        // It will then automatically refresh them for you and return them back as
+        // response headers in the same request according to the customRefreshHeader and customAuthHeader
+        enableAutoRefreshValidator : false,
+        // Enable the POST > /cbsecurity/refreshtoken API endpoint
+        enableRefreshEndpoint      : true,
         // encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
-            algorithm               : "HS512",
+        algorithm               : "HS512",
         // Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
         requiredClaims          : [] ,
         // The token storage settings
@@ -228,9 +228,13 @@ The driver to use. Can be either **db** or **cachebox** or your own WireBox Id f
 
 A struct of properties to configure each storage with.
 
+### Refresh Token Configuration
+
+Refresh tokens have several configuration items, check them out in our [refresh token configuration section](refresh-tokens.md#refresh-token-configuration).
+
 ## JWT Subject Interface
 
-The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements. So your User object must implement our `JWTSubject` interface with the following functions:
+The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements. So your `User` object must implement our `JWTSubject` interface with the following functions:
 
 {% code title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
 ```javascript
@@ -317,13 +321,6 @@ component accessors="true" {
             .len();
     }
 
-    /**
-     * Shortcut to verify it the user is logged in or not.
-     */
-    boolean function isLoggedIn(){
-        return auth.isLoggedIn();
-    }
-
 }
 ```
 {% endcode %}
@@ -336,19 +333,48 @@ Please note that the JWT validators must talk to the authentication and user ser
 
 Ok, now we can focus on all the wonderful methods the JWT service offers:
 
-* `attempt( username, password, [ customClaims:struct ] ):token` - Attempt to authenticate a user with the authentication service and if successful, return the token using the identifier and custom claims. Exception if invalid authentication.
+### Token Creation Methods
+
+* `attempt( username, password, [ customClaims:struct ] ):token` - Attempt to authenticate a user with the authentication service and if successful, return the token using the identifier and custom claims. Exception if invalid authentication
 * `fromUser( user, [ customClaims:struct ] ):token` - Generate a token according to the passed user object and custom claims.
+
+### Raw JWT Methods
+
 * `encode( struct payload ):token` - Generate a raw jwt token from a native payload struct.
 * `verify( required token ):boolean` - Verify a token string or throws exception
 * `decode( required token ):struct` - Decode and retrieve the passed in token to CFML struct
-* `parseToken():struct` - Get the decoded token using the headers strategy and store it in the `prc.jwt_token` and the decoded data as `prc.jwt_payload` if it verifies correctly. Throws: `TokenExpiredException` if the token is expired, `TokenInvalidException` if the token doesn't verify decoding, `TokenNotFoundException` if not found
+
+### Parsing and Helper Methods
+
+* `parseToken( token, storeInContext, authenticate ):struct` - Get the decoded token using the headers strategy and store it in the `prc.jwt_token` and the decoded data as `prc.jwt_payload` if it verifies correctly. Throws: `TokenExpiredException` if the token is expired, `TokenInvalidException` if the token doesn't verify decoding, `TokenNotFoundException` if not found
 * `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty string.
 * `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty struct.
 * `setToken( token ):JWTService` - Store the token in `prc.jwt_token`, and store the decoded version in `prc.jwt_payload`
-* `getuser()` - Get the authenticated user
-* `authenticate( [token] ):User` - Calls the auth service using the parsed token or optional passed token, to get the user by subject claim else throw an exception
-* `invalidate( token )` - Invalidates the incoming token by removing it from the permanent storage, no key in storage, it's invalid.
+
+### Authentication Helpers
+
+* `authenticate( [payload] ):User` - Authenticates a passed or detected token payload and return the user it represents
+* `getuser()` - Get the authenticated user according to the access token detected
 * `logout()` - Logout a user and invalidate their token
+
+### Storage Methods
+
+* `invalidateAll( async:false )` - Invalidate all access and refresh tokens in permanent storage
+* `invalidate( token )` - Invalidates the incoming token by removing it from the permanent storage.
+* `isTokenInStorage( token )` - Checks if the passed token exists in permanent storage.
+* `getTokenStorage( force:false )` - Get the current token storage implementation. You can also force create it again if needed.
+
+### Refresh Methods
+
+* `attempt( username, password, [ customClaims:struct ] ):struct` - Attempt to authenticate a user with the authentication service and if successful, return a struct containing an access and refresh token.
+* `fromUser( user, [ customClaims:struct ] ):struct` - Generate a struct of refresh and access token according to the passed user object and custom claims.
+
+```javascript
+{
+    "access_token"  : "AYjcyMzY3ZDhiNmJk",
+    "refresh_token" : "RjY2NjM5NzA2OWJj"
+}
+```
 
 ## Putting it Together
 
@@ -422,7 +448,7 @@ In order to implement JWT authentication in your application, you may need to mo
 
 The following configuration may be applied to the main NGINX `http` configuration block to allow for the presence of tokens in both the request and response headers:
 
-```text
+```julia
 http {
     # These settings affect outbound headers via proxy server
     proxy_buffer_size   64k;
@@ -449,7 +475,7 @@ You will need to modify two registry keys:
 
 You will need to add a `LimitRequestFieldSize` setting in each `<VirtualHost...>` entry in order increase the default header size from the default 8 kilobytes. Example, with a setting of 128 kilobytes:
 
-```text
+```markup
 <VirtualHost 10.10.50.50:80>
     ServerName www.mysite.com
 

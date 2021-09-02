@@ -1,6 +1,10 @@
+---
+description: This feature set is provided by the cbcsrf module.
+---
+
 # Cross Site Request Forgery
 
-Since version 2.4.x we have included the `cbcsrf` module into **cbSecurity**.  Below is how you can use it:
+Since version 2.4.x we have added the `cbcsrf` module as a dependency of **cbSecurity**.  Below is how you can use it:
 
 ## Settings
 
@@ -28,7 +32,7 @@ moduleSettings = {
 
 ## Mixins
 
-This module will add the following UDFs into any framework files:
+This module will add the following UDF mixins to handlers, interceptors, layouts and views:
 
 * `csrfToken()` : To generate a token, using the `default` or a custom key
 * `csrfVerify()` : Verify a valid token or not
@@ -89,6 +93,14 @@ function csrfRotate()
 
 The module also registers the following mapping in WireBox: `@cbcsrf` so you can call our service model directly.
 
+```java
+component{
+
+    property name="cbcsrf" inject="@cbcsrf";
+    
+}
+```
+
 ## Automatic Token Expiration
 
 By default, the module is configured to rotate all user csrf tokens **every 30 minutes**. This means that every token that gets created has a maximum life-span of `{rotationTimeout}` minutes. If you do NOT want the tokens to EVER expire during the user's logged in session, then use the value of `0` zero.
@@ -97,39 +109,56 @@ By default, the module is configured to rotate all user csrf tokens **every 30 m
 
 ## Token Rotation
 
-We have provided several methods to rotate or clear out all of a user's tokens. If you are using `cbAuth` as your module of choice for authentication, then we will listen to logins and logouts and rotate the keys for you.
-
-If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbsrf.rotate()` method on the `@cbsrf` model.
+We have provided several methods to rotate or clear out all of a user's tokens. If you are using `cbAuth` as your module of choice for authentication, then we will listen to **logins** and **logouts** and rotate the keys for you if you have enabled the `enableAuthTokenRotator` setting.
 
 ```javascript
-function doLogin(){
+moduleSettings = {
+    cbcsrf : {
+			// Enable/Disable the cbAuth login/logout listener in order to rotate keys
+			enableAuthTokenRotator : true
+    }
+};
+```
 
-    if( valid login ){
-        // login user
+If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbsrf.rotate()` method on the `@cbsrf` model and do the manual rotation yourself.
+
+{% code title="handlers/security.cfc" %}
+```javascript
+component{
+
+    function doLogin( event, rc, prc ){
+    
+        if( valid login ){
+            // login user
+            csrfRotate();
+        }
+    }
+    
+    function logout( event, rc, prc  ){
         csrfRotate();
     }
-}
 
-function logout(){
-    csrfRotate();
 }
 ```
+{% endcode %}
 
 ### Simple Example
 
-Below is a simple example of manually verifying tokens:
+Below is a simple example of manually verifying tokens in your handlers:
 
+{% code title="registration.cfc" %}
 ```javascript
-component {
+component extends="coldbox.system.EventHandler"{
 
-    any function signUp( event, rc, prc ){
+     function signUp( event, rc, prc ){
         // Store this in a hidden field in the form
         prc.token = csrfGenerate();
+        event.setView( "registration/signup" );
     }
 
-    any function signUpProcess( event, rc, prc ){
+     function signUpProcess( event, rc, prc ){
         // Verify CSFR token from form
-        if( csrfVerify( rc.token ) {
+        if( csrfVerify( rc.token ?: '' ) {
             // save form
         } else {
             // Something isn't right
@@ -138,6 +167,7 @@ component {
     }
 }
 ```
+{% endcode %}
 
 ## Automatic Token Verifier
 
@@ -146,10 +176,15 @@ We have included an interceptor that if loaded will verify all incoming requests
 The settings for this feature are:
 
 ```javascript
+cbcsrf : {
+    // Enable the verifier
     enableAutoVerifier : true,
+    
     // A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
     verifyExcludes : [
+    
     ]
+}
 ```
 
 You can also register an array of regular expressions that will be tested against the incoming event and if matched, it will allow the request through with no verification.

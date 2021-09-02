@@ -61,7 +61,7 @@
 * [JWT Validator](jwt/jwt-validator.md)
 * [Refresh Tokens](jwt/refresh-tokens.md)
 * [Token Storage](jwt/jwt-token-storage.md)
-* [Interceptions](jwt/jwt-interceptions.md)
+* [JWT Interceptions](jwt/jwt-interceptions.md)
 
 ## External links
 
