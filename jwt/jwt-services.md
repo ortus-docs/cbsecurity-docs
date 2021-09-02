@@ -376,12 +376,12 @@ component{
 		try {
 			var token = jwtAuth().attempt( rc.username, rc.password );
 			return {
-				"error"   : true,
+				"error"   : false,
 				"data"    : token,
 				"message" : "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
 			};
 		} catch ( "InvalidCredentials" e ) {
-			event.setHTTPHeader( statusCode = 401, statusText = "Not Authorized" );
+			event.setHTTPHeader( statusCode = 401, statusText = "Unauthorized" );
 			return { "error" : true, "data" : "", "message" : "Invalid Credentials" };
 		}
 	}
@@ -397,7 +397,7 @@ component{
 	
 		var token = jwtAuth().fromuser( prc.oUser );
 		return {
-			"error"   : true,
+			"error"   : false,
 			"data"    : token,
 			"message" : "User registered correctly and Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
 		};
