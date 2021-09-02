@@ -20,7 +20,7 @@ description: 2021-SEP-
 ### Fixed
 
 * Unique `jti` could have collisions if tokens created at the same time, add randomness to it
-* `TokenExpirationException` not relaeyed from the base jwt library
+* `TokenExpirationException` not relayed from the base jwt library
 * If `variables.settings.jwt.tokenStorage.enabled` is disabled all invalidations failed, make sure if the storage is disabled to not throw storage exceptions.
 
 
