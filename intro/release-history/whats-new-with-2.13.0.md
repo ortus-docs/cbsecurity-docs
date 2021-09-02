@@ -7,9 +7,9 @@ description: 2021-SEP-
 ### Added
 
 * Adobe 2021 Support
-* Migration to github actions from travis
+* Migration to GitHub Actions from Travis CI
 * Refresh tokens support
-* Refresh token endpoint `/cbsecurity/refreshtToken` for secure refresh token generation
+* Refresh token endpoint `/cbsecurity/refreshToken` for secure refresh token generation
 * Manual refresh token method on the `JwtService` : `refreshToken( token )`
 * Auto refresh token header interceptions for JWT validators
 * Detect on `authenticate()` if the payload is empty and throw the appropriate exceptions

@@ -1,6 +1,6 @@
 # Security Rules
 
-We have seen how the module works on the concept of rules and how to declare them. Before we dig  deeper and decompose the rules let's have a look at the processing of the rules first.
+We have seen how the module works on the concept of rules and how to declare them. Before we dig deeper and decompose the rules let's have a look at the processing of the rules first.
 
 ## Rule Anatomy
 
@@ -29,7 +29,7 @@ Please remember that by default the secure and white lists are evaluated as regu
 
 ## Rules processing
 
-When processing rules, it is important to realize these rules come as an array which will be processed in **order**, so make sure your more specific rules will be processed **before** the more generic ones. 
+When processing rules, it is important to realize these rules come as an array which will be processed in **order**, so make sure your more specific rules will be processed **before** the more generic ones.
 
 ![cbsecurity rules processing](../.gitbook/assets/securityruleprocess.png)
 
@@ -108,6 +108,4 @@ Sometimes you want to make sure ALL events are secured, except for the ones spec
     "permissions" : "nonExistingPermission"
 }
 ```
-
-
 

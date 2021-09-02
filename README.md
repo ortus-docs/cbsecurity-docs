@@ -38,7 +38,7 @@ The major areas of concern are:
 
 ## Versioning <a id="versioning"></a>
 
-The ColdBox Security Module is maintained under the [Semantic Versioning](http://semver.org/) guidelines as much as possible.  Releases will be numbered with the following format:
+The ColdBox Security Module is maintained under the [Semantic Versioning](http://semver.org/) guidelines as much as possible. Releases will be numbered with the following format:
 
 ```text
 <major>.<minor>.<patch>
@@ -73,9 +73,9 @@ The ColdBox Security Module is a professional open source software backed by [Or
 * Code Reviews
 * [Much More](http://www.ortussolutions.com/services)
 
-### Discussion & Help 
+### Discussion & Help
 
-The Box products and modules community for  discussion and help can be found here: 
+The Box products and modules community for discussion and help can be found here:
 
 [https://community.ortussolutions.com/c/box-modules/cbsecurity/](https://community.ortussolutions.com/c/box-modules/cbsecurity/26)
 

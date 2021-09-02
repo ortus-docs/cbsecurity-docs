@@ -4,7 +4,7 @@ description: 2020-MAR-30
 
 # What's New With 2.3.0
 
-This release focuses on bringing a strong focus on protecting every development layer of a ColdBox application.  It introduces the `cbSecurity` model that can be used by any layer and provides you with a great functional API to secure your code.
+This release focuses on bringing a strong focus on protecting every development layer of a ColdBox application. It introduces the `cbSecurity` model that can be used by any layer and provides you with a great functional API to secure your code.
 
 ## Explicit Authorizations
 

@@ -2,7 +2,7 @@
 
 CBSecurity also provides you with a JWT \(Json Web Tokens\) authentication and authorization system.
 
-JSON Web Token \(JWT\) is an open standard \([RFC 7519](https://tools.ietf.org/html/rfc7519)\) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret \(with the **HMAC** algorithm\) or a public/private key pair using **RSA** or **ECDSA**. 
+JSON Web Token \(JWT\) is an open standard \([RFC 7519](https://tools.ietf.org/html/rfc7519)\) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret \(with the **HMAC** algorithm\) or a public/private key pair using **RSA** or **ECDSA**.
 
 ![](../.gitbook/assets/68747470733a2f2f63646e2e61757468302e636f6d2f636f6e74656e742f6a77742f6a77742d6469616772616d2e706e67.png)
 
@@ -12,20 +12,20 @@ Signed tokens can verify the _integrity_ of the **claims** contained within it, 
 
 You can find much more information about JWT at [jwt.io](https://jwt.io/introduction/).
 
-{% embed url="https://jwt.io/introduction/" %}
+{% embed url="https://jwt.io/introduction/" caption="" %}
 
 ## When should you use JSON Web Tokens?
 
-JSON Web Tokens have become the standard for authenticating and authorizing API requests.  They can be used on their own or with an oauth/single sign-on server as well.
+JSON Web Tokens have become the standard for authenticating and authorizing API requests. They can be used on their own or with an oauth/single sign-on server as well.
 
 * **Authorization**: This is the most common scenario for using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token.
 * **Information Exchange**: JSON Web Tokens are a good way of securely transmitting information between parties. Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are. Additionally, as the signature is calculated using the header and the payload, you can also verify that the content hasn't been tampered with.
 
-The ColdBox Security module will assist you with all the generation, decoding, encoding and security aspects of JWT.  All you need to do is, configure it, create a few standard files and off you go.
+The ColdBox Security module will assist you with all the generation, decoding, encoding and security aspects of JWT. All you need to do is, configure it, create a few standard files and off you go.
 
 ## Tokens
 
-The tokens created by the JWT services will have the mandatory headers, but also will have a standardizes payload structure.  This payload structure can also be customized as you see fit.
+The tokens created by the JWT services will have the mandatory headers, but also will have a standardizes payload structure. This payload structure can also be customized as you see fit.
 
 ![](../.gitbook/assets/screen-shot-2019-09-24-at-1.42.21-pm.png)
 
@@ -52,7 +52,7 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
   "sub": 123,
   "exp": 1569344262,
   "jti": "12954F907C0535ABE97F761829C6BD11"
-}  
+}
 ```
 {% endcode %}
 
@@ -66,7 +66,7 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
   "exp": 1569344262,
   "jti": "234234CDDEEDD",
   "cbsecurity_refresh" : true
-}  
+}
 ```
 {% endcode %}
 
@@ -101,28 +101,28 @@ cbsecurity : {
     // JWT Settings
     jwt                     : {
         // The issuer authority for the tokens, placed in the `iss` claim
-				issuer				          : "",
-				// The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
+                issuer                          : "",
+                // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
         secretKey               : getSystemSetting( "JWT_SECRET", "" ),
         // by default it uses the authorization bearer header, but you can also pass a custom one as well.
         customAuthHeader        : "x-auth-token",
         // The expiration in minutes for the jwt tokens
         expiration              : 60, 
         // If true, enables refresh tokens, token creation methods will return a struct instead
-				// of just the access token. e.g. { access_token: "", refresh_token : "" }
-				enableRefreshTokens        : false,
-				// The default expiration for refresh tokens, defaults to 30 days
-				refreshExpiration          : 10080,
-				// The Custom header to inspect for refresh tokens
-				customRefreshHeader        : "x-refresh-token",
-				// If enabled, the JWT validator will inspect the request for refresh tokens and expired access tokens
-				// It will then automatically refresh them for you and return them back as
-				// response headers in the same request according to the customRefreshHeader and customAuthHeader
-				enableAutoRefreshValidator : false,
-				// Enable the POST > /cbsecurity/refreshtoken API endpoint
-				enableRefreshEndpoint      : true,
+                // of just the access token. e.g. { access_token: "", refresh_token : "" }
+                enableRefreshTokens        : false,
+                // The default expiration for refresh tokens, defaults to 30 days
+                refreshExpiration          : 10080,
+                // The Custom header to inspect for refresh tokens
+                customRefreshHeader        : "x-refresh-token",
+                // If enabled, the JWT validator will inspect the request for refresh tokens and expired access tokens
+                // It will then automatically refresh them for you and return them back as
+                // response headers in the same request according to the customRefreshHeader and customAuthHeader
+                enableAutoRefreshValidator : false,
+                // Enable the POST > /cbsecurity/refreshtoken API endpoint
+                enableRefreshEndpoint      : true,
         // encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
-		    algorithm               : "HS512",
+            algorithm               : "HS512",
         // Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
         requiredClaims          : [] ,
         // The token storage settings
@@ -160,19 +160,19 @@ The issuer authority for the tokens, placed in the `iss` claim of the token. If 
 
 ### secretKey
 
-The secret key is used to sign the JWT tokens.  By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts.  So technically, your secret will rotate according to this setting.
+The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate according to this setting.
 
 {% hint style="success" %}
-Your secret key will auto-rotate every application scope rotation.  Please note that all tokens used after that scope rotation will automatically become invalid.
+Your secret key will auto-rotate every application scope rotation. Please note that all tokens used after that scope rotation will automatically become invalid.
 
-Please note that we use the jwt-cfml library for encoding/decoding tokens.  Please [refer to it's documentation](https://forgebox.io/view/jwt-cfml) in order to leverage RS and ES algorithms with certificates.
+Please note that we use the jwt-cfml library for encoding/decoding tokens. Please [refer to it's documentation](https://forgebox.io/view/jwt-cfml) in order to leverage RS and ES algorithms with certificates.
 
 [https://forgebox.io/view/jwt-cfml](https://forgebox.io/view/jwt-cfml)
 {% endhint %}
 
 ### customAuthHeader
 
-By default, our jwt services will look into the `authorization` header for a bearer token. However, it can also look in a custom header by this name, which defaults to `x-auth-token`.  Finally, if not found, it will also look into the `rc` scope for a `rc[ 'x-auth-token' ]` as well.
+By default, our jwt services will look into the `authorization` header for a bearer token. However, it can also look in a custom header by this name, which defaults to `x-auth-token`. Finally, if not found, it will also look into the `rc` scope for a `rc[ 'x-auth-token' ]` as well.
 
 ### Expiration
 
@@ -180,7 +180,7 @@ The default expiration in minutes for the JWT tokens. Defaults to 60 minutes
 
 ### Algorithm
 
-The encryption algorithm to use for the tokens.  The default is **HS512**, but the available ones for are:
+The encryption algorithm to use for the tokens. The default is **HS512**, but the available ones for are:
 
 * HS256
 * HS384
@@ -198,20 +198,19 @@ If your private key is not currently in this format, conversion should be straig
 
 ```text
 $ openssl pkcs8 -topk8 -nocrypt -in privatekey.pem -out privatekey.pk8
-
 ```
 
 When decoding tokens, either a public key or certificate can be provided. \(If a certificate is provided, the public key will be extracted from it.\)
 
-{% embed url="https://forgebox.io/view/jwt-cfml" %}
+{% embed url="https://forgebox.io/view/jwt-cfml" caption="" %}
 
 ### RequiredClaims
 
-This is an array of claim names that each token MUST have in order to be authenticated.  If a token comes in but does not have these claims in the payload structure, it will be deemed invalid.
+This is an array of claim names that each token MUST have in order to be authenticated. If a token comes in but does not have these claims in the payload structure, it will be deemed invalid.
 
 ### Token Storage
 
-By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them and in the future provide refresh tokens.  We ship with two providers for token storage: db and cachebox.
+By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them and in the future provide refresh tokens. We ship with two providers for token storage: db and cachebox.
 
 #### Enabled
 
@@ -231,7 +230,7 @@ A struct of properties to configure each storage with.
 
 ## JWT Subject Interface
 
-The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements.  So your User object must implement our `JWTSubject` interface with the following functions:
+The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements. So your User object must implement our `JWTSubject` interface with the following functions:
 
 {% code title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
 ```javascript
@@ -262,77 +261,76 @@ Since also the authentication services will be used with JWT, your user object m
 ```javascript
 component accessors="true" {
 
-	property name="auth" inject="authenticationService@cbauth";
+    property name="auth" inject="authenticationService@cbauth";
 
-	property name="id";
-	property name="firstName";
-	property name="lastName";
-	property name="username";
-	property name="password";
+    property name="id";
+    property name="firstName";
+    property name="lastName";
+    property name="username";
+    property name="password";
 
-	function init(){
-		variables.id        = "";
-		variables.firstName = "";
-		variables.lastName  = "";
-		variables.username  = "";
-		variables.password  = "";
+    function init(){
+        variables.id        = "";
+        variables.firstName = "";
+        variables.lastName  = "";
+        variables.username  = "";
+        variables.password  = "";
 
-		variables.permissions = [ "write", "read" ];
+        variables.permissions = [ "write", "read" ];
 
-		return this;
-	}
+        return this;
+    }
 
-	boolean function isLoaded(){
-		return ( !isNull( variables.id ) && len( variables.id ) );
-	}
+    boolean function isLoaded(){
+        return ( !isNull( variables.id ) && len( variables.id ) );
+    }
 
-	/**
-	 * A struct of custom claims to add to the JWT token
-	 */
-	struct function getJWTCustomClaims(){
-		return { "role" : "admin" };
-	}
+    /**
+     * A struct of custom claims to add to the JWT token
+     */
+    struct function getJWTCustomClaims(){
+        return { "role" : "admin" };
+    }
 
-	/**
-	 * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
-	 */
-	array function getJWTScopes(){
-		return variables.permissions;
-	}
+    /**
+     * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
+     */
+    array function getJWTScopes(){
+        return variables.permissions;
+    }
 
-	/**
-	 * Verify if the user has one or more of the passed in permissions
-	 *
-	 * @permission One or a list of permissions to check for access
-	 *
-	 */
-	boolean function hasPermission( required permission ){
-		if ( isSimpleValue( arguments.permission ) ) {
-			arguments.permission = listToArray( arguments.permission );
-		}
+    /**
+     * Verify if the user has one or more of the passed in permissions
+     *
+     * @permission One or a list of permissions to check for access
+     *
+     */
+    boolean function hasPermission( required permission ){
+        if ( isSimpleValue( arguments.permission ) ) {
+            arguments.permission = listToArray( arguments.permission );
+        }
 
-		return arguments.permission
-			.filter( function(item){
-				return ( variables.permissions.ListFindNoCase( item ) );
-			} )
-			.len();
-	}
+        return arguments.permission
+            .filter( function(item){
+                return ( variables.permissions.ListFindNoCase( item ) );
+            } )
+            .len();
+    }
 
-	/**
-	 * Shortcut to verify it the user is logged in or not.
-	 */
-	boolean function isLoggedIn(){
-		return auth.isLoggedIn();
-	}
+    /**
+     * Shortcut to verify it the user is logged in or not.
+     */
+    boolean function isLoggedIn(){
+        return auth.isLoggedIn();
+    }
 
 }
-
 ```
 {% endcode %}
 
 ## Authentication and User Services
 
-Please note that the JWT validators must talk to the authentication and user services.  Please refer to the [Authentication Services](../usage/authentication-services.md) page to configure and create them.
+Please note that the JWT validators must talk to the authentication and user services. Please refer to the [Authentication Services](../usage/authentication-services.md) page to configure and create them.
 
 ## JWT Methods
 
@@ -354,7 +352,7 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 
 ## Putting it Together
 
-That's it, we are ready to put it all together.  Now cbsecurity knows about your authentication/user services, can talk to your user to create tokens and can guard the incoming requests via the JWT Validator.  Here is a sample controller for login, logout and user registration:
+That's it, we are ready to put it all together. Now cbsecurity knows about your authentication/user services, can talk to your user to create tokens and can guard the incoming requests via the JWT Validator. Here is a sample controller for login, logout and user registration:
 
 Let's configure some routes first:
 
@@ -369,44 +367,44 @@ Then build out the `Auth` controller
 ```javascript
 component{
 
-	function login( event, rc, prc ){
-		param rc.username = "";
-		param rc.password = "";
-	
-		try {
-			var token = jwtAuth().attempt( rc.username, rc.password );
-			return {
-				"error"   : false,
-				"data"    : token,
-				"message" : "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
-			};
-		} catch ( "InvalidCredentials" e ) {
-			event.setHTTPHeader( statusCode = 401, statusText = "Unauthorized" );
-			return { "error" : true, "data" : "", "message" : "Invalid Credentials" };
-		}
-	}
-	
-	function register( event, rc, prc ){
-		param rc.firstName = "";
-		param rc.lastName  = "";
-		param rc.username  = "";
-		param rc.password  = "";
-	
-		prc.oUser = populateModel( "User" );
-		userService.create( prc.oUser );
-	
-		var token = jwtAuth().fromuser( prc.oUser );
-		return {
-			"error"   : false,
-			"data"    : token,
-			"message" : "User registered correctly and Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
-		};
-	}
-	
-	function logout( event, rc, prc ){
-		jwtAuth().logout();
-		return { "error" : false, "data" : "", "message" : "Successfully logged out" };
-	}
+    function login( event, rc, prc ){
+        param rc.username = "";
+        param rc.password = "";
+
+        try {
+            var token = jwtAuth().attempt( rc.username, rc.password );
+            return {
+                "error"   : false,
+                "data"    : token,
+                "message" : "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
+            };
+        } catch ( "InvalidCredentials" e ) {
+            event.setHTTPHeader( statusCode = 401, statusText = "Unauthorized" );
+            return { "error" : true, "data" : "", "message" : "Invalid Credentials" };
+        }
+    }
+
+    function register( event, rc, prc ){
+        param rc.firstName = "";
+        param rc.lastName  = "";
+        param rc.username  = "";
+        param rc.password  = "";
+
+        prc.oUser = populateModel( "User" );
+        userService.create( prc.oUser );
+
+        var token = jwtAuth().fromuser( prc.oUser );
+        return {
+            "error"   : false,
+            "data"    : token,
+            "message" : "User registered correctly and Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes"
+        };
+    }
+
+    function logout( event, rc, prc ){
+        jwtAuth().logout();
+        return { "error" : false, "data" : "", "message" : "Successfully logged out" };
+    }
 }
 ```
 
@@ -414,53 +412,52 @@ component{
 Make sure you add validation!
 {% endhint %}
 
-That's it, we now can login a user, give them a token, register a new user and give them their token, and also log them out.  The next step is for you to build your rules and/or security annotations and make sure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
+That's it, we now can login a user, give them a token, register a new user and give them their token, and also log them out. The next step is for you to build your rules and/or security annotations and make sure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
 
 ## Web Server Configuration
 
-In order to implement JWT authentication in your application, you may need to modify some web server settings. Most web servers have default content length restrictions on the size of an individual header.  If your web server platform has such default enabled, you will need to increase the buffer size to accommodate the presence of JTW tokens in both the request and response headers.  The size of a JWT token header, encrypted via the default cbSecurity HMAC512 algorithm, is around 44 kilobytes.  As such you will need to allow for at least that size.   Below are some examples for common web server configurations
+In order to implement JWT authentication in your application, you may need to modify some web server settings. Most web servers have default content length restrictions on the size of an individual header. If your web server platform has such default enabled, you will need to increase the buffer size to accommodate the presence of JTW tokens in both the request and response headers. The size of a JWT token header, encrypted via the default cbSecurity HMAC512 algorithm, is around 44 kilobytes. As such you will need to allow for at least that size. Below are some examples for common web server configurations
 
 ### NGINX
 
 The following configuration may be applied to the main NGINX `http` configuration block to allow for the presence of tokens in both the request and response headers:
 
-```
+```text
 http {
-	# These settings affect outbound headers via proxy server
-	proxy_buffer_size   64k;
-	proxy_buffers   4 128k;
-	proxy_busy_buffers_size   128k;
-	# These settings affect the http client request headers
-	client_body_buffer_size     128k;
-	client_header_buffer_size   64k;
-	large_client_header_buffers 8 128k;
-	# These settings affect HTTP/2 headers, however some versions of NGINX will throw an error on HTTP/1 requests if these are not present
-	http2_max_header_size 128k;
-	http2_max_field_size 1000m;
+    # These settings affect outbound headers via proxy server
+    proxy_buffer_size   64k;
+    proxy_buffers   4 128k;
+    proxy_busy_buffers_size   128k;
+    # These settings affect the http client request headers
+    client_body_buffer_size     128k;
+    client_header_buffer_size   64k;
+    large_client_header_buffers 8 128k;
+    # These settings affect HTTP/2 headers, however some versions of NGINX will throw an error on HTTP/1 requests if these are not present
+    http2_max_header_size 128k;
+    http2_max_field_size 1000m;
 }
-
 ```
 
 ### IIS
 
 You will need to modify two registry keys:
 
-1. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxFieldLength` - Sets an upper limit, in bytes, for each header. The default value is 65534 bytes and the maximum value is 65534 bytes ( 64kb )
-2. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxRequestBytes` - Sets the upper limit for the request line and the headers, combined.  As such 128K should allow for both long URLs, as well as JWT tokens in the headers. The default value is 16384 bytes and the maximum value is 16777216 bytes ( 16 MB )
-
+1. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxFieldLength` - Sets an upper limit, in bytes, for each header. The default value is 65534 bytes and the maximum value is 65534 bytes \( 64kb \)
+2. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxRequestBytes` - Sets the upper limit for the request line and the headers, combined.  As such 128K should allow for both long URLs, as well as JWT tokens in the headers. The default value is 16384 bytes and the maximum value is 16777216 bytes \( 16 MB \)
 
 ### Apache
 
-You will need to add a `LimitRequestFieldSize` setting in each `<VirtualHost...>` entry in order increase the default header size from the default 8 kilobytes.  Example, with a setting of 128 kilobytes:
+You will need to add a `LimitRequestFieldSize` setting in each `<VirtualHost...>` entry in order increase the default header size from the default 8 kilobytes. Example, with a setting of 128 kilobytes:
 
-```
+```text
 <VirtualHost 10.10.50.50:80>
-	ServerName www.mysite.com
-	
-	LimitRequestFieldSize 128000
-	
-	RewriteEngine On
-	...
-	...
+    ServerName www.mysite.com
+
+    LimitRequestFieldSize 128000
+
+    RewriteEngine On
+    ...
+    ...
 </VirtualHost>
 ```
+

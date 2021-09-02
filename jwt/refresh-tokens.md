@@ -1,10 +1,10 @@
 # Refresh Tokens
 
-ColdBox Security supports the concept of refresh tokens alongside the normal JWT access tokens.  Let's start exploring this feature in detail.
+ColdBox Security supports the concept of refresh tokens alongside the normal JWT access tokens. Let's start exploring this feature in detail.
 
 ## What Is a Refresh Token?
 
-A refresh token is a credential artifact that lets a client application get new access tokens without having to ask the user to log in again.  Access tokens may be valid for a short amount of time. Once they expire, client applications can use a refresh token to "**refresh**" the access token.
+A refresh token is a credential artifact that lets a client application get new access tokens without having to ask the user to log in again. Access tokens may be valid for a short amount of time. Once they expire, client applications can use a refresh token to "**refresh**" the access token.
 
 The client application can get a new access token as long as the refresh token is valid and unexpired. Consequently, a refresh token that has a very long lifespan could theoretically give infinite power to the token bearer to get a new access token to access protected resources anytime. The bearer of the refresh token could be a legitimate user or a malicious user.
 
@@ -14,9 +14,9 @@ In the `jwt` section of the `cbsecurity` configuration you will have the followi
 
 ```javascript
 jwt : {
-    
+
     ...
-    
+
     // If true, enables refresh tokens, token creation methods will return a struct instead of just an access token string
     // e.g. { access_token: "", refresh_token : "" }
     "enableRefreshTokens"   : false,
@@ -35,11 +35,11 @@ jwt : {
 
 #### EnableRefreshTokens
 
-This setting is used to turn on the refresh capabilities of the JWT Service.  If this remains false, then exceptions will be thrown when trying to use refresh capabilities.
+This setting is used to turn on the refresh capabilities of the JWT Service. If this remains false, then exceptions will be thrown when trying to use refresh capabilities.
 
 #### RefreshExpiration
 
-The default time refresh tokens expire in.  The default is 7 days or 10080 minutes
+The default time refresh tokens expire in. The default is 7 days or 10080 minutes
 
 #### CustomRefreshHeader
 
@@ -82,8 +82,8 @@ var newTokens = jwtService.refreshToken( storedRefreshToken );
 ```
 
 {% hint style="danger" %}
-**Important:**  
-  
+**Important:**
+
 Please note that the currently used refresh token will be **invalidated** and **rotated** for you automatically. This is a security feature called **refresh token rotation**, where the refreshed token is automatically rotated for you upon refresh usage.
 {% endhint %}
 
@@ -103,8 +103,8 @@ This endpoint must be executed with a `POST` and you will need to pass in your r
 ```
 
 {% hint style="danger" %}
-**Important:**  
-  
+**Important:**
+
 Please note that the currently used refresh token will be **invalidated** and **rotated** for you automatically. This is a security feature called **refresh token rotation**, where the refreshed token is automatically rotated for you upon refresh usage.
 {% endhint %}
 
