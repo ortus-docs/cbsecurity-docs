@@ -101,7 +101,7 @@ We have also added the following `whenX()` methods to serve your needs when eval
 
 ```javascript
 // When all permissions must exist in the user
-whenAll( permissoins, success, fail)
+whenAll( permissions, success, fail)
 // When none of the permissions exist in the user
 whenNone( permissions, success, fail )
 ```
