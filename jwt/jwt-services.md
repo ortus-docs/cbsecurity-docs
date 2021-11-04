@@ -103,6 +103,7 @@ cbsecurity : {
         // The issuer authority for the tokens, placed in the `iss` claim
         issuer                          : "",
         // The jwt secret encoding key, defaults to getSystemEnv( "JWT_SECRET", "" )
+        // This key is only effective within the `config/Coldbox.cfc`. Specifying within a module does nothing.
         secretKey               : getSystemSetting( "JWT_SECRET", "" ),
         // by default it uses the authorization bearer header, but you can also pass a custom one as well.
         customAuthHeader        : "x-auth-token",
@@ -160,7 +161,9 @@ The issuer authority for the tokens, placed in the `iss` claim of the token. If 
 
 ### secretKey
 
-The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate according to this setting.
+The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate only if a secret is not specified. 
+
+Also, this key is ignored in modules. To specify a fixed key to be used in your modules, you will have to configure it by adding a cbsecurity key settings in the moduleSettings structure within the config/Coldbox.cfc.
 
 {% hint style="success" %}
 Your secret key will auto-rotate every application scope rotation. Please note that all tokens used after that scope rotation will automatically become invalid.
@@ -486,4 +489,3 @@ You will need to add a `LimitRequestFieldSize` setting in each `<VirtualHost...>
     ...
 </VirtualHost>
 ```
-
