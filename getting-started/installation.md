@@ -69,7 +69,7 @@ moduleSettings = {
  			  "jwt"                         : {
      				// The issuer authority for the tokens, placed in the `iss` claim
      				"issuer"                     : "",
-     				// The jwt secret encoding key to use
+     				// The jwt secret encoding key to use. This key is only effective within the `config/Coldbox.cfc`. Specifying within a module does nothing.
      				"secretKey"                  : getSystemSetting( "JWT_SECRET", "" ),
      				// by default it uses the authorization bearer header, but you can also pass a custom one as well or as an rc variable.
      				"customAuthHeader"           : "x-auth-token",
