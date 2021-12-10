@@ -5,6 +5,8 @@
 ## Intro
 
 * [Release History](intro/release-history/README.md)
+  * [What's New With 2.15.0](intro/release-history/whats-new-with-2.15.0.md)
+  * [What's New With 2.14.0](intro/release-history/whats-new-with-2.14.0.md)
   * [What's New With 2.13.0](intro/release-history/whats-new-with-2.13.0.md)
   * [What's New With 2.12.0](intro/release-history/whats-new-with-2.12.0.md)
   * [What's New With 2.11.x](intro/release-history/whats-new-with-2.11.x.md)
@@ -40,10 +42,10 @@
 * [Authentication Services](usage/authentication-services.md)
 * [Security Rules](usage/untitled-1.md)
 * [Security Annotations](usage/security-annotations.md)
-* [Secured URL](usage/_securedurl-key.md)
+* [Secured URL](usage/\_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
 * [cbSecurity Model](usage/cbsecurity-model/README.md)
-  * [secure\(\) Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
+  * [secure() Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
   * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
   * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
   * [Securing Views](usage/cbsecurity-model/securing-views.md)
@@ -67,7 +69,6 @@
 
 * [Source code](https://github.com/coldbox-modules/cbsecurity)
 * [Issue Tracker](https://ortussolutions.atlassian.net/projects/BOX/issues)
-* [cbauth](https://cbauth.ortusbooks.com/)
+* [cbauth](https://cbauth.ortusbooks.com)
 * [cbcsrf](https://www.forgebox.io/view/cbcsrf)
 * [JWT CFML](https://www.forgebox.io/view/jwt-cfml)
-

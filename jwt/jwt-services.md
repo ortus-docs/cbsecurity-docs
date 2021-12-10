@@ -1,8 +1,8 @@
 # JWT Services
 
-CBSecurity also provides you with a JWT \(Json Web Tokens\) authentication and authorization system.
+CBSecurity also provides you with a JWT (Json Web Tokens) authentication and authorization system.
 
-JSON Web Token \(JWT\) is an open standard \([RFC 7519](https://tools.ietf.org/html/rfc7519)\) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret \(with the **HMAC** algorithm\) or a public/private key pair using **RSA** or **ECDSA**.
+JSON Web Token (JWT) is an open standard ([RFC 7519](https://tools.ietf.org/html/rfc7519)) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the **HMAC** algorithm) or a public/private key pair using **RSA** or **ECDSA**.
 
 ![](../.gitbook/assets/68747470733a2f2f63646e2e61757468302e636f6d2f636f6e74656e742f6a77742f6a77742d6469616772616d2e706e67.png)
 
@@ -12,7 +12,7 @@ Signed tokens can verify the _integrity_ of the **claims** contained within it, 
 
 You can find much more information about JWT at [jwt.io](https://jwt.io/introduction/).
 
-{% embed url="https://jwt.io/introduction/" caption="" %}
+{% embed url="https://jwt.io/introduction/" %}
 
 ## When should you use JSON Web Tokens?
 
@@ -35,13 +35,13 @@ A JSON Web Token encodes a series of claims in a JSON object. Some of these clai
 
 Here are the base claims that the ColdBox Security JWT token creates for you automatically:
 
-* Issuer \(`iss`\) - The issuer of the token \(defaults to the application's base URL\)
-* Issued At \(`iat`\) - When the token was issued \(unix timestamp\)
-* Subject \(`sub`\) - This holds the identifier for the token \(defaults to user id\)
-* Expiration time \(`exp`\) - The token expiry date \(unix timestamp\)
-* Unique ID \(`jti`\) - A unique identifier for the token \(md5 of the sub and iat claims\)
-* Scopes \(`scope)` - A space delimited string of scopes attached to the token
-* Refresh Token \(`cbsecurity_refresh` \) - If you are using refresh tokens, this custom claim will be added to the payload.
+* Issuer (`iss`) - The issuer of the token (defaults to the application's base URL)
+* Issued At (`iat`) - When the token was issued (unix timestamp)
+* Subject (`sub`) - This holds the identifier for the token (defaults to user id)
+* Expiration time (`exp`) - The token expiry date (unix timestamp)
+* Unique ID (`jti`) - A unique identifier for the token (md5 of the sub and iat claims)
+* Scopes (`scope)` - A space delimited string of scopes attached to the token
+* Refresh Token (`cbsecurity_refresh` ) - If you are using refresh tokens, this custom claim will be added to the payload.
 
 {% code title="mytoken.json" %}
 ```javascript
@@ -74,7 +74,7 @@ You can add much more to this payload via the JWT service methods or via the Use
 
 ## Our JwtService
 
-The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service \(`JwtService@cbsecurity`\) or using our helper method \(`jwtAuth()`\).
+The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service (`JwtService@cbsecurity`) or using our helper method (`jwtAuth()`).
 
 ```javascript
 // Injection
@@ -161,7 +161,7 @@ The issuer authority for the tokens, placed in the `iss` claim of the token. If 
 
 ### secretKey
 
-The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate only if a secret is not specified. 
+The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate only if a secret is not specified.
 
 Also, this key is ignored in modules. To specify a fixed key to be used in your modules, you will have to configure it by adding a cbsecurity key settings in the moduleSettings structure within the config/Coldbox.cfc.
 
@@ -195,17 +195,17 @@ The encryption algorithm to use for the tokens. The default is **HS512**, but th
 * ES384
 * ES512
 
-In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format \(in the latter case first deserialize the JWK to a CFML struct\). When using PEM, private keys need to be encoded in PKCS\#8 format.
+In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format (in the latter case first deserialize the JWK to a CFML struct). When using PEM, private keys need to be encoded in PKCS#8 format.
 
 If your private key is not currently in this format, conversion should be straightforward:
 
-```text
+```
 $ openssl pkcs8 -topk8 -nocrypt -in privatekey.pem -out privatekey.pk8
 ```
 
-When decoding tokens, either a public key or certificate can be provided. \(If a certificate is provided, the public key will be extracted from it.\)
+When decoding tokens, either a public key or certificate can be provided. (If a certificate is provided, the public key will be extracted from it.)
 
-{% embed url="https://forgebox.io/view/jwt-cfml" caption="" %}
+{% embed url="https://forgebox.io/view/jwt-cfml" %}
 
 ### RequiredClaims
 
@@ -241,12 +241,22 @@ The next step is to make sure that our JWT services can handle the construction 
 
 {% code title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
 ```javascript
+/**
+ * Copyright since 2016 by Ortus Solutions, Corp
+ * www.ortussolutions.com
+ * ---
+ * If you use the jwt services, then your jwt subject user must implement this interface
+ */
 interface{
 
     /**
-     * A struct of custom claims to add to the JWT token
+     * A struct of custom claims to add to the JWT token when creating it
+	 *
+	 * @payload The actual payload structure that was used in the request
+	 *
+	 * @return A structure of custom claims
      */
-    struct function getJwtCustomClaims();
+    struct function getJwtCustomClaims( required struct payload );
 
     /**
      * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
@@ -254,12 +264,13 @@ interface{
     array function getJwtScopes();
 
 }
+
 ```
 {% endcode %}
 
 Basically, it's two functions:
 
-* `getJwtCustomClaims()` - This is a struct of custom claims to incorporate into the token payload at construction time.  This can be ANYTHING you like
+* `getJwtCustomClaims( payload )` - This is a struct of custom claims to incorporate into the token payload at construction time. This can be ANYTHING you like.
 * `getJwtScopes()` - We will also call this at construction time in order to incorporate the right permission scopes into the token according to your user. This must be an array of scopes/permissions.
 
 Since also the authentication services will be used with JWT, your user object might end up looking like this:
@@ -471,8 +482,8 @@ http {
 
 You will need to modify two registry keys:
 
-1. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxFieldLength` - Sets an upper limit, in bytes, for each header. The default value is 65534 bytes and the maximum value is 65534 bytes \( 64kb \)
-2. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxRequestBytes` - Sets the upper limit for the request line and the headers, combined.  As such 128K should allow for both long URLs, as well as JWT tokens in the headers. The default value is 16384 bytes and the maximum value is 16777216 bytes \( 16 MB \)
+1. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxFieldLength` - Sets an upper limit, in bytes, for each header. The default value is 65534 bytes and the maximum value is 65534 bytes ( 64kb )
+2. `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\HTTP\Parameters\MaxRequestBytes` - Sets the upper limit for the request line and the headers, combined. As such 128K should allow for both long URLs, as well as JWT tokens in the headers. The default value is 16384 bytes and the maximum value is 16777216 bytes ( 16 MB )
 
 ### Apache
 

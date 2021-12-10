@@ -10,7 +10,7 @@ The client application can get a new access token as long as the refresh token i
 
 ### Refresh Token Configuration
 
-In the `jwt` section of the `cbsecurity` configuration you will have the following settings dealing with refresh tokens \(Please note that the other jwt configurations are also mandatory\)
+In the `jwt` section of the `cbsecurity` configuration you will have the following settings dealing with refresh tokens (Please note that the other jwt configurations are also mandatory)
 
 ```javascript
 jwt : {
@@ -55,7 +55,7 @@ If enabled, the REST `cbsecurity/refreshToken` endpoint will be available for th
 
 ## Token Creation
 
-You must enable the setting \(`enableRefreshTokens`\) in order for the following methods to return a `struct` of tokens. If not, only the access token will be returned as a `string`.
+You must enable the setting (`enableRefreshTokens`) in order for the following methods to return a `struct` of tokens. If not, only the access token will be returned as a `string`.
 
 * `attempt( username, password ):struct`
 * `fromUser( user, customClaims ):struct`
@@ -73,13 +73,37 @@ This is the same procedure for creating access tokens, but now you get a struct 
 
 ## Refreshing Tokens Manually
 
-You can refresh tokens manually by using the `refreshToken( token )` method on the `JwtService` object. You can pass a valid refresh token to be used for refreshement or pass **none** and the token will be inspected from the headers or incoming rc using the `x-refresh-token` value or whatever you setup as your `customRefreshHeader` setting.
+You can refresh tokens manually by using the `refreshToken( token, customClaims )` method on the `JwtService` object. You can pass a valid refresh token to be used for refreshment or pass **none** and the token will be inspected from the headers or incoming rc using the `x-refresh-token` value or whatever you setup as your `customRefreshHeader` setting.
 
 ```javascript
 var newTokens = jwtService.refreshToken();
 
 var newTokens = jwtService.refreshToken( storedRefreshToken );
 ```
+
+Here is the signature for the refresh method:
+
+```javascript
+/**
+ * Manually refresh tokens by passing a valid refresh token and returning two new tokens:
+ * <code>{ access_token : "", refresh_token : "" }</code>
+ *
+ * @refreshToken A refresh token
+ * @customClaims A struct of custom claims to apply to the new tokens
+ *
+ * @throws RefreshTokensNotActive If the setting enableRefreshTokens is false
+ * @throws TokenExpiredException If the token has expired or no longer in the storage (invalidated)
+ * @throws TokenInvalidException If the token doesn't verify decoding
+ * @throws TokenNotFoundException If the token cannot be found in the headers
+ *
+ * @return A struct of { access_token : "", refresh_token : "" }
+ */
+struct function refreshToken( token = discoverRefreshToken(), struct customClaims = {} )
+```
+
+{% hint style="success" %}
+`customClaims` where added in v2.15.0
+{% endhint %}
 
 {% hint style="danger" %}
 **Important:**
@@ -89,7 +113,7 @@ Please note that the currently used refresh token will be **invalidated** and **
 
 ## Refresh Token Endpoint
 
-If you have enabled the refresh token setting \(`enableRefreshEndpoint`\) then you will also have access to the `POST > /cbsecurity/refreshtoken` API endpoint.
+If you have enabled the refresh token setting (`enableRefreshEndpoint`) then you will also have access to the `POST > /cbsecurity/refreshtoken` API endpoint.
 
 This endpoint is used for applications to refresh their access tokens using the refresh token received when authenticating in the application.
 
@@ -124,10 +148,9 @@ CBSecurity has the ability to refresh access tokens automatically for you when c
 * refresh token
   * `x-refresh-token`
 
-If the access token has expired and the `x-refresh-token` was passed and is valid, then the access token will be re-generated, the refresh token will be rotated, the request will continue as normal and two new **response** headers will be sent back to the calling application.
+If the access token has expired or is invalid or missing and the `x-refresh-token` was passed and is valid, then the access token will be re-generated, the refresh token will be rotated, the request will continue as normal and two new **response** headers will be sent back to the calling application.
 
 * `x-auth-token` : refreshed access token
 * `x-refresh-token` : new refresh token
 
 The calling application can monitor if those two response headers are sent and save them appropriately.
-
