@@ -54,11 +54,12 @@ Check them all out in our [JWT Interceptions Page](../jwt/jwt-interceptions.md).
 
 ## CBAuth Interceptions
 
-You can always find the latest interception points here: [https://github.com/coldbox-modules/cbauth\#interception-points](https://github.com/coldbox-modules/cbauth#interception-points)
+You can always find the latest interception points here:
+
+{% embed url="https://cbauth.ortusbooks.com/interception-points" %}
 
 cbauth announces several custom interception points. You can use these interception points to change request data or add additional values to session or request scopes. The `preAuthentication` and `postAuthentication` events fire during the standard `authenticate()` method call with a username and password. The `preLogin` and `postLogin` events fire during the `login()` method call. The `preLogout` and `postLogout` events fire during the `logout()` method call.
 
 {% hint style="success" %}
-The `preLogin` and `postLogin` interception points will be called during the course of `authenticate()`. The order of the calls then are `preAuthentication` -&gt; `preLogin` -&gt; `postLogin` -&gt; `postAuthentication`.
+The `preLogin` and `postLogin` interception points will be called during the course of `authenticate()`. The order of the calls then are `preAuthentication` -> `preLogin` -> `postLogin` -> `postAuthentication`.
 {% endhint %}
-
