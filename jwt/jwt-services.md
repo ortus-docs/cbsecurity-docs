@@ -213,7 +213,7 @@ This is an array of claim names that each token MUST have in order to be authent
 
 ### Token Storage
 
-By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them and in the future provide refresh tokens. We ship with two providers for token storage: db and cachebox.
+By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them. We ship with two providers for token storage: db and cachebox.
 
 #### Enabled
 
