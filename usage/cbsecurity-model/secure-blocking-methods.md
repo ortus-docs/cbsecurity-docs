@@ -1,17 +1,17 @@
-# secure\(\) Blocking Methods
+# secure() Blocking Methods
 
 ### The `secure()` Methods
 
-Now that you have access to the model, you can use the following method to verify explicit permissions and authorize access. This method will **throw an exception** if the user does not validate the incoming permissions context \(`NotAuthorized`\).
+Now that you have access to the model, you can use the following method to verify explicit permissions and authorize access. This method will **throw an exception** if the user does not validate the incoming permissions context (`NotAuthorized`).
 
 ```javascript
-// Verify the currently logged in user has those permission, 
+// Verify the currently logged in user has at least one of those permissions, 
 // else throw a NotAuthorized exception
 cbSecurity.secure( permissions, [message] );
 cbsecure().secure( permissions, [message] );
 ```
 
-* The `permission` can be an array, string or list of the permissions to validate.
+* The `permission` can be an array, string or list of the permissions to validate. The user must have at least one of the permissions specified.
 * The `message` is a custom error message to be used in the `message` string of the exception thrown.
 
 You also have two more authorization methods that will verify certain permission conditions for you:
@@ -31,8 +31,8 @@ There are also cases where you want to execute a piece of code by determining if
 when( permissions, success, fail )
 ```
 
-* The `permissions` is a permission array or list that will be Or'ed 
-* The `success` is a closure/lambda or UDF that will execute if the permissions validate.  
+* The `permissions` is a permission array or list that will be Or'ed&#x20;
+* The `success` is a closure/lambda or UDF that will execute if the permissions validate. &#x20;
 * The `fail` is a closure/lambda or UDF that will execute if the permissions DID not validate, much like an else statement
 
 Both closures/functions takes in a `user` which is the currently authenticated user, the called in `permissions` and can return anything.
@@ -79,4 +79,3 @@ whenAll( permissoins, success, fail)
 // When none of the permissions exist in the user
 whenNone( permissions, success, fail )
 ```
-
