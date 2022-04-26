@@ -22,7 +22,7 @@ Please note that **cbauth** already implements this interface and is included wi
 
 ## Authentication Service Interface
 
-This interface has been provided by convenience and it is not mandatory at runtime \(`cbsecurity.interfaces.IAuthService`\)
+This interface has been provided by convenience and it is not mandatory at runtime (`cbsecurity.interfaces.IAuthService`)
 
 {% code title="cbsecurity.interfaces.IAuthService.cfc" %}
 ```javascript
@@ -79,7 +79,9 @@ interface{
 ```
 {% endcode %}
 
-You can find the information for **cbauth** at their website: [https://github.com/elpete/cbauth/](https://github.com/elpete/cbauth/)
+You can find the information for **cbauth** in its own book:
+
+{% embed url="https://cbauth.ortusbooks.com" %}
 
 ## User Interface
 
@@ -148,4 +150,3 @@ If using `cbauth`, you also have to specify the `UserServiceClass` key in the **
 {% hint style="info" %}
 Remember that the User Service setting is only required if you will be using JWT token security
 {% endhint %}
-
