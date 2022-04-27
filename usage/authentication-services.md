@@ -20,6 +20,10 @@ cbSecurity : {
 Please note that **cbauth** already implements this interface and is included with **cbsecurity** as a dependency.
 {% endhint %}
 
+{% hint style="warning" %}
+If you are using cbauth as your `authenticationService` (the default), you also need to [configure cbauth.](https://cbauth.ortusbooks.com/installation-and-usage)
+{% endhint %}
+
 ## Authentication Service Interface
 
 This interface has been provided by convenience and it is not mandatory at runtime (`cbsecurity.interfaces.IAuthService`)
