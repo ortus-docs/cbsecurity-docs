@@ -12,7 +12,7 @@ install cbsecurity@be
 
 ## System Requirements
 
-* Lucee 5.x+ 
+* Lucee 5.x+
 * ColdFusion 2016+
 
 ## Module Settings
@@ -109,3 +109,6 @@ moduleSettings = {
 ```
 {% endcode %}
 
+{% hint style="warning" %}
+If you are using cbauth as your `authenticationService` (the default), you also need to [configure cbauth.](https://cbauth.ortusbooks.com/installation-and-usage)
+{% endhint %}

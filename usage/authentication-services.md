@@ -83,6 +83,10 @@ You can find the information for **cbauth** in its own book:
 
 {% embed url="https://cbauth.ortusbooks.com" %}
 
+{% hint style="warning" %}
+If you are using cbauth as your `authenticationService` (the default), you also need to [configure cbauth.](https://cbauth.ortusbooks.com/installation-and-usage)
+{% endhint %}
+
 ## User Interface
 
 As you can see from above, the authentication services all expect a `User` object to model your user in the system. So your `User` object must also adhere to the following methods modeled by the `cbsecurity.interfaces.IAuthUser` interface. This will allow the validators and JWT services to get the appropriate data it needs.
