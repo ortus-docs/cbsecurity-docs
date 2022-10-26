@@ -2,23 +2,24 @@
 description: Welcome to the ColdBox Security v3.x Series
 ---
 
-# Introduction
+# 🔏 Introduction
 
-The ColdBox `cbsecurity` module is a collection of modules to help secure your applications.
+The ColdBox `cbsecurity` module is a collection of modules to help secure your ColdBox applications.
 
 <figure><img src=".gitbook/assets/cbsecurity-3-visualizer.png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
 
 The major areas of concern are:
 
 * A **security authentication/authorization firewall** ( `cbsecurity` ) which can secure your application based on:
-  * Security rules and a rule engine for validation incoming events or URL's
+  * Security rules and a rule engine for validation incoming events or URL's patterns
   * Handler annotations
 * A **security service** for explicit authorizations ( `cbsecurity` ) to provide you with functional approaches to security context authorization in **any** layer of your application.
 * A **JWT generator, decoder and authentication services** ( `jwtcfml` )&#x20;
 * Cross Site Request Forgery **(CSRF) Protection** ( `cbcsrf` )
-* An **authentication manage**r ( `cbauth` )
-* Basic Authentication services
-* A graphical user interface for visualizing the firewall and operational settings
+* An **authentication manage**r ( `cbauth` ) which can be plug-and-play with your own or third party modules
+* Basic Authentication services that provide basic user credential storage and browser challenges
+* A graphical user interface for visualizing the firewall and operational settings we lovingly call the **CBSecurity Visualizer**
+* Industry standard response headers to protect agains xss, clickjacking, frame busting, and much more
 
 ## Module composition
 

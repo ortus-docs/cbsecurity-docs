@@ -1,6 +1,18 @@
+---
+description: A brief history in time of our major releases
+---
+
 # Release History
 
 In this section you will find the release notes for each version we release under this major version.  If you are looking for the release notes of previous major versions use the version switcher at the top left of this documentation book.  Here is a breakdown of our major version releases.
+
+## Version 3.0
+
+Version 3 is a major rewrite of this module.  It drops Adobe 2016 support and enhances the way the firewall is configured.  It also add major capabilities for security headers, csrf settings and much more.
+
+It also introduces the ability for the firewall to do 401 response blocks as actions for security rules.  The CBSecurity visualizer is also a major addition that allows a developer or manager to visualize the performance of the firewall and visualize all the configurations necessary for operation.
+
+Finally, we have introduced basic authentication for your applications with an optional user credential in-memory storage.
 
 ## Version 2.0
 
