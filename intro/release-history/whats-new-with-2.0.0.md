@@ -4,13 +4,13 @@ description: October 2022
 
 # What's New With 3.0.0
 
-### Changed / COMPATIBILITY
+### Changed / Compatibility Updates
 
 * Dropped ACF2016
 * Separated routes to it's own module Router
-* **COMPAT** New `JwtAuthValidator` instead of mixing concerns with the `JwtService`. You will have to update your configuration to use this `validator` instead of the `JwtService`
-* `useSSL` is now defaulted to `true` for all security relocations as the default
+* New `JwtAuthValidator` instead of mixing concerns with the `JwtService`. You will have to update your configuration to use this `validator` instead of the `JwtService`
 * Encapsulation of `jwt` settings from the `ModuleConfig` to the `JwtService`
+* All settings have changed. They are not single level anymore. They are now grouped by functionality. Please see the [Configuration](../../getting-started/first-chapter/) area for the new approach.
 
 ### Added
 
