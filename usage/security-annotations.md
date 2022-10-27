@@ -1,6 +1,6 @@
 # Security Annotations
 
-The security module also allows you to secure your events via annotations instead of using security rules.  The setting that controls this security feature is the `handlerAnnotationSecurity` which can see in the [configuration section.](../getting-started/first-chapter/#annotation-security)
+The security module also allows you to secure your events via annotations instead of using security rules.  The setting that controls this security feature is the `handlerAnnotationSecurity` which can see in the [configuration section.](../getting-started/configuration/#annotation-security)
 
 The security module has a tiered approach to annotation security as it will check the handler component first and then the requested action method second.  You can apply different security contexts to each level as you see fit.
 

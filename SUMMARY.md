@@ -13,14 +13,20 @@
 
 * [Installation](getting-started/installation.md)
 * [Overview](getting-started/overview.md)
-* [Configuration](getting-started/first-chapter/README.md)
-  * [Rule Sources](getting-started/first-chapter/rule-sources/README.md)
-    * [DB Rules](getting-started/first-chapter/rule-sources/untitled.md)
-    * [Inline Rules](getting-started/first-chapter/rule-sources/inline-rules.md)
-    * [JSON Rules](getting-started/first-chapter/rule-sources/json-properties.md)
-    * [Model Rules](getting-started/first-chapter/rule-sources/model-rules.md)
-    * [Module Rules](getting-started/first-chapter/rule-sources/module-rules.md)
-    * [XML Rules](getting-started/first-chapter/rule-sources/xml-properties.md)
+* [Configuration](getting-started/configuration/README.md)
+  * [Authentication](getting-started/configuration/authentication.md)
+  * [Basic Auth](getting-started/configuration/basic-auth.md)
+  * [CSRF](getting-started/configuration/csrf.md)
+  * [Firewall](getting-started/configuration/firewall/README.md)
+    * [Rule Sources](getting-started/configuration/firewall/rule-sources/README.md)
+      * [DB Rules](getting-started/configuration/firewall/rule-sources/untitled.md)
+      * [Inline Rules](getting-started/configuration/firewall/rule-sources/inline-rules.md)
+      * [JSON Rules](getting-started/configuration/firewall/rule-sources/json-properties.md)
+      * [Model Rules](getting-started/configuration/firewall/rule-sources/model-rules.md)
+      * [Module Rules](getting-started/configuration/firewall/rule-sources/module-rules.md)
+      * [XML Rules](getting-started/configuration/firewall/rule-sources/xml-properties.md)
+  * [Security Headers](getting-started/configuration/security-headers.md)
+  * [Visualizer](getting-started/configuration/visualizer.md)
 
 ## Usage
 

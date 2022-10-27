@@ -8,7 +8,7 @@ description: October 2022
 
 * Dropped Adobe ColdFusion 2016
 * New **`JwtAuthValidator`** instead of mixing concerns with the `JwtService`. You will have to update your configuration to use this `validator` instead of the `JwtService`
-* All settings have changed. They are not single level anymore. They are now grouped by functionality. Please see the [Configuration](../../getting-started/first-chapter/) area for the new approach.
+* All settings have changed. They are not single level anymore. They are now grouped by functionality. Please see the [Configuration](../../getting-started/configuration/) area for the new approach.
 
 ### Added
 

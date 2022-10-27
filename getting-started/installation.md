@@ -22,7 +22,7 @@ install cbsecurity@be
 
 ## Configuration Settings
 
-By default `cbsecurity` is configured to work with `cbauth` as the authentication service.  You would only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials.  You can also use the in-built basic authentication services as well.  Here is just a snippet of the configuration, please see the [Configuration](first-chapter/) section for an in-depth review of all the module's settings.
+By default `cbsecurity` is configured to work with `cbauth` as the authentication service.  You would only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials.  You can also use the in-built basic authentication services as well.  Here is just a snippet of the configuration, please see the [Configuration](configuration/) section for an in-depth review of all the module's settings.
 
 {% code title="config/Coldbox.cfc" lineNumbers="true" %}
 ```javascript

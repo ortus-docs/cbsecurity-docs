@@ -24,7 +24,7 @@ Each rule is modeled by a struct with keys in it:
 The only required key is the `secureList` which is what you are trying to secure. The rest are optional and described below. Please note that you can add as many keys as you like to your security rules, which can contain much more context and information for the validators to use for validation.
 
 {% hint style="warning" %}
-Please remember that by default the secure and white lists are evaluated as regular expressions. You can turn that off in your [configuration settings.](../getting-started/first-chapter/)
+Please remember that by default the secure and white lists are evaluated as regular expressions. You can turn that off in your [configuration settings.](../getting-started/configuration/)
 {% endhint %}
 
 ## Rules processing
