@@ -17,7 +17,7 @@ For any security system you need to know **who** is authenticated (authenticatio
 * **Authorization** system which:
   * Validates permissions or roles or both or none at all :smile:
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (2).png>)
 
 ## CBSecurity Security Firewall
 
