@@ -2,7 +2,7 @@
 description: Configuring your authentication services
 ---
 
-# Authentication
+# 🔏 Authentication
 
 You will configure the authentication and user services in the `authentication` area of CBSecurity.  CBSecurity ships with the [cbauth](https://github.com/elpete/cbauth) module that can provide you with a robust authentication service, session/request storage, interceptions, and much more. However, you can use any security authentication service as long as it matches our interface: `cbsecurity.interfaces.ISecurityValidator`.
 
@@ -50,11 +50,23 @@ authentication : {
 
 The `provider` key is the WireBox ID of the authentication service that must adhere to our interface.
 
+```javascript
+"provider" : "SecurityService@contentbox"
+```
+
 ### UserService
 
 This key is not mandatory and will be automatically filled out for you from the `cbauth` user service class by default.  This class is used in order for CBSecurity to know how to actually retrieve users and validate credentials from whatever storage system you use.  This value can be a Wirebox ID and the object must adhere to our interface: `cbsecurity.interfaces.IUserService`.
 
+```javascript
+"provider" : "BasicAuthUserService@cbsecurity"
+```
+
 ### prcUserVariable
 
 This is a convenience setting that tells CBSecurity into which `prc` (private request context) variable to store the authenticated user on EVERY request.  This allows for your entire codebase to just talk to a single variable for the authenticated user.
+
+```javascript
+"prcUserVariable" : "oCurrentUser"
+```
 

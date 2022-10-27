@@ -1,8 +1,8 @@
 ---
-description: Cross Site Request Forgery Setting
+description: Configuring CBSecurity for cross site request forgery attacks
 ---
 
-# CSRF
+# 🙈 CSRF
 
 CBSecurity ships with the `cbsrf` module and can be configured in line with the `cbsecurity` key.
 
@@ -42,9 +42,17 @@ By default, this setting is turned off.  If you turn it on, then every non-GET r
 
 A list of regex patterns that will match against the incoming event. If matched, then that event will be excluded from the auto-verifier.
 
+```javascript
+verifyExcludes : [ "stripe\.", "logout" ],
+```
+
 ### RotationTimeout
 
 All csrf tokens have a life span of 30 minutes.  But you can control how long they live with this setting.
+
+```javascript
+rotationTimeout : 60,
+```
 
 ### EnableEndpoint
 
@@ -58,8 +66,15 @@ This setting enables the `GET /cbcsrf/generate` endpoint to generate csrf tokens
 
 The WireBox ID to use for storing the tokens.  The default is the `CacheStorage@cbstorages` object.  However, you can use any ColdBox storage or your own as long as it matches the CBStorages API: [https://forgebox.io/view/cbstorages](https://forgebox.io/view/cbstorages).
 
+```javascript
+cacheStorage : "SessionStorage@cbstorages"
+```
+
 ### EnableAuthTokenRotator
 
 This setting is enabled by default and what it does is that it will rotate a user's secret keys when they login/logout via any authentication service registered with CBSecurity.
 
-###
+```javascript
+enableAuthTokenRotator : false
+```
+

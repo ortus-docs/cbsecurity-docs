@@ -1,8 +1,8 @@
 ---
-description: CBSecurity supports basic authentication for your applications
+description: Configuration for basic authentication
 ---
 
-# Basic Auth
+# 🥸 Basic Auth
 
 The `basicAuth` key is used to store user credentials that will be used with [Basic Authentication](../../usage/basic-authentication.md) and how the passwords are stored in memory.
 
@@ -30,9 +30,17 @@ basicAuth : {
 
 This is the default algorithm used when hashing the user storage passwords in memory.  The default is `SHA-512`
 
+```javascript
+hashAlgorithm  : "SHA-256",
+```
+
 ### HashIterations
 
 Iterates the number of times the hash is computed to create a more computationally intensive hash.  The default is `5`
+
+```javascript
+hashIterations  : 10,
+```
 
 ### Users
 
