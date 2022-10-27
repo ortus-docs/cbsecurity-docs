@@ -224,4 +224,11 @@ If `true` then if a security rule needs to do a redirect, it will force the redi
 
 #### defaults
 
-This is a collection of name-value pairs that each security rule&#x20;
+This is a collection of name-value pairs that each security rule will inherit by default.
+
+```javascript
+defaults : {
+    name : "",
+    action : "block"
+}
+```
