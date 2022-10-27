@@ -1,2 +1,2 @@
-# Security Headers
+# ☢ Security Headers
 

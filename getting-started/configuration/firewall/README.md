@@ -150,7 +150,7 @@ This key is used to define where rules come from and how they interact with the 
 This is the shorthand way of defining global rules.
 
 ```javascript
-"rules"                      : [
+"rules" : [
 	// should use direct action and do a global redirect
 	{
 		"whitelist"   : "",
@@ -196,9 +196,8 @@ This is the shorthand way of defining global rules.
 
 If this setting is a struct, then you can configure how the rules behave and where they come from: JSON, XML, database, model, etc.
 
-```javascript
-"rules" : {
-    // Use regular expression matching on the rule match types
+<pre class="language-javascript"><code class="lang-javascript"><strong>"rules" : {
+</strong>    // Use regular expression matching on the rule match types
     "useRegex" : true,
     // Force SSL for all relocations
     "useSSL"   : false,
@@ -211,8 +210,7 @@ If this setting is a struct, then you can configure how the rules behave and whe
     // The source can be a json file, an xml file, model, db
     // Each provider can have it's appropriate properties as well. Please see the documentation for each provider.
     "provider" : { "source" : "", "properties" : {} }
-}
-```
+}</code></pre>
 
 #### useRegex
 
@@ -232,3 +230,47 @@ defaults : {
     action : "block"
 }
 ```
+
+#### inline
+
+This is an array that holds all the rules you can define in CFML. This is the same as making the entire `rules` key an array of rules.
+
+```javascript
+"rules" : {
+    // You can store all your rules in this inline array
+    "inline"   : [
+	// should use direct action and do a global redirect
+	{
+		"whitelist"   : "",
+		"securelist"  : "admin",
+		"match"       : "event",
+		"roles"       : "admin",
+		"permissions" : "",
+		"action"      : "redirect",
+		"httpMethods" : "*"
+	},
+	// Match only put/post
+	{
+		"whitelist"   : "",
+		"securelist"  : "putpost",
+		"match"       : "event",
+		"roles"       : "",
+		"permissions" : "",
+		"action"      : "block",
+		"httpMethods" : "put,post"
+	}
+    ]
+}
+```
+
+#### provider
+
+The `provider` key is how you can define rules from the following sources:
+
+* A JSON file
+* An XML file
+* From a model object via a method call
+* From a database
+
+Here are the different ways you can define rules from other sources rather than inline:
+
