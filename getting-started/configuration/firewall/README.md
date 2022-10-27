@@ -66,7 +66,7 @@ By default, the security firewall is always enabled, but you can disable it glob
 autoLoadFirewall : false
 ```
 
-### Annotation Security
+### HandlerAnnotationSecurity
 
 By default, annotation security is enabled. This will inspect ALL incoming event executions for the security annotation `secured`. If you do not want to use annotation security we recommend you turn it off to avoid the inspection of events.
 
@@ -142,8 +142,8 @@ The `dsn` key is optional and CBSecurity will inspect the Application settings f
 
 This key is used to define where rules come from and how they interact with the firewall.  The `rules` key can be of two types:
 
-* An array of rules
-* A struct of configuration with a rule source
+* An `array` of rules
+* A `struct` of configuration with a rule source
 
 #### Array of Rules
 
