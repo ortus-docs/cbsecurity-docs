@@ -15,24 +15,31 @@ For any security system you need to know **who** is authenticated (authenticatio
   * Logs them in and out
   * Tracks their security in sessions or any custom storage
 * **Authorization** system which:
-  * validates permissions or roles or both
+  * Validates permissions or roles or both or none at all :smile:
 
 ![](../.gitbook/assets/image.png)
 
-## ColdBox Security Firewall
+## CBSecurity Security Firewall
 
-With the ColdBox security module you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations within your code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere.
+With CBSecurity you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations within your handler's code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere, from execution blocks, to views, and much more.
 
 ![ColdBox Security Firewall](<../.gitbook/assets/image (1).png>)
 
-The module wraps itself around the `preProcess` interception point (The first execution of a ColdBox request) and will try to validate if the request has been authenticated and authorized to execute.  This is done via security rules and/or annotations on the requested handler actions through a CBSecurity `Validator` .  The job of the validator is to make sure user requests have been authenticated and authorized:
+The module wraps itself around the `preProcess` interception point (The first execution of a ColdBox request) and will try to validate if the request has been authenticated and authorized to execute. &#x20;
 
-* **CBAuth Validator**: this is the default (and recommended) validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission_ based security.
-* **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _roles_ based security.
-* **JWT Validator**: If you want to use Json Web Tokens the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens for RESTFul APIs.
-* **Custom Validator:** You can define your own authentication and authorization engines and plug them in to the cbsecurity framework.
+### Validators
 
-## How Does Validation Happen?
+<figure><img src="../.gitbook/assets/CBSecurity Validators.png" alt=""><figcaption><p>Security Validators Process Flow</p></figcaption></figure>
+
+This is done via security rules and/or annotations on the requested handler actions and through a CBSecurity `Validator` which knows how to authenticate and authorize the request.  CBSecurity ships with many validators:
+
+* **CBAuth Validator**: this is the default validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
+* **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
+* **Basic Auth Validator:** This validator secures your app by doing [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
+* **JWT Validator**: If you want to use JSON Web Tokens the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
+* **Custom Validator:** You can define your own authentication and authorization engines and plug them into the cbsecurity framework.
+
+### How Does Validation Happen?
 
 How does the interceptor know a user doesn't or does have access? Well, here is where you register a Validator CFC (`validator` setting) with the interceptor that implements two validation functions: `ruleValidator()` and `annotationValidator()` that will allow the module to know if the user is logged in and has the right authorizations to continue with the execution.
 
@@ -45,43 +52,48 @@ The validator has two options to determine if the user will be allowed access:
 * The `ruleValidator`() function will evaluate configured [security rules](../usage/untitled-1.md)
 * The  `annotationValidator()` function will look at [security annotations](../usage/security-annotations.md) in your handler and handler actions.
 
-You can use rules, annotations or even both. Rules are much more flexible, but more complex. Rules will be evaluated before annotations.
+You can use rules, annotations, or even both. Rules are much more flexible and can be visualized in our security visualizer.  Also, note that rules will be evaluated before annotations.
 
-The validators' job is to tell back to the firewall if they are allowed access and if they don't, what type of validation they broke: **authentication** or **authorization**.
+The validators' job is to tell back to the firewall if they are allowed access and if they don't, what type of validation they broke: **authentication** or **authorization**.  It can also determine if the firewall should block the request.
 
 > `Authentication` is when a user is NOT logged in
 >
 > `Authorization` is when a user does not have the right permissions to access an event/handler or action.
+
+{% hint style="info" %}
+In some special cases, the validator can also challenge the user to log in like our `BasicAuthValidator` which sends a unique HTTP Header to prompt the user for credentials.
+{% endhint %}
 
 ## Validation Process
 
 Once the firewall has the results and the user is **NOT** allowed access, the following will occur:
 
 * The request that was blocked will be logged via LogBox with the offending IP and extra metadata
-* The current requested URL will be flashed as `_securedURL` so it can be used in relocations
+* If firewall database logging is turned on, we will log the block in our database logs so the visualizer can represent them.
+* The current requested URL will be flashed into ColdBox Flash as `_securedURL` so it can be used in relocations
 * If using a rule, the rule will be stored in `prc` as `cbsecurity_matchedRule`
 * The validator results will be stored in `prc` as `cbsecurity_validatorResults`
 * If the type of invalidation is `authentication` the `cbSecurity_onInvalidAuthentication` interception will be announced
 * If the type of invalidation is `authorization` the `cbSecurity_onInvalidAuthorization` interception will be announced
-* If the type is `authentication` the default action (`defaultAuthenticationAction`) for that type will be executed (An override or a relocation) will occur against the setting `invalidAuthenticationEvent` which can be an event or a destination URL.
-* If the type is `authorization` the default action (`defaultAuthorizationAction`) for that type will be executed (An override or a relocation) `invalidAuthorizationEvent` which can be an event or a destination URL.
+* If the type is `authentication` the default action (`defaultAuthenticationAction`) for that type will be executed (An override or a relocation or a firewall block).
+* If the type is `authorization` the default action (`defaultAuthorizationAction`) for that type will be executed (An override or a relocation or a firewall block).
 
 ## Security Rules vs Annotation Security
 
 {% code title="Security Rules" %}
 ```javascript
 {
-    "whitelist"     : "", 
-    "securelist"    : "", 
-    "match"            : "event",  // or url
-    "roles"            : "", 
-    "permissions"    : "", 
-    "redirect"         : "", 
-    "overrideEvent"    : "", 
-    "useSSL"        : false, 
-    "action"        : "redirect", // or override 
-    "module"        : ""
-};
+    "whiteList": "",
+    "secureList": "",
+    "match": "event",
+    "roles": "admin",
+    "permissions": "",
+    "action" : "redirect",
+    "useSSL": false,
+    "redirect": "user.login",
+    "httpMethods" : "*",
+    "allowedIPs" : "*"
+},
 ```
 {% endcode %}
 
