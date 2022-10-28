@@ -21,7 +21,6 @@
     * [DB Rules](getting-started/configuration/firewall/rule-sources/untitled.md)
     * [JSON Rules](getting-started/configuration/firewall/rule-sources/json-properties.md)
     * [Model Rules](getting-started/configuration/firewall/rule-sources/model-rules.md)
-    * [Module Rules](getting-started/configuration/firewall/rule-sources/module-rules.md)
     * [XML Rules](getting-started/configuration/firewall/rule-sources/xml-properties.md)
   * [☢ Security Headers](getting-started/configuration/security-headers.md)
   * [🔬 Visualizer](getting-started/configuration/visualizer.md)

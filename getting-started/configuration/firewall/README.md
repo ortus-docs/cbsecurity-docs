@@ -214,11 +214,11 @@ If this setting is a struct, then you can configure how the rules behave and whe
 
 #### useRegex
 
-This is `true` by default.   It tells the fireall to use regular expression matching against white and secure lists in a rule.
+This is `true` by default.   It tells the firewall to use regular expression matching against white and secure lists in a rule.
 
 #### useSSL
 
-If `true` then if a security rule needs to do a redirect, it will force the redirect to SSL.
+If `true` then if a security rule needs to do a redirect, it will force the redirect to SSL. This defaults to `false`.
 
 #### defaults
 
@@ -226,8 +226,8 @@ This is a collection of name-value pairs that each security rule will inherit by
 
 ```javascript
 defaults : {
-    name : "",
-    action : "block"
+    action : "block",
+    roles  : "users"
 }
 ```
 
@@ -274,3 +274,22 @@ The `provider` key is how you can define rules from the following sources:
 
 Here are the different ways you can define rules from other sources rather than inline:
 
+{% content-ref url="rule-sources/untitled.md" %}
+[untitled.md](rule-sources/untitled.md)
+{% endcontent-ref %}
+
+{% content-ref url="rule-sources/json-properties.md" %}
+[json-properties.md](rule-sources/json-properties.md)
+{% endcontent-ref %}
+
+{% content-ref url="rule-sources/model-rules.md" %}
+[model-rules.md](rule-sources/model-rules.md)
+{% endcontent-ref %}
+
+{% content-ref url="rule-sources/xml-properties.md" %}
+[xml-properties.md](rule-sources/xml-properties.md)
+{% endcontent-ref %}
+
+{% hint style="success" %}
+Please note that defining rules are both the same in a global ColdBox config as in a ModuleConfig.
+{% endhint %}

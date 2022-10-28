@@ -1,18 +1,26 @@
+---
+description: Security rules in a JSON file
+---
+
 # JSON Rules
 
-If you have already a JSON file with your rules, then all you need to do is add the path (relative or absolute) to that file in the `rules` configuration key.  However, the path MUST include the keyword `json` in it.
+You can place all your security rules inside of a JSON file and then tell CBSecurity where they are:
 
 {% code title="config/Coldbox.cfc" %}
 ```javascript
-moduleSettings = {
-	// CB Security
-	cbSecurity : {
-		"rules" : "config/security.json.cfm"
-};
+// CB Security
+cbSecurity : {
+  firewall : {
+    rules : {
+      provider : {
+        "source" : "config/security.json.cfm"
+      }
+    }
+  }
+}
 ```
 {% endcode %}
 
-\
 Then your file can be something like this:
 
 {% code title="config/security.json.cfm" %}

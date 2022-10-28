@@ -598,3 +598,11 @@ settings = {
 }
 ```
 {% endcode %}
+
+{% hint style="danger" %}
+Please note that a module's security rules will be **PREPENDED** to the global rules
+{% endhint %}
+
+#### Loading/Unloading
+
+Also note that if modules are loaded dynamically, it will still inspect them and register them if cbsecurity settings are found. The same goes for unloading, the entire security rules for that module will cease to exist.

@@ -1,14 +1,23 @@
+---
+description: Security rules in an XML file
+---
+
 # XML Rules
 
-If you have already an XML file with your rules, then all you need to do is add the path (relative or absolute) to that file in the `rules` configuration key.  However, the path MUST include the keyword `XML` in it.
+You can place all your security rules inside of an XML file and then tell CBSecurity where they are:
 
 {% code title="config/Coldbox.cfc" %}
 ```javascript
-moduleSettings = {
-	// CB Security
-	cbSecurity : {
-		"rules" : "config/security.xml.cfm"
-};
+// CB Security
+cbSecurity : {
+  firewall : {
+    rules : {
+      provider : {
+        "source" : "config/security.xml.cfm"
+      }
+    }
+  }
+}
 ```
 {% endcode %}
 
@@ -43,7 +52,7 @@ that can be found in an event.
     </rule>
 
     <rule>
-           <match>event</match>
+        <match>event</match>
         <whitelist></whitelist>
         <securelist>^moderator</securelist>
         <roles>admin,moderator</roles>
@@ -52,7 +61,7 @@ that can be found in an event.
     </rule>
 
     <rule>
-           <match>url</match>
+        <match>url</match>
         <whitelist></whitelist>
         <securelist>/secured.*</securelist>
         <roles>admin,paid_subscriber</roles>

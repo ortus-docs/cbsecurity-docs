@@ -1,26 +1,35 @@
+---
+description: Security rules from a database
+---
+
 # DB Rules
 
-If you have your security rules in a database, then cbsecurity can read the rules from the database for you.  Just **make** **the `rules` key  equal to `db`** and fill out the extra configuration keys shown below:
+CBSecurity also allows you to store your security rules in a database as long as all the columns match the keys of the rules as we saw in the [rule anatomy.](../../../overview.md#rule-anatomy)
 
-
-
-| Property       | Type   | Required | Default                   | Description                                                                                                                                                   |
-| -------------- | ------ | -------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `rulesDSN`     | string | true     | ---                       | The dsn to use if the rules are coming from a database                                                                                                        |
-| `rulesTable`   | string | true     | ---                       | The table where the rules are                                                                                                                                 |
-| `rulesSQL`     | string | false    | `select* from rulesTable` | The custom SQL statement to use to retrieve the rules according to the rulesTable property. If not set, the default of select\* from rulesTable will be used. |
-| `rulesOrderBy` | string | false    | ---                       | The column to order the rules by. If not chosen, the interceptor will not order the query, just select it.                                                    |
+You will use the `db` as the `source` and fill out the available db properties:
 
 {% code title="config/Coldbox.cfc" %}
 ```javascript
-moduleSettings = {
-	// CB Security
-	cbSecurity : {
-		rules        : "db", // Rules are in the database
-		rulesDSN     : "myDatasource", // The datasource
-		rulesTable   : "securityRules", // The table that has the rules
-		rulesOrderBy : "order asc" // An optional ordering
-	}
-};
+// CB Security
+cbSecurity : {
+  firewall : {
+    rules : {
+      provider : {
+        "source" : "db",
+        "properties" : {
+            "dsn" : "myapp",
+            "sql" : "",
+            "table" : "securityRules",
+            "orderBy" : "order asc"
+        }
+      }
+    }
+  }
+}
 ```
 {% endcode %}
+
+* The `dsn` property is the name of the datasource to use
+* The `table` property is what table the rules are stored in
+* The `orderBy` property is what order by SQL to use, by default it is empty
+* The `sql` property is what SQL to execute to retrieve the rules.  The default is `select * from ${table}`\
