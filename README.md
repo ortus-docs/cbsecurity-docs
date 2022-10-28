@@ -23,7 +23,7 @@ The major areas of concern are:
 
 ## Module composition
 
-![Cbsecurity consumes several other modules and leverages cbstorages for storage.](.gitbook/assets/cbSecurity-Modules.png)
+![CBSecurity consumes several other modules and leverages cbstorages for storage.](.gitbook/assets/cbSecurity-Modules.png)
 
 ## Features
 
