@@ -1,11 +1,10 @@
 ---
 description: October 2022
-cover: ../../.gitbook/assets/CBSecurity-L-darkbg.png
-coverY: 0
-layout: landing
 ---
 
 # What's New With 3.0.0
+
+<figure><img src="../../.gitbook/assets/CBSecurity-M-darkbg.png" alt=""><figcaption><p>v3.x Release</p></figcaption></figure>
 
 ### Compatibility
 
