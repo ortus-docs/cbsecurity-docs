@@ -6,8 +6,8 @@
 
 * [Release History](intro/release-history/README.md)
   * [What's New With 3.0.0](intro/release-history/whats-new-with-3.0.0.md)
-* [About This Book](intro/about-this-book.md)
-* [Author](intro/author.md)
+* [About This Book](intro/about-this-book/README.md)
+  * [Author](intro/about-this-book/author.md)
 
 ## Getting Started
 

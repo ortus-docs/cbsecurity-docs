@@ -6,7 +6,7 @@ description: About our authors
 
 ## Luis Fernando Majano Lainez <a href="#luis-fernando-majano-lainez" id="luis-fernando-majano-lainez"></a>
 
-![](<../.gitbook/assets/assets--LA-UVvG0NM7NpDzssBL--Lk6BFGIHo1oV7R83\_YL--Lk6D1zW4YSdITH86ZYX-Luis F Majano.jpg>)
+![](<../../.gitbook/assets/assets--LA-UVvG0NM7NpDzssBL--Lk6BFGIHo1oV7R83\_YL--Lk6D1zW4YSdITH86ZYX-Luis F Majano.jpg>)
 
 Luis Majano is a Computer Engineer that has been developing and designing software systems since the year 2000. He was born in [San Salvador, El Salvador](http://en.wikipedia.org/wiki/El\_Salvador) in the late 70’s, during a period of economical instability and civil war. He lived in El Salvador until 1995 and then moved to Miami, Florida where he completed his Bachelors of Science in Computer Engineering at [Florida International University](http://fiu.edu). Luis resides in Houston, Texas with his beautiful wife Veronica, baby girl Alexia and baby boy Lucas!
 
