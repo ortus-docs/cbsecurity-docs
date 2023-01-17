@@ -84,3 +84,20 @@ event
 ```
 
 Ultimately, you can close your browser too.
+
+### ColdBox Request Context
+
+ColdBox also supports the concept of basic authentication retrieval since the early version 2 days.  ColdBox can detect, parse and give you a struct of `username` and `password` by leveraging the request context's `getHTTPBasicCredentials()` method.
+
+```javascript
+function preHandler( event, action, eventArguments ){
+    var authDetails = event.getHTTPBasicCredentials();
+    if( !securityService.authenticate( authDetails.username, authDetails.password ) ) {
+        event.renderData( type="JSON", data={ message = 'Please check your credentials' }, statusCode=401, statusMessage="You're not authorized to do that");
+    }
+}
+```
+
+{% embed url="https://coldbox.ortusbooks.com/digging-deeper/recipes/building-rest-apis#basic-http-auth" %}
+ColdBox HTTP Basic Auth Support
+{% endembed %}
