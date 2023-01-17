@@ -4,7 +4,7 @@ description: Security rules from a model's method call
 
 # Model Rules
 
-If you prefer to store your rules your way, then that's perfectly fine.  CBSecurity can talk to any WireBox ID or model and get the rules from them by using the `model` source in the rule provider.
+If you prefer to store your rules your way, CBSecurity can talk to any WireBox ID or model and get the rules from them by using the `model` source in the rule provider.
 
 {% code title="config/Coldbox.cfc" %}
 ```javascript

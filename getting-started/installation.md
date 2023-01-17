@@ -4,7 +4,7 @@ description: Get up and running with CBSecurity in no time!
 
 # Installation
 
-Leverage CommandBox to install into your ColdBox app:
+Leverage [CommandBox](https://www.ortussolutions.com/products/commandbox) to install into your ColdBox app:
 
 ```bash
 # Latest version
@@ -22,7 +22,11 @@ install cbsecurity@be
 
 ## Configuration Settings
 
-By default `cbsecurity` is configured to work with `cbauth` as the authentication service.  You would only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials.  You can also use the in-built basic authentication services as well.&#x20;
+By default `cbsecurity` is configured to work with `cbauth` as the authentication service.  You only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials.  You can also use the in-built basic authentication users as well.&#x20;
+
+{% hint style="success" %}
+You can find much more information about cbauth here: [https://forgebox.io/view/cbauth](https://forgebox.io/view/cbauth)
+{% endhint %}
 
 {% content-ref url="configuration/" %}
 [configuration](configuration/)

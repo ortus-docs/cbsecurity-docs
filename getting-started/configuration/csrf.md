@@ -56,10 +56,10 @@ rotationTimeout : 60,
 
 ### EnableEndpoint
 
-This setting enables the `GET /cbcsrf/generate` endpoint to generate csrf tokens for secured users.  You can use this endpoint to generate tokens for your users via AJAX or UI-only applications. Please note that you can pass an optional `/:key` URL parameter that will generate the token for that specific key.
+This setting enables the `GET /cbcsrf/generate` endpoint to generate csrf tokens for secured users.  You can use this endpoint to generate user tokens via AJAX or UI-only applications. Please note that you can pass an optional `/:key` URL parameter that will generate the token for that specific key.
 
 {% hint style="danger" %}
-**IMPORTANT:** This endpoint is secured via a `secured` annotation so make sure the firewall has annotation-driven rules enabled.
+**IMPORTANT:** This endpoint is secured via a `secured` annotation, so make sure the firewall has annotation-driven rules enabled.
 {% endhint %}
 
 ### CacheStorage

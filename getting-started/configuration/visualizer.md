@@ -4,7 +4,7 @@ description: Configuring the CBSecurity Visualizer
 
 # 🔬 Visualizer
 
-The CBSecurity visualizer is a tool that will allow you to visualize all of your configuration settings, firewall logs, and much more.  By default the visualizer is **disabled**.
+The CBSecurity visualizer is a tool that will allow you to visualize all of your configuration settings, firewall logs, and much more.  By default, the visualizer is **disabled**.
 
 <figure><img src="../../.gitbook/assets/cbsecurity-3-visualizer (2).png" alt=""><figcaption><p>Visualizer</p></figcaption></figure>
 
@@ -12,7 +12,7 @@ The CBSecurity visualizer is a tool that will allow you to visualize all of your
 If you enable the visualizer, we highly suggest you **secure** it.
 {% endhint %}
 
-If enabled, you can visit the `/cbsecurity` entry point and you will get the visualizer rendered.
+If enabled, you can visit the `/cbsecurity` entry point, and you will get the visualizer rendered.
 
 ```javascript
 /**
@@ -36,11 +36,11 @@ If `false` then no visualizer, if `true` then you get a visualizer :tada:
 
 ### secured
 
-We highly encourage you to make sure the visualizer is ONLY accessible if you have authenticated into your system.  By using a `secured=true` then CBSecurity will incorporate a rule to secure the visualizer for ONLY authenticated users.  If you want to be picky, use the `securityRule` setting.
+We highly encourage you to ensure the visualizer is ONLY accessible if you have authenticated into your system.  By using a `secured=true` then CBSecurity will incorporate a rule to secure the visualizer for ONLY authenticated users.  If you want to be picky, use the `securityRule` setting.
 
 ### securityRule
 
-We also recommend that ONLY certain users have access to the visualizer. You can accomplish this by adding the keys into the security rule that will be created for the visualizer.  For example, I only want `admins` or users with the `cbsecurity-visualizer` permission to access it.
+We also recommend that ONLY certain users have access to the visualizer. You can accomplish this by adding the keys to the security rule created for the visualizer.  For example, I only want `admins` or users with the `cbsecurity-visualizer` permission to access it.
 
 ```javascript
 visualizer : {

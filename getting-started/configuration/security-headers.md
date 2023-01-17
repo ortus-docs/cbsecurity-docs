@@ -4,7 +4,7 @@ description: Configuring the security response headers and features
 
 # ☢ Security Headers
 
-CBSecurity comes bundled with tons of security response features in helping developers be secure-minded about their applications.  Here are the defaults for configuring the security headers in CBSecurity.
+CBSecurity comes bundled with tons of security response features to help developers be secure-minded about their applications.  Here are the defaults for configuring the security headers in CBSecurity.
 
 <pre class="language-javascript" data-line-numbers><code class="lang-javascript">/**
  * --------------------------------------------------------------------------
@@ -73,17 +73,18 @@ securityHeaders : {
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection,
 	// X-XSS-Protection: 1; mode=block
 	"xssProtection"      : { "enabled" : true, "mode" : "block" }
-}</code></pre>
+}
+</code></pre>
 
 ### TrustUpstream
 
-This is a boolean flag that tells CBSecurity whether to inspect `x-forwarded-` headers FIRST instead of traditional host/ip headers.  If you really trust your proxies then turn this setting to `true`.
+This boolean flag tells CBSecurity whether to inspect `x-forwarded-` headers FIRST instead of traditional host/IP headers.  If you trust your proxies, then turn this setting to `true`.
 
 ### ContentSecurityPolicy
 
-The Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft, to site defacement, to malware distribution. &#x20;
+The Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for data theft, site defacement, and malware distribution. &#x20;
 
-By default, this policy is disabled as it requires a custom policy to be written according to your needs.  Once you have a policy available you can add it in the configuration.
+By default, this policy is disabled as it requires a custom policy to be written according to your needs.  Once you have a policy available, you can add it to the configuration.
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" %}
 Read more about content security policies
@@ -112,7 +113,7 @@ Read more about content type options
 
 ### CustomHeaders
 
-This is a struct that you can fill out with your own custom headers you would like to send out on EVERY request.  The header value can be a simple value to return always, or a closure/lambda that will be executed at runtime and the value sent on every request.
+You can fill out this struct with the custom headers you would like to send out on EVERY request.  The header value can be a simple value to return always or a closure/lambda that will be executed at runtime and the value sent on every request.
 
 ```javascript
 customHeaders : {
@@ -125,7 +126,7 @@ Please note that the closure accepts the incoming `event, rc, and prc` variables
 
 ### FrameOptions
 
-The **`X-Frame-Options`** [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) response header can be used to indicate whether or not a browser should be allowed to render a page in a [`<frame>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/frame), [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe), [`<embed>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed) or [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object). Sites can use this to avoid [click-jacking](https://developer.mozilla.org/en-US/docs/Web/Security/Types\_of\_attacks#click-jacking) attacks, by ensuring that their content is not embedded into other sites.  The default value ColdBox uses is `SAMEORIGIN` which allows iframes and embeds from the same origin.  The available values are: `SAMEORIGIN OR DENY`.
+The **`X-Frame-Options`** [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) response header can be used to indicate whether or not a browser should be allowed to render a page in a [`<frame>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/frame), [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe), [`<embed>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed) or [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object). Sites can use this to avoid [click-jacking](https://developer.mozilla.org/en-US/docs/Web/Security/Types\_of\_attacks#click-jacking) attacks by ensuring that their content is not embedded into other sites.  The default value ColdBox uses is `SAMEORIGIN` which allows iframes and embeds from the same origin.  The available values are: `SAMEORIGIN OR DENY`.
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" %}
 Read more about frame options
@@ -137,7 +138,7 @@ Read more about frame options
 
 ### HSTS - HTTP Strict Transport Security
 
-The HTTP Strict-Transport-Security response header (often abbreviated as HSTS) informs browsers that the site should only be accessed using HTTPS, and that any future attempts to access it using HTTP should automatically be converted to HTTPS.  Here are the defaults we use in CBSecurity:
+The HTTP Strict-Transport-Security response header (often abbreviated as HSTS) informs browsers that the site should only be accessed using HTTPS and that any future attempts to access it using HTTP should automatically be converted to HTTPS.  Here are the defaults we use in CBSecurity:
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security" %}
 Read more about HSTS
@@ -158,7 +159,7 @@ Read more about HSTS
 
 ### HostHeaderValidation
 
-This configuration setting can be used to restrict access to your application for ONLY a specific list of hosts.  This prevents host spoofing.  If an invalid host is detected, then a 401 Not Authorized response will be sent back to the user.  This setting is **disabled** by default.
+This configuration setting can restrict access to your application for ONLY a specific list of hosts.  This prevents host spoofing.  If an invalid host is detected, a 401 Not Authorized response will be sent back to the user.  This setting is **disabled** by default.
 
 ```javascript
 // Validates the host or x-forwarded-host to an allowed list of valid hosts
@@ -171,7 +172,7 @@ This configuration setting can be used to restrict access to your application fo
 
 ### IPValidation
 
-This configuration setting can be used to restrict access to your application for ONLY a specific list of ip addresses.  This prevents ip spoofing.  If an invalid ip is detected, then a 401 Not Authorized response will be sent back to the user.  This setting is **disabled** by default.
+This configuration setting can restrict access to your application for ONLY a specific list of IP addresses.  This prevents IP spoofing.  If an invalid IP is detected, then a 401 Not Authorized response will be sent back to the user.  This setting is **disabled** by default.
 
 {% hint style="warning" %}
 Please note that as of now, a full IP address must be used.
@@ -216,7 +217,7 @@ Policy: unsafe-url
 
 ### SecureSSLRedirects
 
-Detect if the incoming requests are NON-SSL and if enabled, redirect with SSL alongside any incoming query strings and host information.  By default this setting is **disabled**.
+Detect if the incoming requests are NON-SSL and redirect with SSL alongside any incoming query strings and host information if enabled.  By default, this setting is **disabled**.
 
 ```javascript
 "secureSSLRedirects" : { "enabled" : true },
@@ -224,7 +225,7 @@ Detect if the incoming requests are NON-SSL and if enabled, redirect with SSL al
 
 ### XSSProtection
 
-Some browsers have built in support for filtering out reflected XSS attacks. Not foolproof, but it assists in XSS protection.  By default it is **enabled** and a `block` mode is produced.
+Some browsers have built-in support for filtering out reflected XSS attacks. Not foolproof, but it assists in XSS protection.  By default, it is **enabled** and a `block` mode is produced.
 
 {% embed url="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection" %}
 Read more about XSS protection

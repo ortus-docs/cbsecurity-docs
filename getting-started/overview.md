@@ -8,7 +8,7 @@ description: >-
 
 ## Authentication/Authorization
 
-For any security system you need to know **who** is authenticated (authentication) and **what** (authorization) this user is allowed to do. `cbsecurity` is no different, so it provides an:
+For any security system, you need to know **who** is authenticated (authentication) and **what** (authorization) this user is allowed to do. `cbsecurity` is no different, so it provides an:
 
 * **Authentication system** which performs the following functions:
   * Validates user credentials
@@ -21,11 +21,11 @@ For any security system you need to know **who** is authenticated (authenticatio
 
 ## CBSecurity Security Firewall
 
-With CBSecurity you will be able to **secure** all your incoming ColdBox events from execution either through security rules or discrete annotations within your handler's code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere, from execution blocks, to views, and much more.
+With CBSecurity, you can **secure** all your incoming ColdBox events from execution through security rules or discrete annotations within your handler's code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere, from execution blocks to views and much more.
 
 ![ColdBox Security Firewall](<../.gitbook/assets/image (1).png>)
 
-The module wraps itself around the `preProcess` interception point (The first execution of a ColdBox request) and will try to validate if the request has been authenticated and authorized to execute. &#x20;
+The module wraps itself around the `preProcess` interception point (The first execution of a ColdBox request) will try to validate if the request has been authenticated and authorized to execute. &#x20;
 
 ### Validators
 
@@ -33,10 +33,10 @@ The module wraps itself around the `preProcess` interception point (The first ex
 
 This is done via security rules and/or annotations on the requested handler actions and through a CBSecurity `Validator` which knows how to authenticate and authorize the request.  CBSecurity ships with many validators:
 
-* **CBAuth Validator**: this is the default validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
+* **CBAuth Validator**: this is the default validator, which uses the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
 * **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
-* **Basic Auth Validator:** This validator secures your app by doing [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
-* **JWT Validator**: If you want to use JSON Web Tokens the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
+* **Basic Auth Validator:** This validator secures your app via [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
+* **JWT Validator**: If you want to use JSON Web Tokens, the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
 * **Custom Validator:** You can define your own authentication and authorization engines and plug them into the cbsecurity framework.
 
 ### How Does Validation Happen?
@@ -78,9 +78,9 @@ Once the firewall has the results and the user is **NOT** allowed access, the fo
 * If the type is `authentication` the default action (`defaultAuthenticationAction`) for that type will be executed (An override or a relocation or a firewall block).
 * If the type is `authorization` the default action (`defaultAuthorizationAction`) for that type will be executed (An override or a relocation or a firewall block).
 
-## Security Rules vs Annotation Security
+## Security Rules vs. Annotation Security
 
-Here is the basics of a security rule which can be defined in json, xml, database or cfml.  Please note that only the following keys are mandatory:
+Here are the basics of a security rule which can be defined in JSON, XML, database or CFML.  Please note that only the following keys are mandatory:
 
 * `securelist`
 
@@ -149,9 +149,9 @@ component{
 
 Your application can be secured with security rules or handler and method annotations. Before making your choice, you should take the following arguments into consideration:
 
-* Annotations are directly visible in your code, but very static.&#x20;
+* Annotations are directly visible in your code but are very static.&#x20;
 * Annotations can protect events. Rules can protect events and incoming URLs.
-* Rules allow you to change your action (override or redirect or block) and target each rule. With annotations, you can only use your configured default action and target.
+* Rules allow you to change your actions (override, redirect, or block) and target each rule. With annotations, you can only use your configured default action and target.
 * When stored in a file or database, rules can be edited by admins at runtime.
 
 ### Security Rules
@@ -263,7 +263,7 @@ cbSecurity : {
 ```
 {% endcode %}
 
-As you can see, you can combine all the security rule keys as you see fit.  Here is the same config but the rules will come from a JSON file:
+As you can see, you can combine all the security rule keys as you see fit.  Here is the same config, but the rules will come from a JSON file:
 
 ```javascript
 // CB Security
@@ -302,7 +302,7 @@ cbSecurity : {
 
 ### Annotation Security
 
-The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action or both. The default value of the `secured` annotation is a Boolean `true`. This means, we need a user to be authenticated in order to access it.
+The firewall will inspect handlers for the `secured` annotation. This annotation can be added to the entire handler or to an action, or both. The default value of the `secured` annotation is a Boolean `true`. This means we need a user to be authenticated in order to access it.
 
 {% code title="handlers" %}
 ```javascript
@@ -338,7 +338,7 @@ component{
 
 #### Authorization Context
 
-You can also give the annotation a value, which can be anything you like: A list of roles, a role, a list of permissions, metadata, etc. Whatever it is, this is the **authorization context** and the user **validator** must be able to not only authenticate but authorize the context or an invalid authorization will occur. **Ultimately it's up to the Validator to decide what that value does and means.**
+You can also give the annotation a value, which can be anything you like: A list of roles, a role, a list of permissions, metadata, etc. Whatever it is, this is the **authorization context,** and the user **validator** must be able to authenticate but authorize the context, or an invalid authorization will occur. **Ultimately it's up to the Validator to decide what that value does and means.**
 
 {% code title="handler/users.cfc" %}
 ```javascript
@@ -359,11 +359,11 @@ component secured="admin,users"{
 
 #### Cascading Security
 
-By having the ability to annotate the **handler** and also the **action** you create a cascading security model where they need to be able to access the handler first and only then will the action be evaluated for access as well.
+By having the ability to annotate the **handler** and also the **action,** you create a cascading security model where they need to be able to access the handler first, and only then will the action be evaluated for access as well.
 
 ## Security Validator
 
-As we mentioned at the beginning of this overview, the security module will use a **Validator** object in order to determine if the user has authentication/authorization or not. This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
+As we mentioned at the beginning of this overview, the security module will use a **Validator** object to determine if the user has authentication/authorization or not. This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
 
 {% code title="ISecurityValidator" %}
 ```javascript
@@ -423,16 +423,17 @@ cbsecurity = {
 ```
 
 {% hint style="warning" %}
-When using the default `CBAuthValidator@cbsecurity` you also have to configure the cbauth module.
+When using the default, `CBAuthValidator@cbsecurity` you also have to configure the cbauth module.
 {% endhint %}
 
 <pre class="language-javascript"><code class="lang-javascript">  cbAuth: {
     userServiceClass: "UserService"
-<strong>  }</strong></code></pre>
+<strong>  }
+</strong></code></pre>
 
 ### BasicAuthValidator
 
-This validator also ships with CBSecurity which will challenge users with browser-based basic authentication.  When used it will use whatever authentication system and user service you have configured.  If you don't change the default settings then CBSecurity will switch to using the `BasicAuthUserService` which allows you to store user credentials in your configuration file.  Let's see how to do that:
+This validator also ships with CBSecurity which will challenge users with browser-based basic authentication.  When used, it will use whatever authentication system and user service you have configured.  If you don't change the default settings, then CBSecurity will switch to using the `BasicAuthUserService` which allows you to store user credentials in your configuration file.  Let's see how to do that:
 
 ```javascript
 cbsecurity = {
@@ -454,7 +455,7 @@ cbsecurity = {
 }
 ```
 
-With this configuration, the basic auth validator will allow users to log in via the browser basic authentication.  What about logging out then? Well you have two options:
+With this configuration, the basic auth validator will allow users to log in via the browser's basic authentication.  What about logging out then? Well, you have two options:
 
 1. Close your browser, which clears the session
 2. We ship with an endpoint to call for securely logging out: `/cbsecurity/basicauth/logout`

@@ -21,7 +21,7 @@ cbSecurity : {
 ```
 {% endcode %}
 
-Then your xml file can look like this:
+Then your XML file can look like this:
 
 {% code title="config/security.xml.cfm" %}
 ```markup

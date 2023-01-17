@@ -60,7 +60,7 @@ firewall : {
 
 ### AutoLoadFirewall
 
-By default, the security firewall is always enabled, but you can disable it globally if you like.
+The security firewall is always enabled by default, but you can disable it globally if you like.
 
 ```javascript
 autoLoadFirewall : false
@@ -68,7 +68,7 @@ autoLoadFirewall : false
 
 ### HandlerAnnotationSecurity
 
-By default, annotation security is enabled. This will inspect ALL incoming event executions for the security annotation `secured`. If you do not want to use annotation security we recommend you turn it off to avoid the inspection of events.
+By default, annotation security is enabled. This will inspect ALL incoming event executions for the security annotation `secured`. If you do not want to use annotation security, we recommend you turn it off to avoid the inspection of events.
 
 ```javascript
 handlerAnnotationSecurity : false
@@ -76,12 +76,12 @@ handlerAnnotationSecurity : false
 
 ### Validator
 
-This is the global validator that will be used to validate authentication/authorization.  The default is `CBAuthValidator@cbsecurity`.  This object needs to match the interface: `cbsecurity.interfaces.ISecurityValidator` .  The available validators we ship are:
+This global validator will be used to validate authentication/authorization.  The default is `CBAuthValidator@cbsecurity`.  This object needs to match the interface: `cbsecurity.interfaces.ISecurityValidator` .  The available validators we ship are:
 
-* **CBAuth Validator**: this is the default validator, which makes use of the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
+* **CBAuth Validator**: this is the default validator, which uses the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
 * **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
-* **Basic Auth Validator:** This validator secures your app by doing [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
-* **JWT Validator**: If you want to use JSON Web Tokens the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
+* **Basic Auth Validator:** This validator secures your app via [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
+* **JWT Validator**: If you want to use JSON Web Tokens, the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
 * **Custom Validator:** You can define your own authentication and authorization engines and plug them into the cbsecurity framework.
 
 ```javascript
@@ -122,7 +122,7 @@ We set the default event above, but how do we get there? This setting is the act
 
 ### Logs
 
-You can enable the firewall logs and CBSecurity will log all blocks the firewall detects.  By default it is disabled, but if you enable the logs, we will create the table for you.
+You can enable the firewall logs, and CBSecurity will log all blocks the firewall detects.  By default, it is disabled, but if you enable the logs, we will create the table for you.
 
 ```javascript
 "logs" : {
@@ -135,7 +135,7 @@ You can enable the firewall logs and CBSecurity will log all blocks the firewall
 ```
 
 {% hint style="info" %}
-The `dsn` key is optional and CBSecurity will inspect the Application settings for a default datasource.
+The `dsn` key is optional, and CBSecurity will inspect the Application settings for a default datasource.
 {% endhint %}
 
 ### Rules
@@ -194,7 +194,7 @@ This is the shorthand way of defining global rules.
 
 #### Rule Configuration
 
-If this setting is a struct, then you can configure how the rules behave and where they come from: JSON, XML, database, model, etc.
+If this setting is a struct, you can configure how the rules behave and where they come from JSON, XML, database, model, etc.
 
 <pre class="language-javascript"><code class="lang-javascript"><strong>"rules" : {
 </strong>    // Use regular expression matching on the rule match types
@@ -210,7 +210,8 @@ If this setting is a struct, then you can configure how the rules behave and whe
     // The source can be a json file, an xml file, model, db
     // Each provider can have it's appropriate properties as well. Please see the documentation for each provider.
     "provider" : { "source" : "", "properties" : {} }
-}</code></pre>
+}
+</code></pre>
 
 #### useRegex
 

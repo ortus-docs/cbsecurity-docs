@@ -4,11 +4,11 @@ description: ColdBox security can work with ANY authentication service provider.
 
 # Authentication Services
 
-CBSecurity has been designed to work with **ANY** authentication and user service provider.  CBSecurity is in charge of intercepting requests and delegating the verification of access to _Security Validators_ which in turn leverage _Authentication_ and _User Services_ to ultimately allow access to a resource or block the request. &#x20;
+CBSecurity has been designed to work with **ANY** authentication and user service provider.  CBSecurity is in charge of intercepting requests and delegating access verification to _Security Validators_, leveraging _Authentication_ and _User Services_ to allow access to a resource or block the request ultimately. &#x20;
 
 <figure><img src="../.gitbook/assets/CBSecurity - Security Flow.png" alt=""><figcaption><p>The CBSecurity Security Flow</p></figcaption></figure>
 
-We have created an [interface](authentication-services.md#authentication-service-interface) that must be implemented by any service that is going to be used with CBSecurity: `cbsecurity.interfaces.IAuthService`.  Then you would configure this service in the [Configuration](../getting-started/configuration/authentication.md) File alongside the validator you would like to use (cbauth, jwt, basic auth, etc)
+We have created an [interface](authentication-services.md#authentication-service-interface) that must be implemented by any service that is going to be used with CBSecurity: `cbsecurity.interfaces.IAuthService`.  Then you would configure this service in the [Configuration](../getting-started/configuration/authentication.md) File alongside the validator you would like to use (cbauth, JWT, basic auth, etc.)
 
 ```javascript
 /**
@@ -38,7 +38,7 @@ firewall : {
 }
 ```
 
-By default, CBSecurity ships with a very simple but yet powerful authentication service and validator called [cbauth](https://forgebox.io/view/cbauth).  This module gives you the ability to login, logout, verify and tracker users across requests using session and request storages.  All you have to do is provide a User Service class that will connect to your storage of choice in order to operate.  Here is a typical `cbauth` configuration that will exist alongside the `cbsecurity` module settings:
+By default, CBSecurity ships with a very simple yet powerful authentication service and validator called [cbauth](https://forgebox.io/view/cbauth).  This module gives you the ability to login, logout, verify and tracker users across requests using session and request storages.  All you have to do is provide a User Service class that will connect to your storage of choice in order to operate.  Here is a typical `cbauth` configuration that will exist alongside the `cbsecurity` module settings:
 
 ```javascript
 cbauth = {
@@ -51,7 +51,7 @@ This user service must also adhere to our User Service interface: `cbsecurity.in
 
 ## IAuthService
 
-This interface has been provided by convenience and it is not mandatory at runtime since cbauth implements it: (`cbsecurity.interfaces.IAuthService`)
+This interface has been provided by convenience, and it is not mandatory at runtime since cbauth implements it: (`cbsecurity.interfaces.IAuthService`)
 
 {% code title="cbsecurity.interfaces.IAuthService.cfc" %}
 ```javascript
@@ -108,13 +108,13 @@ interface{
 ```
 {% endcode %}
 
-You can find the information for **cbauth** in its own book:
+You can find the information for **cbauth** in its book:
 
 {% embed url="https://cbauth.ortusbooks.com" %}
 
 ## IAuthUser
 
-As you can see from above, the authentication services all expect a `User` object to model your user in the system. So your `User` object must also adhere to the following methods modeled by the `cbsecurity.interfaces.IAuthUser` interface. This will allow the validators and JWT services to get the appropriate data it needs.
+As you can see from above, the authentication services all expect a `User` object to model your user in the system. So your `User` object must also adhere to the following methods modeled by the `cbsecurity.interfaces.IAuthUser` interface. This will allow the validators and JWT services to get the appropriate data.
 
 {% code title="cbsecurity.interfaces.IAuthUser.cfc" %}
 ```javascript
@@ -153,7 +153,7 @@ interface{
 
 ## IUserService
 
-If you will be using **cbauth** or any of our JWT features, then we will also require you register a user service class that can provide us with the right data to encapsulate security using the `userService` setting. We have provided this interface for your usage:
+If you are using **cbauth** or any of our JWT features, then we will also require you to register a user service class that can provide us with the correct data to encapsulate security using the `userService` setting. We have provided this interface for your usage:
 
 {% code title="cbsecurity.interfaces.IUserService.cfc" %}
 ```javascript
@@ -188,7 +188,7 @@ interface{
 
 ## Simple Example
 
-Ok, now that we have discovered the basics of CBSecurity, why don't we just build a simple example using a database driven approach to security with `cbauth`.  Please note that we also have a [Basic Authentication](basic-authentication.md) approach as well.
+Ok, now that we have discovered the basics of CBSecurity, why don't we build a simple example using a database-driven approach to security with `cbauth`.  Please note that we also have a [Basic Authentication](basic-authentication.md) approach as well.
 
 ### Configuration
 
@@ -224,21 +224,21 @@ moduleSettings : {
 };
 ```
 
-As you can see, we don't have to specify an authentication provider or validator, it's already defaulted to `cbauth`.  I only have to specify the user service that will be providing the User object and user information from my database.
+As you can see, we don't have to specify an authentication provider or validator; it's already defaulted to `cbauth`.  I only have to specify the user service that will provide the `User` object and user information from my database.
 
 ### User
 
-Ok, before I go into building my user service, I would have to create a `User` object that the service would return so `cbauth` can use it. However, `CBSecurity` already ships with a basic authentication user object I can just use: `cbsecurity.models.basicauth.BasicAuthUser`.&#x20;
+Ok, before I go into building my user service, I would have to create a `User` object that the service would return so `cbauth` can use it. However, `CBSecurity` already ships with a basic authentication user object I can use: `cbsecurity.models.basicauth.BasicAuthUser`.&#x20;
 
 I will model my database table after it and create the following columns:
 
-* id
-* firstName
-* lastName
-* username
-* password
-* permissions
-* roles
+* `id`
+* `firstName`
+* `lastName`
+* `username`
+* `password`
+* `permissions`
+* `roles`
 
 ```javascript
 /**
@@ -347,7 +347,7 @@ component accessors="true" {
 
 ### User Service
 
-Ok, now let's build our basic service that will leverage the db and simple password hashing.  Remember, this object must implement `cbsecurity.interfaces.IUserService` :
+Ok, now let's build our basic service that will leverage the DB and simple password hashing.  Remember, this object must implement `cbsecurity.interfaces.IUserService` :
 
 ```javascript
 component accessors="true" singleton {
@@ -446,9 +446,9 @@ component accessors="true" singleton {
 
 ### Testing It Out
 
-At this point I have satisfied all the requirements for CBSecurity to work:
+At this point, I have satisfied all the requirements for CBSecurity to work:
 
-1. Create a user service that knows how to get users by id, username and credentials
+1. Create a user service that knows how to get users by id, username, and credentials
 2. Created my database table and connection
 
 Now I have to build out:

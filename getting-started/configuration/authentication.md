@@ -56,7 +56,7 @@ The `provider` key is the WireBox ID of the authentication service that must adh
 
 ### UserService
 
-This key is not mandatory and will be automatically filled out for you from the `cbauth` user service class by default.  This class is used in order for CBSecurity to know how to actually retrieve users and validate credentials from whatever storage system you use.  This value can be a Wirebox ID and the object must adhere to our interface: `cbsecurity.interfaces.IUserService`.
+This key is not mandatory and will be automatically filled out from the `cbauth` user service class by default.  This class is used for CBSecurity to know how to retrieve users and validate credentials from whatever storage system you use.  This value can be a WireBox ID, and the object must adhere to our interface: `cbsecurity.interfaces.IUserService`.
 
 ```javascript
 "provider" : "BasicAuthUserService@cbsecurity"
@@ -64,7 +64,7 @@ This key is not mandatory and will be automatically filled out for you from the 
 
 ### prcUserVariable
 
-This is a convenience setting that tells CBSecurity into which `prc` (private request context) variable to store the authenticated user on EVERY request.  This allows for your entire codebase to just talk to a single variable for the authenticated user.
+This is a convenience setting that tells CBSecurity into which `prc` (private request context) variable to store the authenticated user on EVERY request.  This allows your entire codebase to talk to a single variable for the authenticated user.
 
 ```javascript
 "prcUserVariable" : "oCurrentUser"
