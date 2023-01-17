@@ -17,13 +17,13 @@ For any security system, you need to know **who** is authenticated (authenticati
 * **Authorization** system which:
   * Validates permissions or roles or both or none at all :smile:
 
-![](<../.gitbook/assets/image (2).png>)
+![](<../.gitbook/assets/image (2) (1).png>)
 
 ## CBSecurity Security Firewall
 
 With CBSecurity, you can **secure** all your incoming ColdBox events from execution through security rules or discrete annotations within your handler's code. You will also be able to leverage our `CBSecurity` service model to secure any code context anywhere, from execution blocks to views and much more.
 
-![ColdBox Security Firewall](<../.gitbook/assets/image (1).png>)
+![ColdBox Security Firewall](<../.gitbook/assets/image (1) (1).png>)
 
 The module wraps itself around the `preProcess` interception point (The first execution of a ColdBox request) will try to validate if the request has been authenticated and authorized to execute. &#x20;
 
