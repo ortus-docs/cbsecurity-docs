@@ -1,5 +1,5 @@
 ---
-description: Welcome to the ColdBox Security v3.x Series
+description: Welcome to the ColdBox Security, the best way to secure your ColdBox apps.
 ---
 
 # 🔏 Introduction
@@ -8,7 +8,11 @@ description: Welcome to the ColdBox Security v3.x Series
 
 The ColdBox `cbsecurity` module is a collection of modules to help secure your ColdBox applications.
 
+
+
 <figure><img src=".gitbook/assets/cbsecurity-3-visualizer.png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
+
+
 
 The major areas of concern are:
 
