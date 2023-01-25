@@ -14,18 +14,18 @@ Below are the settings you can use for this module. Remember you must create the
 moduleSettings = {
     cbcsrf : {
         // By default we load up an interceptor that verifies all non-GET incoming requests against the token validations
-			enableAutoVerifier     : false,
-			// A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
-			verifyExcludes         : [],
-			// By default, all csrf tokens have a life-span of 30 minutes. After 30 minutes, they expire and we aut-generate new ones.
-			// If you do not want expiring tokens, then set this value to 0
-			rotationTimeout        : 30,
-			// Enable the /cbcsrf/generate endpoint to generate cbcsrf tokens for secured users.
-			enableEndpoint         : false,
-			// The WireBox mapping to use for the CacheStorage
-			cacheStorage           : "CacheStorage@cbstorages",
-			// Enable/Disable the cbAuth login/logout listener in order to rotate keys
-			enableAuthTokenRotator : false
+        enableAutoVerifier     : false,
+        // A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
+        verifyExcludes         : [],
+        // By default, all csrf tokens have a life-span of 30 minutes. After 30 minutes, they expire and we aut-generate new ones.
+        // If you do not want expiring tokens, then set this value to 0
+        rotationTimeout        : 30,
+        // Enable the /cbcsrf/generate endpoint to generate cbcsrf tokens for secured users.
+        enableEndpoint         : false,
+        // The WireBox mapping to use for the CacheStorage
+        cacheStorage           : "CacheStorage@cbstorages",
+        // Enable/Disable the cbAuth login/logout listener in order to rotate keys
+        enableAuthTokenRotator : false
     }
 };
 ```
@@ -114,8 +114,8 @@ We have provided several methods to rotate or clear out all of a user's tokens. 
 ```javascript
 moduleSettings = {
     cbcsrf : {
-			// Enable/Disable the cbAuth login/logout listener in order to rotate keys
-			enableAuthTokenRotator : true
+        // Enable/Disable the cbAuth login/logout listener in order to rotate keys
+        enableAuthTokenRotator : true
     }
 };
 ```

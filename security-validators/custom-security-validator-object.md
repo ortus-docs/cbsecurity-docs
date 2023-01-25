@@ -1,3 +1,7 @@
+---
+description: You can write your own custom validators with CBSecurity
+---
+
 # Custom Validator
 
 ## Registration
@@ -32,11 +36,12 @@ interface{
 	 * This function is called once an incoming event matches a security rule.
 	 * You will receive the security rule that matched and an instance of the ColdBox controller.
 	 *
-	 * You must return a struct with two keys:
+	 * You must return a struct with three keys:
 	 * - allow:boolean True, user can continue access, false, invalid access actions will ensue
-	 * - type:string(authentication|authorization) The type of block that ocurred.  Either an authentication or an authorization issue.
+	 * - type:string(authentication|authorization) The type of block that ocurred.  Either an authentication or an authorization issue
+	 * - messages:string Info/debug messages
 	 *
-	 * @return { allow:boolean, type:string(authentication|authorization) }
+	 * @return { allow:boolean, type:string(authentication|authorization), messages:string }
 	 */
 	struct function ruleValidator( required rule, required controller );
 
@@ -44,11 +49,12 @@ interface{
 	 * This function is called once access to a handler/action is detected.
 	 * You will receive the secured annotation value and an instance of the ColdBox Controller
 	 *
-	 * You must return a struct with two keys:
+	 * You must return a struct with three keys:
 	 * - allow:boolean True, user can continue access, false, invalid access actions will ensue
-	 * - type:string(authentication|authorization) The type of block that ocurred.  Either an authentication or an authorization issue.
+	 * - type:string(authentication|authorization) The type of block that ocurred.  Either an authentication or an authorization issue
+	 * - messages:string Info/debug messages
 	 *
-	 * @return { allow:boolean, type:string(authentication|authorization) }
+	 * @return { allow:boolean, type:string(authentication|authorization), messages:string }
 	 */
 	struct function annotationValidator( required securedValue, required controller );
 
@@ -60,6 +66,7 @@ Each validator must return a **struct** with the following keys:
 
 * `allow:boolean` A Boolean indicator if authentication or authorization was violated
 * `type:stringOf(authentication|authorization)` A string that indicates the type of violation: authentication or authorization.
+* `messages:string` Info/debug/error messages
 
 ## Example
 
@@ -96,3 +103,11 @@ private function permissionValidator( permissions, controller, rule ){
 {% endcode %}
 
 That's it!  Go validate!
+
+{% hint style="danger" %}
+The configured authentication service must adhere to our `IAuthService` interface and the User object must adhere to the `IAuthUser` interface.
+{% endhint %}
+
+{% hint style="success" %}
+Remember that a validator can exist globally and on a per ColdBox Module le
+{% endhint %}

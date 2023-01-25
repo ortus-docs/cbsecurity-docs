@@ -1,22 +1,24 @@
+---
+description: >-
+  The CFML Security validator leverages the ColdFusion security functions for
+  authentication and role based authorization.
+---
+
 # CFML Security Validator
 
-ColdBox security has had this security validator since version 1, in which it will talk to the ColdFusion engine's security methods to authenticate and authorize users.  With it you will be able to authenticate users and also do **role** base authorization.
+ColdBox security has had this security validator since version 1, in which it will talk to the ColdFusion engine's security methods to authenticate and authorize users using roles.
 
 All you need to do is use the WireBox ID of `CFValidator@cbsecurity` in your `validator` setting:
 
 ```javascript
 cbsecurity = {
 
-    validator = "CFValidator@cbsecurity"
+    firewall : {
+        validator = "CFValidator@cbsecurity"
+    }
 
 }
 ```
-
-{% hint style="info" %}
-The default value is of `CFValidator@cbsecurity` which is the WireBox ID for the object.
-{% endhint %}
-
-The code for this validator can be found at `cbsecurity.models.CFValidator`
 
 {% embed url="https://helpx.adobe.com/coldfusion/developing-applications/developing-cfml-applications/securing-applications/using-coldfusion-security-tags-and-functions.html" %}
 
@@ -76,3 +78,11 @@ component{
 {% endcode %}
 
 For more information about `cflogin, cfloginuser and cflogout`, please visit the docs [http://cfdocs.org/security-functions](http://cfdocs.org/security-functions)
+
+{% hint style="danger" %}
+The configured authentication service must adhere to our `IAuthService` interface and the User object must adhere to the `IAuthUser` interface.
+{% endhint %}
+
+{% hint style="success" %}
+Remember that a validator can exist globally and on a per ColdBox Module level.
+{% endhint %}

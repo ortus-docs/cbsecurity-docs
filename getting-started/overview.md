@@ -33,8 +33,8 @@ The module wraps itself around the `preProcess` interception point (The first ex
 
 This is done via security rules and/or annotations on the requested handler actions and through a CBSecurity `Validator` which knows how to authenticate and authorize the request.  CBSecurity ships with many validators:
 
-* **CBAuth Validator**: this is the default validator, which uses the [cbauth](https://cbauth.ortusbooks.com/) module. It provides authentication and _permission-_based security.
-* **CFML Security Validator:** Coldbox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
+* **Auth Validator**: this is the default validator, which provides authentication and _permission-_based security through our `IAuthService` and `IAuthUser` interfaces.
+* **CFML Security Validator:** ColdBox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
 * **Basic Auth Validator:** This validator secures your app via [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
 * **JWT Validator**: If you want to use JSON Web Tokens, the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.
 * **Custom Validator:** You can define your own authentication and authorization engines and plug them into the cbsecurity framework.
@@ -361,9 +361,9 @@ component secured="admin,users"{
 
 By having the ability to annotate the **handler** and also the **action,** you create a cascading security model where they need to be able to access the handler first, and only then will the action be evaluated for access as well.
 
-## Security Validator
+## Security Validators
 
-As we mentioned at the beginning of this overview, the security module will use a **Validator** object to determine if the user has authentication/authorization or not. This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`
+As we mentioned at the beginning of this overview, the security module will use a **Validator** object to determine if the user has authentication/authorization or not. This setting is the `validator` setting and will point to the WireBox ID that implements the following methods: `ruleValidator() and annotationValidator().`  The validator can also be selected on a per module basis as well.
 
 {% code title="ISecurityValidator" %}
 ```javascript
@@ -412,18 +412,28 @@ Each validator must return a `struct` with the following keys:
 * `type:stringOf(authentication|authorization)` A string that indicates the type of violation: authentication or authorization.
 * `messages:string` Info or debugging messages
 
-### CBAuthValidator
+### AuthValidator
 
-ColdBox security ships with the `CBAuthValidator@cbsecurity` which is the default validator in the configuration setting `validator` setting.
+ColdBox security ships with the `AuthValidator@cbsecurity` which is the default validator in the configuration setting `validator`.  This validator can talk to ANY authentication service as long as it implements our `IAuthService` interface.  The typical methods it calls on your authentication service are:
+
+* `isLoggedIn()`
+* `getUser()`
+
+It will then also talk to the User object returned from `getUser()` which must implement the `IAuthUser` interface.  The typical methods called on your User object are:
+
+* `hasRole()`
+* `hasPermission()`
+
+These methods are used in order to determine authorizations.
 
 ```javascript
 cbsecurity = {
-    validator = "CBAuthValidator@cbsecurity"
+    validator = "AuthValidator@cbsecurity"
 }
 ```
 
-{% hint style="warning" %}
-When using the default, `CBAuthValidator@cbsecurity` you also have to configure the cbauth module.
+{% hint style="success" %}
+The `AuthValidator` will talk to the configured authentication service to validate authentication and authorization.
 {% endhint %}
 
 <pre class="language-javascript"><code class="lang-javascript">  cbAuth: {

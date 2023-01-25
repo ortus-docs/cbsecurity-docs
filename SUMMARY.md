@@ -42,8 +42,8 @@
 
 ## Security Validators
 
+* [Auth Validator](security-validators/auth-validator.md)
 * [BasicAuth Validator](security-validators/basicauth-validator.md)
-* [CBAuth Validator](security-validators/cbauth-validator.md)
 * [CFML Security Validator](security-validators/default-security.md)
 * [Custom Validator](security-validators/custom-security-validator-object.md)
 
