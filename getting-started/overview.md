@@ -211,7 +211,7 @@ cbSecurity : {
         // Auto load the global security firewall automatically, else you can load it a-la-carte via the `Security` interceptor
 	"autoLoadFirewall"            : true,
 	// The Global validator is an object that will validate the firewall rules and annotations and provide feedback on either authentication or authorization issues.
-	"validator"                   : "AuthValidator@cbsecurity",
+	"validator"                   : "CBAuthValidator@cbsecurity",
 	// Activate handler/action based annotation security
 	"handlerAnnotationSecurity"   : true,
 	// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
@@ -272,7 +272,7 @@ cbSecurity : {
         / Auto load the global security firewall automatically, else you can load it a-la-carte via the `Security` interceptor
 	"autoLoadFirewall"            : true,
 	// The Global validator is an object that will validate the firewall rules and annotations and provide feedback on either authentication or authorization issues.
-	"validator"                   : "AuthValidator@cbsecurity",
+	"validator"                   : "CBAuthValidator@cbsecurity",
 	// Activate handler/action based annotation security
 	"handlerAnnotationSecurity"   : true,
 	// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
