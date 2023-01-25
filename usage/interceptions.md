@@ -1,4 +1,12 @@
+---
+description: >-
+  CBSecurity has many events that you can listen to for an event-driven
+  experience.
+---
+
 # Interceptions
+
+## Login Interceptions
 
 The security firewall will announce some interception events when invalid access or authorizations occur within the system:
 
@@ -32,11 +40,11 @@ component extends="coldbox.system.Interceptor"{
 ```
 {% endcode %}
 
-## Stop Processing Actions
+### Stop Processing Actions
 
-The intercept data has a key called `processActions` which defaults to **true**.  This Boolean indicator tells the firewall to process the invalid authentication/authorization procedures.  If you change this value to **false**, then the firewall will do NOTHING because it is expecting for YOU to have done the actions.
+The received event data has a Boolean key called `processActions` which defaults to **true**.  This Boolean indicator tells the firewall to process the invalid authentication/authorization procedures.  If you change this value to **false**, then the firewall will do NOTHING because it is expecting for YOU to have done the actions.
 
-## JWT Interception
+## JWT Interceptions
 
 If you are using our [JWT facilities](../jwt/jwt-services.md), then we will announce the following interceptions during JWT usage:
 
@@ -54,11 +62,20 @@ Check them all out in our [JWT Interceptions Page](../jwt/jwt-interceptions.md).
 
 ## CBAuth Interceptions
 
+`cbauth` announces several custom interception points.&#x20;
+
+* `preAuthentication`
+* `postAuthentication`
+* `preLogin`
+* `postLogin`
+* `preLogout`
+* `postLogout`
+
+You can use these interception points to change request data or add additional values to session or request scopes. The `preAuthentication` and `postAuthentication` events fire during the standard `authenticate()` method call with a username and password. The `preLogin` and `postLogin` events fire during the `login()` method call. The `preLogout` and `postLogout` events fire during the `logout()` method call.
+
 You can always find the latest interception points here:
 
 {% embed url="https://cbauth.ortusbooks.com/interception-points" %}
-
-cbauth announces several custom interception points. You can use these interception points to change request data or add additional values to session or request scopes. The `preAuthentication` and `postAuthentication` events fire during the standard `authenticate()` method call with a username and password. The `preLogin` and `postLogin` events fire during the `login()` method call. The `preLogout` and `postLogout` events fire during the `logout()` method call.
 
 {% hint style="success" %}
 The `preLogin` and `postLogin` interception points will be called during the course of `authenticate()`. The order of the calls then are `preAuthentication` -> `preLogin` -> `postLogin` -> `postAuthentication`.
