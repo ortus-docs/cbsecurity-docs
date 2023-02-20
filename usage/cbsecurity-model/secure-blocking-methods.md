@@ -1,4 +1,8 @@
-# secure() Blocking Methods
+---
+description: Get outta here!
+---
+
+# Blocking Methods
 
 ### The `secure()` Methods
 

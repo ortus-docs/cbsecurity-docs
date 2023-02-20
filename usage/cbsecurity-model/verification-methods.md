@@ -1,3 +1,7 @@
+---
+description: Verify permissions the fluent way!
+---
+
 # Verification Methods
 
 If you just want to validate if a user has certain permissions or maybe no permissions at all or if a passed user is the same as the logged in user, then you can use the following boolean methods that only do verification.

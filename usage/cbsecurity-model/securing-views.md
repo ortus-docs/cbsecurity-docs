@@ -1,3 +1,7 @@
+---
+description: Secure access to views in ColdBox
+---
+
 # Securing Views
 
 You can also use our handy `event.secureView()` method in the request context to pivot between views according to user permissions.

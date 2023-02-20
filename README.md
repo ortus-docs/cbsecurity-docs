@@ -10,7 +10,7 @@ The ColdBox `cbsecurity` module is a collection of modules to help secure your C
 
 
 
-<figure><img src=".gitbook/assets/cbsecurity-3-visualizer.png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
+<figure><img src=".gitbook/assets/cbsecurity-3-visualizer (1).png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
 
 
 
@@ -26,6 +26,7 @@ The major areas of concern are:
 * Basic Authentication services that provide basic user credential storage and browser challenges
 * A graphical user interface for visualizing the firewall and operational settings we lovingly call the **CBSecurity Visualizer**
 * Industry-standard response headers to protect against XSS, clickjacking, frame busting, and much more
+* Generate secure and random passwords
 
 ## Module composition
 

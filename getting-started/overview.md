@@ -211,7 +211,7 @@ cbSecurity : {
         // Auto load the global security firewall automatically, else you can load it a-la-carte via the `Security` interceptor
 	"autoLoadFirewall"            : true,
 	// The Global validator is an object that will validate the firewall rules and annotations and provide feedback on either authentication or authorization issues.
-	"validator"                   : "CBAuthValidator@cbsecurity",
+	"validator"                   : "AuthValidator@cbsecurity",
 	// Activate handler/action based annotation security
 	"handlerAnnotationSecurity"   : true,
 	// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
@@ -272,7 +272,7 @@ cbSecurity : {
         / Auto load the global security firewall automatically, else you can load it a-la-carte via the `Security` interceptor
 	"autoLoadFirewall"            : true,
 	// The Global validator is an object that will validate the firewall rules and annotations and provide feedback on either authentication or authorization issues.
-	"validator"                   : "CBAuthValidator@cbsecurity",
+	"validator"                   : "AuthValidator@cbsecurity",
 	// Activate handler/action based annotation security
 	"handlerAnnotationSecurity"   : true,
 	// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
@@ -553,7 +553,7 @@ You will receive the following data in the `interceptData` struct:
 
 ## CBSecurity Model
 
-The `CBSecurity` model was introduced in version 2.3.0 and it provides you with a way to provide authorization checks and contexts anywhere you like: handlers, layouts, views, interceptors, and even models.
+The `CBSecurity` model was introduced in version 2.3.0, and it provides you with a way to provide authorization checks, utility security methods, and security contexts anywhere you like: handlers, layouts, views, interceptors, and even models.
 
 Getting access to the model is easy via our `cbSecure()` mixin (handlers/layouts/views/interceptors) or injecting it via WireBox:
 
@@ -565,11 +565,11 @@ cbSecure()
 property name="cbSecurity" inject="@CBSecurity";
 ```
 
-Once injected you can leverage it using our awesome methods listed below:
+Once injected, you can leverage it using our extraordinary methods listed below:
 
 ### **Blocking Methods**
 
-When certain permission context is met, if not throws `NotAuthorized`
+When certain permission context is met, if not, throws `NotAuthorized`
 
 * `secure( permissions, [message] )`
 * `secureAll( permissions, [message] )`
@@ -672,9 +672,28 @@ component{
 ```
 {% endcode %}
 
+### Authentication Methods
+
+You can leverage the model to do the following authentication-related methods:
+
+* `authenticate( username, password )` : Authenticate a user
+* `getAuthService()` : Get the configured auth service
+* `getUserService()` : Get the configured user service
+* `getUser()` : Get the authenticated user
+* `isLoggedIn()` : Verify if a request is logged in
+* `logout()` : Logout via the configured auth service
+
+### Utility Methods
+
+You can use the following methods to assist in your programming needs:
+
+* `createPassword( length:32, letters:true, numbers:true, symbols:true )` : Generate a random and secure password
+* `getRealIP( trustUpstream : true )` : Get a request's actual IP address
+* `getRealHost( trustUpstream : true )` : Get a request's actual hostname used
+
 ## Security Visualizer
 
-<figure><img src="../.gitbook/assets/cbsecurity-3-visualizer (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cbsecurity-3-visualizer (2).png" alt=""><figcaption></figcaption></figure>
 
 This module also ships with a security visualizer that will provide you with the following features:
 

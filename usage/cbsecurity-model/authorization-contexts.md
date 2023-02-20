@@ -1,3 +1,7 @@
+---
+description: Create fluent and secure code blocks
+---
+
 # Authorization Contexts
 
 There are also times where you need to validate custom conditions and block access to certain areas. This way, you can implement your own custom security logic and leverage **cbSecurity** for blockage. You will accomplish this via the `secureWhen()` method:
