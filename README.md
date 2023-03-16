@@ -10,7 +10,7 @@ The ColdBox `cbsecurity` module is a collection of modules to help secure your C
 
 
 
-<figure><img src=".gitbook/assets/cbsecurity-3-visualizer (1).png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
+<figure><img src=".gitbook/assets/cbsecurity-3-visualizer (1) (1).png" alt=""><figcaption><p>Security Visualizer</p></figcaption></figure>
 
 
 

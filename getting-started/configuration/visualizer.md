@@ -6,7 +6,7 @@ description: Configuring the CBSecurity Visualizer
 
 The CBSecurity visualizer is a tool that will allow you to visualize all of your configuration settings, firewall logs, and much more.  By default, the visualizer is **disabled**.
 
-<figure><img src="../../.gitbook/assets/cbsecurity-3-visualizer (2).png" alt=""><figcaption><p>Visualizer</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/cbsecurity-3-visualizer (1).png" alt=""><figcaption><p>Visualizer</p></figcaption></figure>
 
 {% hint style="danger" %}
 If you enable the visualizer, we highly suggest you **secure** it.
