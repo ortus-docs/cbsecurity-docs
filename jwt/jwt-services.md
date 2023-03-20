@@ -29,19 +29,19 @@ The tokens created by the JWT services will have the mandatory headers, but also
 
 ![](<../.gitbook/assets/Screen Shot 2019-09-24 at 1.42.21 PM.png>)
 
-A JSON Web Token encodes a series of claims in a JSON object. Some of these claims have specific meaning, while others are left to be interpreted by the users. You can consider claims to be the keys of the payload structure and it can contain, well, pretty much anything you like.
+A JSON Web Token encodes a series of claims in a JSON object. Some of these claims have specific meanings, while others are left to be interpreted by the users. You can consider claims to be the keys of the payload structure, and it can contain pretty much anything you like.
 
 ### Base Claims
 
 Here are the base claims that the ColdBox Security JWT token creates for you automatically:
 
 * Issuer (`iss`) - The issuer of the token (defaults to the application's base URL)
-* Issued At (`iat`) - When the token was issued (unix timestamp)
+* Issued At (`iat`) - When the token was issued (Unix timestamp)
 * Subject (`sub`) - This holds the identifier for the token (defaults to user id)
-* Expiration time (`exp`) - The token expiry date (unix timestamp)
-* Unique ID (`jti`) - A unique identifier for the token (md5 of the sub and iat claims)
-* Scopes (`scope)` - A space delimited string of scopes attached to the token
-* Refresh Token (`cbsecurity_refresh` ) - If you are using refresh tokens, this custom claim will be added to the payload.
+* Expiration time (`exp`) - The token expiry date (Unix timestamp)
+* Unique ID (`jti`) - A unique identifier for the token (`md5` of the `sub` and `iat` claims)
+* Scopes (`scope)` - A space-delimited string of scopes attached to the token
+* Refresh Token (`cbsecurity_refresh` ) - If you use refresh tokens, this custom claim will be added to the payload.
 
 {% code title="mytoken.json" %}
 ```javascript
@@ -70,11 +70,11 @@ Here are the base claims that the ColdBox Security JWT token creates for you aut
 ```
 {% endcode %}
 
-You can add much more to this payload via the JWT service methods or via the User that models the token.
+You can add much more to this payload via the JWT service methods or the User that models the token.
 
 ## Our JwtService
 
-The service can be found here `cbsecurity.models.JWTService` and can be retrieved by either injecting the service (`JwtService@cbsecurity`) or using our helper method (`jwtAuth()`).
+The service can be found here `cbsecurity.models.jwt.JWTService` and can be retrieved by either injecting the service (`JwtService@cbsecurity`) or using our helper method (`jwtAuth()`).
 
 ```javascript
 // Injection
@@ -84,11 +84,11 @@ property name="jwtService" inject="JwtService@cbsecurity";
 jwtAuth()
 ```
 
-In order to begin exploring the JWT capabilities, let's explore how to configure it first.
+To begin exploring the JWT capabilities, let's explore how to configure it first.
 
 ## Configuration
 
-Our JWT services have several configuration settings, let's explore them:
+You can check out our [JWT Configuration section](../getting-started/configuration/jwt.md) for a more in-depth tutorial.  Here are the basic settings you would put in the `cbsecurity` configuration:
 
 ```javascript
 cbsecurity : {
@@ -143,101 +143,11 @@ cbsecurity : {
 }
 ```
 
-### Authentication Service
 
-The WireBox Id of the service to provide our authentication. **cbauth** is our default provider, but you can use any authentication service that [adheres to our interface](../usage/authentication-services.md).
-
-### User Service
-
-The WireBox Id of the service to provide our user retrieval and validation functions. You can use any service that [adheres to our interface](../usage/authentication-services.md).
-
-### prcUserVariable
-
-The default variable name in the `prc` scope that will be used to store an authenticated user object if the JWT request is valid. The default is `prc.oCurrentUser`
-
-### issuer
-
-The issuer authority for the tokens, placed in the `iss` claim of the token. If empty, we will use the `event.buildLink()` to create the issuer. By default, our validators also check that tokens are created by the same issuer.
-
-### secretKey
-
-The secret key is used to sign the JWT tokens. By default it will try to load an environment variable called `JWT_SECRET` , if that setting is also empty, then we will auto-generate a secret token that will last as long as the ColdFusion application scope lasts. So technically, your secret will rotate only if a secret is not specified.
-
-Also, this key is ignored in modules. To specify a fixed key to be used in your modules, you will have to configure it by adding a cbsecurity key settings in the moduleSettings structure within the config/Coldbox.cfc.
-
-{% hint style="success" %}
-Your secret key will auto-rotate every application scope rotation. Please note that all tokens used after that scope rotation will automatically become invalid.
-
-Please note that we use the jwt-cfml library for encoding/decoding tokens. Please [refer to it's documentation](https://forgebox.io/view/jwt-cfml) in order to leverage RS and ES algorithms with certificates.
-
-[https://forgebox.io/view/jwt-cfml](https://forgebox.io/view/jwt-cfml)
-{% endhint %}
-
-### customAuthHeader
-
-By default, our jwt services will look into the `authorization` header for a bearer token. However, it can also look in a custom header by this name, which defaults to `x-auth-token`. Finally, if not found, it will also look into the `rc` scope for a `rc[ 'x-auth-token' ]` as well.
-
-### Expiration
-
-The default expiration in minutes for the JWT tokens. Defaults to 60 minutes
-
-### Algorithm
-
-The encryption algorithm to use for the tokens. The default is **HS512**, but the available ones for are:
-
-* HS256
-* HS384
-* **HS512**
-* RS256
-* RS384
-* RS512
-* ES256
-* ES384
-* ES512
-
-In the case of the `RS` and `ES` algorithms, asymmetric keys are expected to be provided in unencrypted PEM or JWK format (in the latter case first deserialize the JWK to a CFML struct). When using PEM, private keys need to be encoded in PKCS#8 format.
-
-If your private key is not currently in this format, conversion should be straightforward:
-
-```
-$ openssl pkcs8 -topk8 -nocrypt -in privatekey.pem -out privatekey.pk8
-```
-
-When decoding tokens, either a public key or certificate can be provided. (If a certificate is provided, the public key will be extracted from it.)
-
-{% embed url="https://forgebox.io/view/jwt-cfml" %}
-
-### RequiredClaims
-
-This is an array of claim names that each token MUST have in order to be authenticated. If a token comes in but does not have these claims in the payload structure, it will be deemed invalid.
-
-### Token Storage
-
-By default, our JWT services will store tokens in CacheBox for you in order to be able to invalidate them. We ship with two providers for token storage: db and cachebox.
-
-#### Enabled
-
-By default the token storage is enabled.
-
-#### KeyPrefix
-
-The key prefix to use when storing the keys in the permanent storage. Defaults to `cbjwt_`
-
-#### Driver
-
-The driver to use. Can be either **db** or **cachebox** or your own WireBox Id for using a custom storage.
-
-#### Properties
-
-A struct of properties to configure each storage with.
-
-### Refresh Token Configuration
-
-Refresh tokens have several configuration items, check them out in our [refresh token configuration section](refresh-tokens.md#refresh-token-configuration).
 
 ## JWT Subject Interface
 
-The next step is to make sure that our JWT services can handle the construction of the JWT tokens as per YOUR requirements. So your `User` object must implement our `JWTSubject` interface with the following functions:
+The next step is ensuring that our JWT services can handle the construction of the JWT tokens as per YOUR requirements. So your `User` object must implement our `JWTSubject` interface with the following functions:
 
 {% code title="cbsecurity.interfaces.jwt.IJwtSubject.cfc" %}
 ```javascript
@@ -251,10 +161,10 @@ interface{
 
     /**
      * A struct of custom claims to add to the JWT token when creating it
-	 *
-	 * @payload The actual payload structure that was used in the request
-	 *
-	 * @return A structure of custom claims
+     *
+     * @payload The actual payload structure that was used in the request
+     *
+     * @return A structure of custom claims
      */
     struct function getJwtCustomClaims( required struct payload );
 
@@ -341,7 +251,7 @@ component accessors="true" {
 
 ## Authentication and User Services
 
-Please note that the JWT validators must talk to the authentication and user services. Please refer to the [Authentication Services](../usage/authentication-services.md) page to configure and create them.
+The JWT validators must talk to the authentication and user services. Please refer to the [Authentication Services](../usage/authentication-services.md) page to configure and create them.
 
 ## JWT Methods
 
@@ -354,15 +264,15 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 
 ### Raw JWT Methods
 
-* `encode( struct payload ):token` - Generate a raw jwt token from a native payload struct.
-* `verify( required token ):boolean` - Verify a token string or throws exception
-* `decode( required token ):struct` - Decode and retrieve the passed in token to CFML struct
+* `encode( struct payload ):token` - Generate a raw JWT token from a native payload struct.
+* `verify( required token ):boolean` - Verify a token string or throws an exception
+* `decode( required token ):struct` - Decode and retrieve the passed-in token to CFML struct
 
 ### Parsing and Helper Methods
 
 * `parseToken( token, storeInContext, authenticate ):struct` - Get the decoded token using the headers strategy and store it in the `prc.jwt_token` and the decoded data as `prc.jwt_payload` if it verifies correctly. Throws: `TokenExpiredException` if the token is expired, `TokenInvalidException` if the token doesn't verify decoding, `TokenNotFoundException` if not found
-* `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty string.
-* `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set this will be an empty struct.
+* `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set, this will be an empty string.
+* `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set, this will be an empty struct.
 * `setToken( token ):JWTService` - Store the token in `prc.jwt_token`, and store the decoded version in `prc.jwt_payload`
 
 ### Authentication Helpers
@@ -376,12 +286,12 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 * `invalidateAll( async:false )` - Invalidate all access and refresh tokens in permanent storage
 * `invalidate( token )` - Invalidates the incoming token by removing it from the permanent storage.
 * `isTokenInStorage( token )` - Checks if the passed token exists in permanent storage.
-* `getTokenStorage( force:false )` - Get the current token storage implementation. You can also force create it again if needed.
+* `getTokenStorage( force:false )` - Get the current token storage implementation. You can also force-create it again if needed.
 
 ### Refresh Methods
 
 * `attempt( username, password, [ customClaims:struct ] ):struct` - Attempt to authenticate a user with the authentication service and if successful, return a struct containing an access and refresh token.
-* `fromUser( user, [ customClaims:struct ] ):struct` - Generate a struct of refresh and access token according to the passed user object and custom claims.
+* `fromUser( user, [ customClaims:struct ] ):struct` - Generate a struct of refresh and access tokens according to the passed user object and custom claims.
 
 ```javascript
 {
