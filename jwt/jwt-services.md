@@ -35,13 +35,13 @@ A JSON Web Token encodes a series of claims in a JSON object. Some of these clai
 
 Here are the base claims that the ColdBox Security JWT token creates for you automatically:
 
-* Issuer (`iss`) - The issuer of the token (defaults to the application's base URL)
-* Issued At (`iat`) - When the token was issued (Unix timestamp)
-* Subject (`sub`) - This holds the identifier for the token (defaults to user id)
-* Expiration time (`exp`) - The token expiry date (Unix timestamp)
-* Unique ID (`jti`) - A unique identifier for the token (`md5` of the `sub` and `iat` claims)
-* Scopes (`scope)` - A space-delimited string of scopes attached to the token
-* Refresh Token (`cbsecurity_refresh` ) - If you use refresh tokens, this custom claim will be added to the payload.
+* **Issuer** (`iss`) - The issuer of the token (defaults to the application's base URL)
+* **Issued At** (`iat`) - When the token was issued (Unix timestamp)
+* **Subject** (`sub`) - This holds the identifier for the token (defaults to user id)
+* **Expiration time** (`exp`) - The token expiry date (Unix timestamp)
+* **Unique ID** (`jti`) - A unique identifier for the token (`md5` of the `sub` and `iat` claims)
+* **Scopes** (`scope)` - A space-delimited string of scopes attached to the token
+* **Refresh Token** (`cbsecurity_refresh` ) - If you use refresh tokens, this custom claim will be added to the payload.
 
 {% code title="mytoken.json" %}
 ```javascript
@@ -75,6 +75,8 @@ You can add much more to this payload via the JWT service methods or the User th
 ## Our JwtService
 
 The service can be found here `cbsecurity.models.jwt.JWTService` and can be retrieved by either injecting the service (`JwtService@cbsecurity`) or using our helper method (`jwtAuth()`).
+
+[https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/cbsecurity/3.2.0/models/jwt/JwtService.html](https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/cbsecurity/3.2.0/models/jwt/JwtService.html)
 
 ```javascript
 // Injection
@@ -259,7 +261,7 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 
 ### Token Creation Methods
 
-* `attempt( username, password, [ customClaims:struct ] ):token` - Attempt to authenticate a user with the authentication service and if successful, return the token using the identifier and custom claims. Exception if invalid authentication
+* `attempt( username, password, [ customClaims:struct ] ):token` - Attempt to authenticate a user with the authentication service and return the token using the identifier and custom claims if successful. Exception if invalid authentication
 * `fromUser( user, [ customClaims:struct ] ):token` - Generate a token according to the passed user object and custom claims.
 
 ### Raw JWT Methods
@@ -271,8 +273,8 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 ### Parsing and Helper Methods
 
 * `parseToken( token, storeInContext, authenticate ):struct` - Get the decoded token using the headers strategy and store it in the `prc.jwt_token` and the decoded data as `prc.jwt_payload` if it verifies correctly. Throws: `TokenExpiredException` if the token is expired, `TokenInvalidException` if the token doesn't verify decoding, `TokenNotFoundException` if not found
-* `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set, this will be an empty string.
-* `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if not token is set, this will be an empty struct.
+* `getToken():string` - Get the stored token from `prc.jwt_token`, if it doesn't exist, it tries to parse it via `parseToken()`, if no token is set, this will be an empty string.
+* `getPayload():struct` - Get the stored token from `prc.jwt_payload`, if it doesn't exist, it tries to parse it via `parseToken()`, if no token is set, this will be an empty struct.
 * `setToken( token ):JWTService` - Store the token in `prc.jwt_token`, and store the decoded version in `prc.jwt_payload`
 
 ### Authentication Helpers
@@ -302,7 +304,7 @@ Ok, now we can focus on all the wonderful methods the JWT service offers:
 
 ## Putting it Together
 
-That's it, we are ready to put it all together. Now cbsecurity knows about your authentication/user services, can talk to your user to create tokens and can guard the incoming requests via the JWT Validator. Here is a sample controller for login, logout and user registration:
+That's it; we are ready to put it all together. Now cbsecurity knows about your authentication/user services, can talk to your user to create tokens, and can guard the incoming requests via the JWT Validator. Here is a sample controller for login, logout, and user registration:
 
 Let's configure some routes first:
 
@@ -362,11 +364,13 @@ component{
 Make sure you add validation!
 {% endhint %}
 
-That's it, we now can login a user, give them a token, register a new user and give them their token, and also log them out. The next step is for you to build your rules and/or security annotations and make sure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
+That's it; we can now login a user, give them a token, register a new user and give them their token, and log them out. The next step is to build your rules and/or security annotations and ensure the [JWT validator ](jwt-validator.md)is configured for your global app or module.
 
 ## Web Server Configuration
 
-In order to implement JWT authentication in your application, you may need to modify some web server settings. Most web servers have default content length restrictions on the size of an individual header. If your web server platform has such default enabled, you will need to increase the buffer size to accommodate the presence of JTW tokens in both the request and response headers. The size of a JWT token header, encrypted via the default cbSecurity HMAC512 algorithm, is around 44 kilobytes. As such you will need to allow for at least that size. Below are some examples for common web server configurations
+To implement JWT authentication in your application, you **may** need to modify some web server settings. Most web servers have default content length restrictions on the size of an individual header. If your web server platform has such a default enabled, you will need to increase the buffer size to accommodate the presence of JTW tokens in both the `request` and `response` headers.&#x20;
+
+The size of a JWT token header, encrypted via the default cbSecurity `HMAC512` algorithm, is around **44** kilobytes. As such, you will need to allow for at least that size. Below are some examples of common web server configurations
 
 ### NGINX
 
