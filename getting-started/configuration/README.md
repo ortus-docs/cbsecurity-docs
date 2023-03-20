@@ -22,6 +22,10 @@ Here you can see how to configure CBSecurity, but you can also navigate to the d
 [csrf.md](csrf.md)
 {% endcontent-ref %}
 
+{% content-ref url="jwt.md" %}
+[jwt.md](jwt.md)
+{% endcontent-ref %}
+
 {% content-ref url="firewall/" %}
 [firewall](firewall/)
 {% endcontent-ref %}
@@ -287,11 +291,12 @@ moduleSettings = {
 			}
 		}
 	}
-<strong>};</strong></code></pre>
+<strong>};
+</strong></code></pre>
 
 ### ColdBox 7 Config
 
-In ColdBox 7 you can segregate module configurations so they are more manageable and have their own identity.  Just create a `config/modules/cbsecurity.cfc` with a nice `configure()` method:
+In ColdBox 7 you can segregate module configurations so they are more manageable and have their own identity. Just create a `config/modules/cbsecurity.cfc` with a nice `configure()` method:
 
 {% code title="config/cmo" lineNumbers="true" %}
 ```javascript
@@ -549,7 +554,7 @@ component{
 
 ### Module Settings
 
-Each module can also have its own CBSecurity settings which override or collaborate with the global settings.  So what can a module do:
+Each module can also have its own CBSecurity settings which override or collaborate with the global settings. So what can a module do:
 
 * Have its own validator
 * Have its own security rules
