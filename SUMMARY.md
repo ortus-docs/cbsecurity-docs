@@ -62,8 +62,6 @@
 
 ## External links
 
-* [Source code](https://github.com/coldbox-modules/cbsecurity)
 * [Issue Tracker](https://ortussolutions.atlassian.net/projects/BOX/issues)
-* [cbauth](https://cbauth.ortusbooks.com/)
-* [cbcsrf](https://www.forgebox.io/view/cbcsrf)
-* [JWT CFML](https://www.forgebox.io/view/jwt-cfml)
+* [Source code](https://github.com/coldbox-modules/cbsecurity)
+* [Sponsor Us](https://patreon.com/ortussolutions)
