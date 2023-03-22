@@ -19,6 +19,8 @@ install cbsecurity@be
 * Lucee 5.x+
 * ColdFusion 2018+
 * A database for optional firewall logging
+* ColdBox 6+
+* ColdBox 7+ for delegates and basic auth support only
 
 ## Configuration Settings
 
