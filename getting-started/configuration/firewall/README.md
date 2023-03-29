@@ -138,9 +138,56 @@ You can enable the firewall logs, and CBSecurity will log all blocks the firewal
 The `dsn` key is optional, and CBSecurity will inspect the Application settings for a default datasource.
 {% endhint %}
 
+We have also included a migrations file so you can add this to your database migrations schemas.  Just run: `migrate create create_cbsecurity_logs_table` and fill it out with this:
+
+{% code lineNumbers="true" %}
+```javascript
+component {
+
+	variables.INDEX_COLUMNS = [
+		"userId",
+		"userAgent",
+		"ip",
+		"host",
+		"httpMethod",
+		"path",
+		"referer"
+	];
+
+	function up( schema, qb ){
+		schema.create( "cbsecurity_logs", function( table ){
+			table.string( "id", 36 ).primaryKey();
+			table.timestamp( "logDate" ).withCurrent();
+			table.string( "action" );
+			table.string( "blockType" );
+			table.string( "ip" );
+			table.string( "host" );
+			table.string( "httpMethod" );
+			table.string( "path" );
+			table.string( "queryString" );
+			table.string( "referer" ).nullable();
+			table.string( "userAgent" );
+			table.string( "userId" ).nullable();
+			table.longText( "securityRule" ).nullable();
+			table.index( [ "logDate", "action", "blockType" ], "idx_cbsecurity" );
+
+			INDEX_COLUMNS.each( ( key ) => {
+				table.index( [ arguments.key ], "idx_cbsecurity_#arguments.key#" );
+			} );
+		} );
+	}
+
+	function down( schema, qb ){
+		schema.drop( "cbsecurity_logs" );
+	}
+
+}
+```
+{% endcode %}
+
 ### Rules
 
-This key is used to define where rules come from and how they interact with the firewall.  The `rules` key can be of two types:
+This key defines where rules come from and how they interact with the firewall.  The `rules` key can be of two types:
 
 * An `array` of rules
 * A `struct` of configuration with a rule source
