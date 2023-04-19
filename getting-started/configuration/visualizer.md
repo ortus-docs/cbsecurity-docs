@@ -14,7 +14,7 @@ If you enable the visualizer, we highly suggest you **secure** it.
 
 If enabled, you can visit the `/cbsecurity` entry point, and you will get the visualizer rendered. &#x20;
 
-### Configuration
+## Configuration
 
 Here are the configuration settings for the visualizer:
 
@@ -57,7 +57,7 @@ visualizer : {
 }
 ```
 
-### Requirements
+## Requirements
 
 Please note that the security visualizer can ONLY visualize if you have [firewall logs enabled](firewall/#logs).  If no logs are enabled or configured, then the visualizer WILL NOT WORK.  Here is a simple logs configuration in the firewall
 
