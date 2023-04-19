@@ -12,7 +12,11 @@ The CBSecurity visualizer is a tool that will allow you to visualize all of your
 If you enable the visualizer, we highly suggest you **secure** it.
 {% endhint %}
 
-If enabled, you can visit the `/cbsecurity` entry point, and you will get the visualizer rendered.
+If enabled, you can visit the `/cbsecurity` entry point, and you will get the visualizer rendered. &#x20;
+
+### Configuration
+
+Here are the configuration settings for the visualizer:
 
 ```javascript
 /**
@@ -50,5 +54,27 @@ visualizer : {
 		"roles" : "admins",
 		"permissions" : "cbsecurity-visualizer"
 	}
-},
+}
 ```
+
+### Requirements
+
+Please note that the security visualizer can ONLY visualize if you have [firewall logs enabled](firewall/#logs).  If no logs are enabled or configured, then the visualizer WILL NOT WORK.  Here is a simple logs configuration in the firewall
+
+```javascript
+firewall : {
+
+    "logs" : {
+        "enabled"    : true,
+        "dsn"        : "myapp",
+        "schema"     : "",
+        "table"      : "cbsecurity_logs",
+        "autoCreate" : true
+    }
+    
+}
+```
+
+{% hint style="warning" %}
+The `dsn` key is optional, and CBSecurity will inspect the Application.cfc settings for a default datasource: `this.datasource`
+{% endhint %}
