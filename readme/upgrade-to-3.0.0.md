@@ -16,4 +16,4 @@ The `CBAuthValidator` has been renamed to just `AuthValidator`.  This validator 
 
 ### Settings Structure
 
-The entire settings structure has been redesigned to support many features in a a more concise and block approach.  All top-level settings have been removed and added to specific sections.  Please review the [Configuration](../../getting-started/configuration/) section in detail to see where the new settings belongs to.
+The entire settings structure has been redesigned to support many features in a a more concise and block approach.  All top-level settings have been removed and added to specific sections.  Please review the [Configuration](../getting-started/configuration/) section in detail to see where the new settings belongs to.
