@@ -510,3 +510,7 @@ component{
     }
 }
 ```
+
+{% hint style="info" %}
+You can also use the `guest()` method to verify if the user is NOT logged in.
+{% endhint %}

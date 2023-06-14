@@ -17,5 +17,6 @@ You can leverage the CBSecurity model to get insight into some aspects of the au
 
 * `authenticate( username, password )` - Authenticate a request
 * `getUser()` - Get the authenticated user of the current request
+* `guest()` - Verify if the users is NOT logged in, but a guest
 * `isLoggedIn()` - Verify if the current request has authenticated
 * `logout()` - Logout the authenticated user

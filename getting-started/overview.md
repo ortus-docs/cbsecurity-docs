@@ -515,12 +515,7 @@ The security module can distinguish between authentication issues and authorizat
 * An event override
 * A firewall 401 Not Authorized block
 
-| Setting                       | Default      | Description                                                                                                         |
-| ----------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `invalidAuthenticationEvent`  | ---          | The global invalid authentication event or URI or URL to go if an invalid authentication occurs                     |
-| `defaultAuthenticationAction` | **redirect** | Default Authentication Action: override or redirect when a user has not logged in                                   |
-| `invalidAuthorizationEvent`   | ---          | The global invalid authorization event or URI or URL to go if an invalid authorization occurs                       |
-| `defaultAuthorizationAction`  | **redirect** | Default Authorization Action: override or redirect when a user does not have enough permissions to access something |
+<table data-header-hidden><thead><tr><th width="315.3333333333333">Setting</th><th width="119">Default</th><th>Description</th></tr></thead><tbody><tr><td>Setting</td><td>Default</td><td>Description</td></tr><tr><td><code>invalidAuthenticationEvent</code></td><td>---</td><td>The global invalid authentication event or URI or URL to go if an invalid authentication occurs</td></tr><tr><td><code>defaultAuthenticationAction</code></td><td><strong>redirect</strong></td><td>Default Authentication Action: override or redirect when a user has not logged in</td></tr><tr><td><code>invalidAuthorizationEvent</code></td><td>---</td><td>The global invalid authorization event or URI or URL to go if an invalid authorization occurs</td></tr><tr><td><code>defaultAuthorizationAction</code></td><td><strong>redirect</strong></td><td>Default Authorization Action: override or redirect when a user does not have enough permissions to access something</td></tr></tbody></table>
 
 ## Interceptions
 

@@ -19,7 +19,7 @@ The major areas of concern are:
 * A **security authentication/authorization firewall** ( `cbsecurity` ) which can secure your application based on:
   * Security rules and a rule engine for validation of incoming events or URL patterns
   * Handler annotations
-* Security **** service for explicit authorizations ( `cbsecurity` ) to provide you with functional approaches to security context authorization in **any** layer of your application.
+* Security service for explicit authorizations ( `cbsecurity` ) to provide you with functional approaches to security context authorization in **any** layer of your application.
 * A **JWT generator, decoder, and authentication services** ( `jwtcfml` )&#x20;
 * Cross-Site Request Forgery **(CSRF) Protection** ( `cbcsrf` )
 * An **authentication manage**r ( `cbauth` ) which can be plug-and-play with your own or third-party modules

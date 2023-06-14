@@ -1,15 +1,15 @@
 # Table of contents
 
 * [🔏 Introduction](README.md)
-
-## Intro
-
-* [Release History](intro/release-history/README.md)
-  * [What's New With 3.1.0](intro/release-history/whats-new-with-3.1.0.md)
-  * [What's New With 3.0.0](intro/release-history/whats-new-with-3.0.0.md)
-  * [Upgrade to 3.0.0](intro/release-history/upgrade-to-3.0.0.md)
-* [About This Book](intro/about-this-book/README.md)
-  * [Author](intro/about-this-book/author.md)
+  * [Release History](readme/release-history/README.md)
+    * [What's New With 3.4.0](readme/release-history/whats-new-with-3.4.0.md)
+    * [What's New With 3.3.0](readme/release-history/whats-new-with-3.3.0.md)
+    * [What's New With 3.2.0](readme/release-history/whats-new-with-3.2.0.md)
+    * [What's New With 3.1.0](readme/release-history/whats-new-with-3.1.0.md)
+    * [What's New With 3.0.0](readme/release-history/whats-new-with-3.0.0.md)
+  * [Upgrade to 3.0.0](readme/upgrade-to-3.0.0.md)
+  * [About This Book](readme/about-this-book/README.md)
+    * [Author](readme/about-this-book/author.md)
 
 ## Getting Started
 
@@ -44,6 +44,8 @@
 * [Secured URL](usage/\_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
 * [Cross Site Request Forgery](usage/cross-site-request-forgery-cbcsrf.md)
+* [Delegates](usage/delegates.md)
+* [Auth User](usage/auth-user.md)
 
 ## Security Validators
 
