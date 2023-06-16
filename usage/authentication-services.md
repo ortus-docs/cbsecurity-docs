@@ -46,8 +46,9 @@ cbauth = {
     userServiceClass = "MyUserService"
 },
 ```
-
 This user service must also adhere to our User Service interface: `cbsecurity.interfaces.IUserService` and the user objects it must produce also will need to adhere to our user interface: `cbsecurity.interface.IAuthUser`.
+
+If you are using `cbauth`, please keep in mind that it stores only the user id in session. All other `AuthUser` properites are transient as they are part of the request scope.
 
 ## IAuthService
 
