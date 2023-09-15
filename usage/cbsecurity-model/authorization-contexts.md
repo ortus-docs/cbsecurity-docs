@@ -4,7 +4,11 @@ description: Create fluent and secure code blocks
 
 # Authorization Contexts
 
-There are also times where you need to validate custom conditions and block access to certain areas. This way, you can implement your own custom security logic and leverage **cbSecurity** for blockage. You will accomplish this via the `secureWhen()` method:
+There are also times where you need to validate custom conditions and block access to certain areas. This way, you can implement your own custom security logic and leverage **cbSecurity** for blockage. You will accomplish this via the `secureWhen()` method.  If the `context` evaluates to `true` then it will throw a `NotAuthorized` exception for you.
+
+{% hint style="info" %}
+Remember, if the `context` is TRUE, then it throws the exception.
+{% endhint %}
 
 ```javascript
 secureWhen( context, [errorMessage] )
@@ -28,3 +32,5 @@ The closure/udf will receive the currently authenticated user as the first argum
 ( user ) => {}
 function( user );
 ```
+
+You can also use the `message` argument to send your own message to the exception that's throw.
