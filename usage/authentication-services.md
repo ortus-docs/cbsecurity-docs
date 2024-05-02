@@ -365,8 +365,8 @@ component accessors="true" singleton {
 	/*********************************************************************************************/
 
 	static {
-		hashAlgorithm = "SHA-512",
-		hashIterations = 5
+		hashAlgorithm = "SHA-512";
+		hashIterations = 5;
 	}
 
 	/**
