@@ -34,7 +34,7 @@ We ship with two drivers:
 
 * `table`   : The table to use for storage
 * `schema`  : A schema to use if the database supports it, else empty
-* `dns`     : The datasource to use, defaults to the one set in `Application.cfc`
+* `dsn`     : The datasource to use, defaults to the one set in `Application.cfc`
 * `autoCreate:true` : Autocreate the table if not found
 * `rotationDays:7` : How many days should the expiration be before removal
 * `rotationFrequency:60` : How many minutes should pass before issuing a rotation check
