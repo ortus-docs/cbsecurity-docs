@@ -12,7 +12,7 @@ The `cbSecurity` model is a specialized service that will allow you to do explic
 
 Sometimes, you will need authorization checks outside of the incoming request rules or the handler annotations. This can be from within interceptors, models, layouts, or views. For this, we have provided the `cbSecurity` model so you can do explicit authorization checks anywhere you like.
 
-## `cbSecurity` Model
+## `cbSecurity` Model Retrieval
 
 You can inject our model, or you can use our handy `cbsecure()` mixin (handlers/layouts/views) and then call the appropriate security functions:
 

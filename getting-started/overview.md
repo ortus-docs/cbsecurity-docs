@@ -33,7 +33,7 @@ The module wraps itself around the `preProcess` interception point (The first ex
 
 This is done via security rules and/or annotations on the requested handler actions and through a CBSecurity `Validator` which knows how to authenticate and authorize the request.  CBSecurity ships with many validators:
 
-* **Auth Validator**: this is the default validator, which provides authentication and _permission-_based security through our `IAuthService` and `IAuthUser` interfaces.
+* **Auth Validator**: this is the default validator, which provides authentication and _permission-_&#x62;ased security through our `IAuthService` and `IAuthUser` interfaces.
 * **CFML Security Validator:** ColdBox security has had this validator since version 1,  and it will talk to the ColdFusion engine's security methods (`cflogin,cflogout`). It provides authentication and _role-based_ security.
 * **Basic Auth Validator:** This validator secures your app via [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) browser challenges to incoming requests. It can also work with the `BasicAuthUserService` and provide you a basic user credentials storage within your configuration file.&#x20;
 * **JWT Validator**: If you want to use JSON Web Tokens, the JWT Validator provides authorization and authentication by validating incoming access/refresh tokens via headers for RESTFul API communications.

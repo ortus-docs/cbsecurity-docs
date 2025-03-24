@@ -25,7 +25,7 @@
     * [JSON Rules](getting-started/configuration/firewall/rule-sources/json-properties.md)
     * [Model Rules](getting-started/configuration/firewall/rule-sources/model-rules.md)
     * [XML Rules](getting-started/configuration/firewall/rule-sources/xml-properties.md)
-  * [☢ Security Headers](getting-started/configuration/security-headers.md)
+  * [☢️ Security Headers](getting-started/configuration/security-headers.md)
   * [🔬 Visualizer](getting-started/configuration/visualizer.md)
 
 ## Usage
@@ -41,7 +41,7 @@
   * [Securing Views](usage/cbsecurity-model/securing-views.md)
   * [Utility Methods](usage/cbsecurity-model/utility-methods.md)
   * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
-* [Secured URL](usage/\_securedurl-key.md)
+* [Secured URL](usage/_securedurl-key.md)
 * [Interceptions](usage/interceptions.md)
 * [Cross Site Request Forgery](usage/cross-site-request-forgery-cbcsrf.md)
 * [Delegates](usage/delegates.md)

@@ -16,11 +16,25 @@ install cbsecurity@be
 
 ## System Requirements
 
-* Lucee 5.x+
-* ColdFusion 2018+
 * A database for optional firewall logging
 * ColdBox 6+
 * ColdBox 7+ for delegates and basic auth support only
+
+## Mixins
+
+The following mixins are registered once the module is installed:
+
+```javascript
+/**
+ * Retrieve the Jwt Auth Service
+ */
+function jwtAuth()
+
+/**
+ * Retrieve the CBSecurity Service Object
+ */
+function cbSecure()
+```
 
 ## Configuration Settings
 

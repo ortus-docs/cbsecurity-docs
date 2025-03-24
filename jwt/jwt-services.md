@@ -76,7 +76,9 @@ You can add much more to this payload via the JWT service methods or the User th
 
 The service can be found here `cbsecurity.models.jwt.JWTService` and can be retrieved by either injecting the service (`JwtService@cbsecurity`) or using our helper method (`jwtAuth()`).
 
-[https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/cbsecurity/3.2.0/models/jwt/JwtService.html](https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/cbsecurity/3.2.0/models/jwt/JwtService.html)
+{% embed url="https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/cbsecurity/3.2.0/models/jwt/JwtService.html" %}
+
+### Retrieval
 
 ```javascript
 // Injection
@@ -86,7 +88,7 @@ property name="jwtService" inject="JwtService@cbsecurity";
 jwtAuth()
 ```
 
-To begin exploring the JWT capabilities, let's explore how to configure it first.
+To begin exploring the JWT capabilities, let's first examine how to configure it.
 
 ## Configuration
 
