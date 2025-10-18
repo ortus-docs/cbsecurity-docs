@@ -53,6 +53,12 @@ The major areas of concern are:
 * The ability for each module to define its own `validator`
 * JWT Access and Refresh Tokens Native support
 
+## System Requirements
+
+* BoxLang 1+ (Preferred)
+* Lucee 5+
+* ColdFusion 2023+
+
 ## Versioning <a href="#versioning" id="versioning"></a>
 
 The ColdBox Security Module is maintained under the [Semantic Versioning](http://semver.org/) guidelines as much as possible. Releases will be numbered in the following format:
