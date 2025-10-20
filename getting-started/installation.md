@@ -16,8 +16,15 @@ install cbsecurity@be
 
 ## System Requirements
 
+### CFML Engines
+
+* BoxLang 1+ (Preferred)
+* Lucee 5+
+* Adobe 2023+
+
+### Additional Requirements
+
 * A database for optional firewall logging
-* ColdBox 6+
 * ColdBox 7+ for delegates and basic auth support only
 
 ## Mixins

@@ -57,7 +57,7 @@ The major areas of concern are:
 
 * BoxLang 1+ (Preferred)
 * Lucee 5+
-* ColdFusion 2023+
+* Adobe 2023+
 
 ## Versioning <a href="#versioning" id="versioning"></a>
 

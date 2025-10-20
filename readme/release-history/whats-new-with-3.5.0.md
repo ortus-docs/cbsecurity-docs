@@ -75,7 +75,7 @@ The release includes improved documentation and tooling for:
 ## System Requirements
 
 - **ColdBox Framework**: 6+ (ColdBox 8 certified)
-- **CFML Engines**: Adobe ColdFusion 2018+, Lucee 5+, BoxLang 1.0+
+- **CFML Engines**: BoxLang 1+ (Preferred), Lucee 5+, Adobe 2023+
 - **CommandBox**: 5.0+
 
 ## Compatibility Notes
