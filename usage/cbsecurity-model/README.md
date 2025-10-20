@@ -2,6 +2,7 @@
 description: >-
   This object is used to provide you with human, fluent and explicit security
   authorizations, authentication insight, utility and contexts.
+icon: brain-circuit
 ---
 
 # cbSecurity Model

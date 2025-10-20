@@ -2,6 +2,7 @@
 description: >-
   In this page you will find a thorough overview of the capabilities of the
   ColdBox Security module.
+icon: head-side-gear
 ---
 
 # Overview

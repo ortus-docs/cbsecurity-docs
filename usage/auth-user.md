@@ -1,5 +1,6 @@
 ---
 description: CBSecurity comes bundled with a basic authentication User
+icon: user-check
 ---
 
 # Auth User

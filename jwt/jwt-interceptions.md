@@ -1,3 +1,7 @@
+---
+icon: bullhorn
+---
+
 # JWT Interceptions
 
 The JWT Services will announce some key events for you to listen to

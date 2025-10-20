@@ -1,5 +1,6 @@
 ---
 description: How to configure CBSecurity
+icon: square-sliders-vertical
 ---
 
 # Configuration

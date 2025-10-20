@@ -1,3 +1,7 @@
+---
+icon: rotate
+---
+
 # Refresh Tokens
 
 ColdBox Security supports the concept of refresh tokens alongside the normal JWT access tokens. Let's start exploring this feature in detail.

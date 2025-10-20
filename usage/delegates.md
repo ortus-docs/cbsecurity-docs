@@ -1,5 +1,6 @@
 ---
 description: Delegate yourself!
+icon: plug
 ---
 
 # Delegates

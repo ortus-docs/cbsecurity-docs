@@ -1,5 +1,6 @@
 ---
 description: CBSecurity can apply security rules to incoming events.
+icon: ruler-combined
 ---
 
 # Security Rules

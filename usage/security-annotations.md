@@ -1,5 +1,6 @@
 ---
 description: Security annotations are used to secure your handler and/or handler actions
+icon: brackets-curly
 ---
 
 # Security Annotations

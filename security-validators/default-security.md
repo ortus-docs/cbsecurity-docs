@@ -2,6 +2,7 @@
 description: >-
   The CFML Security validator leverages the ColdFusion security functions for
   authentication and role based authorization.
+icon: bolt
 ---
 
 # CFML Security Validator

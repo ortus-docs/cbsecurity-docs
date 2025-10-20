@@ -1,3 +1,7 @@
+---
+icon: split
+---
+
 # JWT Validator
 
 Now that we have all the pieces in place for JWT, we can now register the JWT validator as our validator of choice: `JwtAuthValidator@cbsecurity`.&#x20;

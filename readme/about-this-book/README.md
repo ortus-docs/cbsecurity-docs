@@ -1,5 +1,6 @@
 ---
 description: A little more info about this book
+icon: book-open
 ---
 
 # About This Book

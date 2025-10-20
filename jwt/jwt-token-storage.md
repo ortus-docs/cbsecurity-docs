@@ -1,3 +1,7 @@
+---
+icon: cloud-binary
+---
+
 # Token Storage
 
 You can enable token storage in cbsecurity via the `tokenStorage` setting. By default it is **enabled** and leverages CacheBox's `default` cache using a key prefix of `cbjwt_` + the token's unique identifier claim of `jti`.
@@ -32,9 +36,9 @@ We ship with two drivers:
 
 ### **DB Driver Properties**
 
-* `table`   : The table to use for storage
-* `schema`  : A schema to use if the database supports it, else empty
-* `dsn`     : The datasource to use, defaults to the one set in `Application.cfc`
+* `table` : The table to use for storage
+* `schema` : A schema to use if the database supports it, else empty
+* `dsn` : The datasource to use, defaults to the one set in `Application.cfc`
 * `autoCreate:true` : Autocreate the table if not found
 * `rotationDays:7` : How many days should the expiration be before removal
 * `rotationFrequency:60` : How many minutes should pass before issuing a rotation check

@@ -1,5 +1,6 @@
 ---
 description: This feature set is provided by the cbcsrf module.
+icon: user-visor
 ---
 
 # Cross Site Request Forgery

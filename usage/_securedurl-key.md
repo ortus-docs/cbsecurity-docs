@@ -2,6 +2,7 @@
 description: >-
   CBSecurity stores the secured incoming url so you can relocate the user to it
   after authenticating.
+icon: link
 ---
 
 # Secured URL

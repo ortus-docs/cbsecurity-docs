@@ -2,6 +2,7 @@
 description: >-
   The BasicAuth validator leverages HTTP Basic Authentication for authentication
   and role-permission-based authorization for you.
+icon: shield-halved
 ---
 
 # BasicAuth Validator

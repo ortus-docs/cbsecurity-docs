@@ -2,6 +2,7 @@
 description: >-
   The auth validator leverages authentication and role-permission-based
   authorization for you.
+icon: bolt-auto
 ---
 
 # Auth Validator

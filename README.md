@@ -1,8 +1,11 @@
 ---
-description: Enterprise-grade security for ColdBox applications with authentication, authorization, JWT, CSRF protection, and comprehensive security headers.
+description: >-
+  Enterprise-grade security for ColdBox applications with authentication,
+  authorization, JWT, CSRF protection, and comprehensive security headers.
+icon: sunglasses
 ---
 
-# 🔏 Introduction
+# Introduction
 
 <figure><img src=".gitbook/assets/CBSecurity-S-darkbg.png" alt="CBSecurity Logo"><figcaption><p>Enterprise Security for ColdBox Applications</p></figcaption></figure>
 
@@ -99,7 +102,7 @@ The ColdBox community is active and ready to help:
 
 ## 🏢 Professional Open Source
 
-![Ortus Solutions, Corp](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LA-UVvG0NM7NpDzssBL%2F-LA-Uaei0WzTH7Su5CR7%2F-LA-UqN1BRXynZ7RUVO7%2Fortussolutions\_button.png?generation=1523647999385555\&alt=media)
+![Ortus Solutions, Corp](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LA-UVvG0NM7NpDzssBL%2F-LA-Uaei0WzTH7Su5CR7%2F-LA-UqN1BRXynZ7RUVO7%2Fortussolutions_button.png?generation=1523647999385555\&alt=media)
 
 CBSecurity is professionally developed and supported by [Ortus Solutions, Corp](http://www.ortussolutions.com/services), a leader in CFML consulting and development.
 
@@ -116,7 +119,7 @@ Ortus Solutions offers comprehensive professional services for CBSecurity and th
 
 [Learn more about our services](http://www.ortussolutions.com/services)
 
----
+***
 
 ## 🙏 HONOR GOES TO GOD ABOVE ALL
 

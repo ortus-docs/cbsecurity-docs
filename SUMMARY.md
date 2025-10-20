@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🔏 Introduction](README.md)
+* [Introduction](README.md)
   * [Release History](readme/release-history/README.md)
     * [What's New With 3.5.0](readme/release-history/whats-new-with-3.5.0.md)
     * [What's New With 3.4.3](readme/release-history/whats-new-with-3.4.3.md)

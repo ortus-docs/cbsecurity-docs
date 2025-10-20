@@ -2,15 +2,16 @@
 description: >-
   Basic access authentication is a method for an HTTP user agent (e.g. a web
   browser) to provide a user name and password when making a request.
+icon: shield-halved
 ---
 
 # Basic Authentication
 
-CBSecurity supports the concept of HTTP [basic authentication](https://en.wikipedia.org/wiki/Basic\_access\_authentication) in your ColdBox applications.  Please note that this is a quick and easy way to provide security, but not the safest by any means.  You have been warned!
+CBSecurity supports the concept of HTTP [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) in your ColdBox applications.  Please note that this is a quick and easy way to provide security, but not the safest by any means.  You have been warned!
 
 ### What is Basic Authentication?
 
-In the context of an [HTTP](https://en.wikipedia.org/wiki/HTTP) transaction, basic access authentication is a method for an [HTTP user agent](https://en.wikipedia.org/wiki/User\_agent) (e.g. a [web browser](https://en.wikipedia.org/wiki/Web\_browser)) to provide a username and password when making a request. In basic HTTP authentication, a request contains a header field in the form of `Authorization: Basic <credentials>`, where credentials is the [Base64](https://en.wikipedia.org/wiki/Base64) encoding of ID and password joined by a single colon `:`.
+In the context of an [HTTP](https://en.wikipedia.org/wiki/HTTP) transaction, basic access authentication is a method for an [HTTP user agent](https://en.wikipedia.org/wiki/User_agent) (e.g. a [web browser](https://en.wikipedia.org/wiki/Web_browser)) to provide a username and password when making a request. In basic HTTP authentication, a request contains a header field in the form of `Authorization: Basic <credentials>`, where credentials is the [Base64](https://en.wikipedia.org/wiki/Base64) encoding of ID and password joined by a single colon `:`.
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Basic Authentication Flow</p></figcaption></figure>
 

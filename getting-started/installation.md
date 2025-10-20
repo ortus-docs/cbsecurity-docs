@@ -1,5 +1,6 @@
 ---
 description: Get up and running with CBSecurity in no time!
+icon: inbox-in
 ---
 
 # Installation
@@ -45,7 +46,7 @@ function cbSecure()
 
 ## Configuration Settings
 
-By default `cbsecurity` is configured to work with `cbauth` as the authentication service.  You only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials.  You can also use the in-built basic authentication users as well.&#x20;
+By default `cbsecurity` is configured to work with `cbauth` as the authentication service. You only need to provide a user service class that knows how to connect to your database to retrieve and validate credentials. You can also use the in-built basic authentication users as well.
 
 {% hint style="success" %}
 You can find much more information about cbauth here: [https://forgebox.io/view/cbauth](https://forgebox.io/view/cbauth)

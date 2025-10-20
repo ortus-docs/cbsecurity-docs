@@ -2,6 +2,7 @@
 description: >-
   CBSecurity has many events that you can listen to for an event-driven
   experience.
+icon: bullhorn
 ---
 
 # Interceptions

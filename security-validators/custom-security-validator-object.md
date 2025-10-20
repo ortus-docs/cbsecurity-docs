@@ -1,5 +1,6 @@
 ---
 description: You can write your own custom validators with CBSecurity
+icon: code
 ---
 
 # Custom Validator

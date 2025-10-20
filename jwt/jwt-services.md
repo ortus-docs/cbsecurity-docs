@@ -1,3 +1,7 @@
+---
+icon: file-binary
+---
+
 # JWT Services
 
 CBSecurity also provides you with a JWT (Json Web Tokens) authentication and authorization system.
