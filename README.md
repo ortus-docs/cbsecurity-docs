@@ -2,7 +2,7 @@
 description: >-
   Enterprise-grade security for ColdBox applications with authentication,
   authorization, JWT, CSRF protection, and comprehensive security headers.
-icon: sunglasses
+icon: house-lock
 ---
 
 # Introduction
