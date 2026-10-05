@@ -19,7 +19,7 @@ CBSecurity provides a multi-layered security approach with the following key cap
 
 ### 🔐 Authentication & Authorization
 
-* **Security Firewall** - Rule-based request protection using security rules engine and handler annotations
+* **Security Firewall** - Rule-based request protection using security rules engine, handler annotations and route middleware
 * **Authentication Manager** (`cbauth`) - Pluggable authentication system compatible with any authentication provider
 * **Basic Authentication** - Built-in HTTP Basic Auth support with credential storage and browser challenge handling
 * **Authorization Service** - Functional security API for authorization checks across all application layers
@@ -62,6 +62,7 @@ The framework leverages `cbstorages` for flexible storage backends and seamlessl
 ### 🔒 Advanced Authorization
 
 * **Annotation-Driven Security** - Secure handlers and actions using ColdBox annotations
+* **Route Middleware** - Secure routes and groups right where they are declared
 * **Cascading Security** - Hierarchical security rules from global to handler to action level
 * **Functional API** - Injectable security service for authorization checks in any application layer
 * **Custom Validators** - Each module can define its own security validator implementation

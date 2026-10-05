@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
   * [Release History](readme/release-history/README.md)
+    * [What's new With 3.9.0](readme/release-history/whats-new-with-3.9.0.md)
     * [What's new With 3.7.0](readme/release-history/whats-new-with-3.7.0.md)
     * [What's New With 3.6.0](readme/release-history/whats-new-with-3.6.0.md)
     * [What's New With 3.5.0](readme/release-history/whats-new-with-3.5.0.md)
@@ -40,6 +41,7 @@
 * [Basic Authentication](usage/basic-authentication.md)
 * [Security Rules](usage/untitled-1.md)
 * [Security Annotations](usage/security-annotations.md)
+* [Route Middleware](usage/route-middleware.md)
 * [cbSecurity Model](usage/cbsecurity-model/README.md)
   * [Authentication Methods](usage/cbsecurity-model/authentication-methods.md)
   * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
