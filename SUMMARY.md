@@ -22,6 +22,7 @@
 
 * [Installation](getting-started/installation.md)
 * [Overview](getting-started/overview.md)
+* [How the Firewall Works](getting-started/how-the-firewall-works.md)
 * [Configuration](getting-started/configuration/README.md)
   * [🔏 Authentication](getting-started/configuration/authentication.md)
   * [🥸 Basic Auth](getting-started/configuration/basic-auth.md)
