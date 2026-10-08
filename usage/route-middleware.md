@@ -32,6 +32,30 @@ Route middleware needs ColdBox **8.2+**. Group-level `meta` and running middlewa
 
 `Authenticated` and `Authorized` use the validator configured in `firewall.validator`.
 
+### More Protection
+
+These do not authenticate users. They guard routes against abuse and answer denied requests directly, with a JSON error and the right status code, without the firewall's invalid actions. Each is configured in the route `meta()`, with defaults in the [module settings](../getting-started/configuration/middleware.md).
+
+| WireBox ID | What it does |
+| --- | --- |
+| [`Throttle@cbsecurity`](route-middleware/throttle.md) | Rate limits requests with named or inline limiters. |
+| [`ApiKey@cbsecurity`](route-middleware/api-key.md) | Requires an API key in a header or request key. |
+| [`AllowedIPs@cbsecurity`](route-middleware/ip-filtering.md) | Only listed IPs and CIDR ranges get in. |
+| [`DenyIPs@cbsecurity`](route-middleware/ip-filtering.md) | Blocks listed IPs and CIDR ranges. |
+| [`EnsureHttps@cbsecurity`](route-middleware/ensure-https.md) | Redirects to HTTPS, or denies non `GET` requests. |
+| [`VerifyCsrf@cbsecurity`](route-middleware/verify-csrf.md) | Verifies a CSRF token on unsafe requests. |
+| [`Honeypot@cbsecurity`](route-middleware/honeypot.md) | Catches spam bots with a hidden field. |
+| [`Signed@cbsecurity`](route-middleware/signed-urls.md) | Only lets valid, unexpired [signed URLs](route-middleware/signed-urls.md) through. |
+
+Stack them as needed. Middleware runs in the order you declare it, so put cheap checks first:
+
+```javascript
+route( "/api/orders" )
+    .middleware( [ "DenyIPs@cbsecurity", "Throttle@cbsecurity", "JwtAuth@cbsecurity" ] )
+    .meta( { denyIps : "198.51.100.0/24", throttle : "api", permissions : "ORDERS_READ" } )
+    .to( "orders.index" )
+```
+
 ## Declaring Permissions and Roles
 
 `Authorized`, `JwtAuth` and `BasicAuth` read their requirements from the route `meta()`:

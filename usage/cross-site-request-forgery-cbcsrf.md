@@ -7,6 +7,10 @@ icon: user-visor
 
 Since version 2.4.x we have added the `cbcsrf` module as a dependency of **cbSecurity**.  Below is how you can use it:
 
+{% hint style="info" %}
+To verify tokens on only some routes, use the [`VerifyCsrf@cbsecurity`](route-middleware/verify-csrf.md) route middleware instead of the auto verifier.
+{% endhint %}
+
 ## Settings
 
 Below are the settings you can use for this module. Remember you must create the `cbcsrf` struct in your `ColdBox.cfc` under the `moduleSettings` structure:
