@@ -13,7 +13,7 @@ To verify tokens on only some routes, use the [`VerifyCsrf@cbsecurity`](route-mi
 
 ## Settings
 
-Set these in the `csrf` key of your `cbsecurity` settings. At startup cbsecurity passes them to the `cbcsrf` module, and they take precedence over any value set in the `cbcsrf` module settings themselves.
+`cbcsrf` is a module of its own with its own settings, so you can configure CSRF in either place. Set them in the `csrf` key of your `cbsecurity` settings, or in the `cbcsrf` module settings. If you set both, the `cbcsrf` module settings win.
 
 ```javascript
 moduleSettings = {
@@ -35,6 +35,31 @@ moduleSettings = {
     }
 };
 ```
+
+### Which Settings Win
+
+For each setting, the first of these that applies is used:
+
+1. A value you set explicitly in the `cbcsrf` module settings, in `moduleSettings.cbcsrf` or `config/modules/cbcsrf.cfc`.
+2. A value you set explicitly in `cbsecurity.csrf`.
+3. The default, which is the same in both modules.
+
+It works one setting at a time, so you can mix them:
+
+```javascript
+moduleSettings = {
+    cbcsrf     : { rotationTimeout : 60 },
+    cbsecurity : { csrf : { rotationTimeout : 15, enableEndpoint : true } }
+}
+// rotationTimeout is 60: the cbcsrf module setting wins
+// enableEndpoint is true: cbsecurity fills in what cbcsrf did not set
+```
+
+After startup, `cbsecurity.csrf` shows the values that are in effect.
+
+{% hint style="info" %}
+Before cbsecurity 3.9.0, `cbsecurity.csrf` always overwrote the `cbcsrf` settings, even for settings you never set in it. Configuring `cbcsrf` directly had no effect.
+{% endhint %}
 
 {% hint style="warning" %}
 `cbcsrf` is a separate module. If you upgrade it, check its own [documentation](https://forgebox.io/view/cbcsrf) for new settings.
