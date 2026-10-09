@@ -13,6 +13,10 @@ icon: house-lock
 
 <figure><img src=".gitbook/assets/cbsecurity-3-visualizer (1) (1).png" alt="CBSecurity Visualizer Interface"><figcaption><p>Security Visualizer - Monitor and configure your security settings</p></figcaption></figure>
 
+{% hint style="info" %}
+These docs describe **cbsecurity 3.9.0**. The settings, method names and route middleware options in them were checked against the module source. New here? Start with the [Quickstart](getting-started/quickstart.md).
+{% endhint %}
+
 ## 🎯 Core Security Capabilities
 
 CBSecurity provides a multi-layered security approach with the following key capabilities:
