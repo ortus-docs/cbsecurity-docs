@@ -13,7 +13,7 @@ To verify tokens on only some routes, use the [`VerifyCsrf@cbsecurity`](route-mi
 
 ## Settings
 
-`cbcsrf` is a module of its own with its own settings, so you can configure CSRF in either place. Set them in the `csrf` key of your `cbsecurity` settings, or in the `cbcsrf` module settings. If you set both, the `cbcsrf` module settings win.
+`cbcsrf` is a module of its own with its own settings, so you can configure CSRF in either place. Set them in the `csrf` key of your `cbsecurity` settings, or in the `cbcsrf` module settings. If you set the same setting in both, the value in `cbsecurity.csrf` wins.
 
 ```javascript
 moduleSettings = {
@@ -40,25 +40,24 @@ moduleSettings = {
 
 For each setting, the first of these that applies is used:
 
-1. A value you set explicitly in the `cbcsrf` module settings, in `moduleSettings.cbcsrf` or `config/modules/cbcsrf.cfc`.
-2. A value you set explicitly in `cbsecurity.csrf`.
-3. The default, which is the same in both modules.
+1. A value you set explicitly in `cbsecurity.csrf`.
+2. The value of the `cbcsrf` module, from `moduleSettings.cbcsrf`, `config/modules/cbcsrf.cfc` or its defaults.
 
-It works one setting at a time, so you can mix them:
+Only the keys you set in `cbsecurity.csrf` are applied. The cbsecurity defaults never overwrite a `cbcsrf` setting. It works one setting at a time, so you can mix them:
 
 ```javascript
 moduleSettings = {
-    cbcsrf     : { rotationTimeout : 60 },
-    cbsecurity : { csrf : { rotationTimeout : 15, enableEndpoint : true } }
+    cbcsrf     : { rotationTimeout : 60, enableAutoVerifier : true },
+    cbsecurity : { csrf : { rotationTimeout : 15 } }
 }
-// rotationTimeout is 60: the cbcsrf module setting wins
-// enableEndpoint is true: cbsecurity fills in what cbcsrf did not set
+// rotationTimeout is 15: the cbsecurity.csrf value wins
+// enableAutoVerifier is true: you did not set it in cbsecurity.csrf, so the cbcsrf value stays
 ```
 
 After startup, `cbsecurity.csrf` shows the values that are in effect.
 
 {% hint style="info" %}
-Before cbsecurity 3.9.0, `cbsecurity.csrf` always overwrote the `cbcsrf` settings, even for settings you never set in it. Configuring `cbcsrf` directly had no effect.
+Before cbsecurity 3.9.0, `cbsecurity.csrf` always overwrote the `cbcsrf` settings, even for settings you never set in it, so a `cbcsrf` setting you did not repeat in `cbsecurity.csrf` was lost.
 {% endhint %}
 
 {% hint style="warning" %}

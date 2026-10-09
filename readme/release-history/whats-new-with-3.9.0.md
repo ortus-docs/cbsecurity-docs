@@ -20,6 +20,10 @@ description: Unreleased
 
 * Handler and action annotation security now shares `processInvalidAccess()` with route middleware. The behavior is unchanged.
 
+#### Fixed
+
+* Settings you set on the `cbcsrf` module were overwritten by the cbsecurity `csrf` defaults, even when you never set `cbsecurity.csrf`. Now only the keys you explicitly set in `cbsecurity.csrf` are applied, and they win over the `cbcsrf` settings. See [Which Settings Win](../../usage/cross-site-request-forgery-cbcsrf.md#which-settings-win).
+
 #### Requirements
 
 * Route middleware requires ColdBox 8.2+.
