@@ -1,0 +1,7 @@
+# Redirects keep old links working after the docs were reorganized.
+# Format: old path without the extension : new file
+redirects:
+  usage/untitled-1: usage/security-rules.md
+  getting-started/configuration/firewall/rule-sources/untitled: getting-started/configuration/firewall/rule-sources/db-rules.md
+  usage/_securedurl-key: usage/secured-url.md
+  getting-started/configuration/csrf: usage/cross-site-request-forgery-cbcsrf.md

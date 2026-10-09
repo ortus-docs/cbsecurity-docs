@@ -65,7 +65,7 @@ You can explicitly set the `UserServiceClass` to be `BasicAuthUserService@cbsecu
 
 
 
-All I have to do now is create [security rules](untitled-1.md) or [annotations](security-annotations.md), and CBSecurity will leverage the browser's Basic Authentication Prompt when those resources are trying to be accessed.  Once you put in your credentials, it will verify them against the registered users in the `basicAuth` configuration dictionary.
+All I have to do now is create [security rules](security-rules.md) or [annotations](security-annotations.md), and CBSecurity will leverage the browser's Basic Authentication Prompt when those resources are trying to be accessed.  Once you put in your credentials, it will verify them against the registered users in the `basicAuth` configuration dictionary.
 
 ### Logout
 

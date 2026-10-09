@@ -162,7 +162,7 @@ moduleSettings = {
 };
 ```
 
-If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbsrf.rotate()` method on the `@cbsrf` model and do the manual rotation yourself.
+If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbcsrf.rotate()` method on the `@cbsrf` model and do the manual rotation yourself.
 
 {% code title="handlers/security.cfc" %}
 ```javascript

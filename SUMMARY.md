@@ -19,29 +19,28 @@
   * [About This Book](readme/about-this-book/README.md)
     * [Author](readme/about-this-book/author.md)
 
-## Getting Started
+## Get Started
 
-* [Installation](getting-started/installation.md)
 * [Overview](getting-started/overview.md)
+* [Quickstart](getting-started/quickstart.md)
+* [Installation](getting-started/installation.md)
 * [How the Firewall Works](getting-started/how-the-firewall-works.md)
 * [Configuration](getting-started/configuration/README.md)
+  * [Full Configuration](getting-started/configuration/full-configuration.md)
   * [🔏 Authentication](getting-started/configuration/authentication.md)
   * [🥸 Basic Auth](getting-started/configuration/basic-auth.md)
   * [🌐 JWT](getting-started/configuration/jwt.md)
   * [🧱 Firewall](getting-started/configuration/firewall/README.md)
-    * [DB Rules](getting-started/configuration/firewall/rule-sources/untitled.md)
+    * [DB Rules](getting-started/configuration/firewall/rule-sources/db-rules.md)
     * [JSON Rules](getting-started/configuration/firewall/rule-sources/json-properties.md)
     * [Model Rules](getting-started/configuration/firewall/rule-sources/model-rules.md)
     * [XML Rules](getting-started/configuration/firewall/rule-sources/xml-properties.md)
   * [🚦 Route Middleware](getting-started/configuration/middleware.md)
-  * [☢️ Security Headers](getting-started/configuration/security-headers.md)
   * [🔬 Visualizer](getting-started/configuration/visualizer.md)
 
-## Usage
+## Secure Your App
 
-* [Authentication Services](usage/authentication-services.md)
-* [Basic Authentication](usage/basic-authentication.md)
-* [Security Rules](usage/untitled-1.md)
+* [Security Rules](usage/security-rules.md)
 * [Security Annotations](usage/security-annotations.md)
 * [Route Middleware](usage/route-middleware.md)
   * [Throttle](usage/route-middleware/throttle.md)
@@ -51,25 +50,14 @@
   * [Verify CSRF](usage/route-middleware/verify-csrf.md)
   * [Honeypot](usage/route-middleware/honeypot.md)
   * [Signed URLs](usage/route-middleware/signed-urls.md)
-* [cbSecurity Model](usage/cbsecurity-model/README.md)
-  * [Authentication Methods](usage/cbsecurity-model/authentication-methods.md)
-  * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
-  * [Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
-  * [Securing Views](usage/cbsecurity-model/securing-views.md)
-  * [Utility Methods](usage/cbsecurity-model/utility-methods.md)
-  * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
-* [Secured URL](usage/_securedurl-key.md)
-* [Interceptions](usage/interceptions.md)
-* [Cross Site Request Forgery](usage/cross-site-request-forgery-cbcsrf.md)
-* [Delegates](usage/delegates.md)
+* [Secured URL](usage/secured-url.md)
+
+## Authentication
+
+* [Authentication Services](usage/authentication-services.md)
+* [Basic Authentication](usage/basic-authentication.md)
 * [Auth User](usage/auth-user.md)
-
-## Security Validators
-
-* [Auth Validator](security-validators/auth-validator.md)
-* [BasicAuth Validator](security-validators/basicauth-validator.md)
-* [CFML Security Validator](security-validators/default-security.md)
-* [Custom Validator](security-validators/custom-security-validator-object.md)
+* [Delegates](usage/delegates.md)
 
 ## JWT
 
@@ -78,6 +66,26 @@
 * [Refresh Tokens](jwt/refresh-tokens.md)
 * [Token Storage](jwt/jwt-token-storage.md)
 * [JWT Interceptions](jwt/jwt-interceptions.md)
+
+## CSRF and Headers
+
+* [Cross Site Request Forgery](usage/cross-site-request-forgery-cbcsrf.md)
+* [☢️ Security Headers](getting-started/configuration/security-headers.md)
+
+## Reference
+
+* [cbSecurity Model](usage/cbsecurity-model/README.md)
+  * [Authentication Methods](usage/cbsecurity-model/authentication-methods.md)
+  * [Authorization Contexts](usage/cbsecurity-model/authorization-contexts.md)
+  * [Blocking Methods](usage/cbsecurity-model/secure-blocking-methods.md)
+  * [Securing Views](usage/cbsecurity-model/securing-views.md)
+  * [Utility Methods](usage/cbsecurity-model/utility-methods.md)
+  * [Verification Methods](usage/cbsecurity-model/verification-methods.md)
+* [Interceptions](usage/interceptions.md)
+* [Auth Validator](security-validators/auth-validator.md)
+* [BasicAuth Validator](security-validators/basicauth-validator.md)
+* [CFML Security Validator](security-validators/default-security.md)
+* [Custom Validator](security-validators/custom-security-validator-object.md)
 
 ## External links
 

@@ -55,7 +55,7 @@ component secured="ADMIN" {
 }
 ```
 
-Prefer a central list? Use [security rules](../usage/untitled-1.md) instead. See [Overview](overview.md) to choose.
+Prefer a central list? Use [security rules](../usage/security-rules.md) instead. See [Overview](overview.md) to choose.
 
 ## 5. Test It
 

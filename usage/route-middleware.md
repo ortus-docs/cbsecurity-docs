@@ -150,7 +150,7 @@ They share the same validators and invalid actions, so choose by where you want 
 
 | Approach | Rules live in | Best for |
 | --- | --- | --- |
-| [Firewall rules](untitled-1.md) | Config, JSON, XML, a database or a model | Central, data-driven policies and rules contributed by modules. |
+| [Firewall rules](security-rules.md) | Config, JSON, XML, a database or a model | Central, data-driven policies and rules contributed by modules. |
 | [Annotations](security-annotations.md) | On the handler or action | Security that must travel with the code. |
 | Route middleware | Next to the route | Securing routes and groups in `config/Router`, with no rules file. |
 

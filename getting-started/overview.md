@@ -18,7 +18,7 @@ Pick the one that matches where you want the rule to live. They share the same v
 
 | Approach | Where the rule lives | Best for |
 | --- | --- | --- |
-| [Security rules](../usage/untitled-1.md) | Config, JSON, XML, a database or a model | Central, data-driven policies. Rules can protect events **and** URLs, and admins can edit them at runtime. |
+| [Security rules](../usage/security-rules.md) | Config, JSON, XML, a database or a model | Central, data-driven policies. Rules can protect events **and** URLs, and admins can edit them at runtime. |
 | [Annotations](../usage/security-annotations.md) | On the handler or action | Security that travels with the code. |
 | [Route middleware](../usage/route-middleware.md) | Next to the route in `config/Router` | Securing routes and groups with no rules file, plus throttling, API keys, IP filtering and more. |
 | [The `cbSecurity` model](../usage/cbsecurity-model/README.md) | In your code | Securing any code context: services, views, blocks of logic. |

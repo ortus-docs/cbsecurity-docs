@@ -11,7 +11,7 @@ The firewall wraps the `preProcess` interception point, the first thing that run
 
 You register a validator (the `firewall.validator` setting) that implements two functions from `cbsecurity.interfaces.ISecurityValidator`:
 
-* `ruleValidator()` evaluates your [security rules](../usage/untitled-1.md).
+* `ruleValidator()` evaluates your [security rules](../usage/security-rules.md).
 * `annotationValidator()` evaluates the [security annotations](../usage/security-annotations.md) on your handlers and actions.
 
 [Route middleware](../usage/route-middleware.md) calls the same validator for the secured route. Rules run before annotations, and you can use any mix of the three.

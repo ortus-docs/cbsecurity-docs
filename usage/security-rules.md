@@ -95,7 +95,7 @@ If you add an `overrideEvent` element, then you will explicitly override the glo
 
 ### Action
 
-If you add an `action` element, then you will be explicitly overriding the global/module setting, and the action will be based on this value (`override` or `event` or `block`)
+If you add an `action` element, then you will be explicitly overriding the global/module setting, and the action will be based on this value (`redirect`, `override` or `block`)
 
 ```javascript
 {
@@ -111,12 +111,12 @@ If a rule has a white list, then it means that you can declare what are the **ex
 ```javascript
 {
     "secureList" : ".*",
-    "whitelist : "^login"
+    "whitelist" : "^login"
 }
 ```
 
 {% hint style="danger" %}
-Please note: if a rule has a white list, it only applies to the **current** rule. So if the whitelist matches, it the current rule is skipped, and the process continues to the next rule.
+Please note: if a rule has a white list, it only applies to the **current** rule. So if the whitelist matches, the current rule is skipped, and the process continues to the next rule.
 {% endhint %}
 
 Sometimes you want to make sure ALL events are secured, except for the ones specified, such as login events. If you add new functionality to your app it is easy to forget a new rule. To prevent unwanted access you could specify a LAST rule, which matches ALL event but NO permission at all. In that case you have to add a whitelist for all events which should still pass, for example:
