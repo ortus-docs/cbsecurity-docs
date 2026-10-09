@@ -43,7 +43,7 @@ cbsecurity : {
         enableRefreshEndpoint      : true,
         // encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
         algorithm               : "HS512",
-        // Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
+        // Which claims need to be present on the jwt token or `TokenInvalidException` upon verification and decoding
         requiredClaims          : [] ,
         // The token storage settings
         tokenStorage            : {

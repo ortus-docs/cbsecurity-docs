@@ -24,7 +24,7 @@ firewall : {
 	"handlerAnnotationSecurity"   : true,
 	// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
 	"invalidAuthenticationEvent"  : "",
-	// Default Auhtentication Action: override or redirect when a user has not logged in
+	// Default Authentication Action: override or redirect when a user has not logged in
 	"defaultAuthenticationAction" : "redirect",
 	// The global invalid authorization event or URI or URL to go if an invalid authorization occurs
 	"invalidAuthorizationEvent"   : "",
@@ -322,8 +322,8 @@ The `provider` key is how you can define rules from the following sources:
 
 Here are the different ways you can define rules from other sources rather than inline:
 
-{% content-ref url="rule-sources/untitled.md" %}
-[untitled.md](rule-sources/untitled.md)
+{% content-ref url="rule-sources/db-rules.md" %}
+[DB Rules](rule-sources/db-rules.md)
 {% endcontent-ref %}
 
 {% content-ref url="rule-sources/json-properties.md" %}

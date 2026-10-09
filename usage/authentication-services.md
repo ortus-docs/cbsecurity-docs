@@ -207,7 +207,7 @@ moduleSettings : {
     cbsecurity : {
         // The global invalid authentication event or URI or URL to go if an invalid authentication occurs
 	"invalidAuthenticationEvent"  : "security.login",
-	// Default Auhtentication Action: override or redirect when a user has not logged in
+	// Default Authentication Action: override or redirect when a user has not logged in
 	"defaultAuthenticationAction" : "redirect",
 	// The global invalid authorization event or URI or URL to go if an invalid authorization occurs
 	"invalidAuthorizationEvent"   : "security.notAuthorized",

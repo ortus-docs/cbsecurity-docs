@@ -7,29 +7,95 @@ icon: user-visor
 
 Since version 2.4.x we have added the `cbcsrf` module as a dependency of **cbSecurity**.  Below is how you can use it:
 
+{% hint style="info" %}
+To verify tokens on only some routes, use the [`VerifyCsrf@cbsecurity`](route-middleware/verify-csrf.md) route middleware instead of the auto verifier.
+{% endhint %}
+
 ## Settings
 
-Below are the settings you can use for this module. Remember you must create the `cbcsrf` struct in your `ColdBox.cfc` under the `moduleSettings` structure:
+`cbcsrf` is a module of its own with its own settings, so you can configure CSRF in either place. Set them in the `csrf` key of your `cbsecurity` settings, or in the `cbcsrf` module settings. If you set both, the `cbcsrf` module settings win.
 
 ```javascript
 moduleSettings = {
-    cbcsrf : {
-        // By default we load up an interceptor that verifies all non-GET incoming requests against the token validations
-        enableAutoVerifier     : false,
-        // A list of events to exclude from csrf verification, regex allowed: e.g. stripe\..*
-        verifyExcludes         : [],
-        // By default, all csrf tokens have a life-span of 30 minutes. After 30 minutes, they expire and we aut-generate new ones.
-        // If you do not want expiring tokens, then set this value to 0
-        rotationTimeout        : 30,
-        // Enable the /cbcsrf/generate endpoint to generate cbcsrf tokens for secured users.
-        enableEndpoint         : false,
-        // The WireBox mapping to use for the CacheStorage
-        cacheStorage           : "CacheStorage@cbstorages",
-        // Enable/Disable the cbAuth login/logout listener in order to rotate keys
-        enableAuthTokenRotator : false
+    cbsecurity : {
+        csrf : {
+            // Verify every non GET request
+            enableAutoVerifier     : false,
+            // Events to skip, regular expressions allowed
+            verifyExcludes         : [],
+            // Minutes before a token expires, 0 for never
+            rotationTimeout        : 30,
+            // Enable the /cbcsrf/generate endpoint
+            enableEndpoint         : false,
+            // The WireBox ID of the cache storage
+            cacheStorage           : "CacheStorage@cbstorages",
+            // Rotate tokens when a user logs in or out
+            enableAuthTokenRotator : true
+        }
     }
 };
 ```
+
+### Which Settings Win
+
+For each setting, the first of these that applies is used:
+
+1. A value you set explicitly in the `cbcsrf` module settings, in `moduleSettings.cbcsrf` or `config/modules/cbcsrf.cfc`.
+2. A value you set explicitly in `cbsecurity.csrf`.
+3. The default, which is the same in both modules.
+
+It works one setting at a time, so you can mix them:
+
+```javascript
+moduleSettings = {
+    cbcsrf     : { rotationTimeout : 60 },
+    cbsecurity : { csrf : { rotationTimeout : 15, enableEndpoint : true } }
+}
+// rotationTimeout is 60: the cbcsrf module setting wins
+// enableEndpoint is true: cbsecurity fills in what cbcsrf did not set
+```
+
+After startup, `cbsecurity.csrf` shows the values that are in effect.
+
+{% hint style="info" %}
+Before cbsecurity 3.9.0, `cbsecurity.csrf` always overwrote the `cbcsrf` settings, even for settings you never set in it. Configuring `cbcsrf` directly had no effect.
+{% endhint %}
+
+{% hint style="warning" %}
+`cbcsrf` is a separate module. If you upgrade it, check its own [documentation](https://forgebox.io/view/cbcsrf) for new settings.
+{% endhint %}
+
+### `enableAutoVerifier`
+
+Off by default. When on, every non-GET request must carry a valid CSRF token, in the `csrf` request key or the `x-csrf-token` header. See [Automatic Token Verifier](#automatic-token-verifier).
+
+### `verifyExcludes`
+
+Regular expressions matched against the incoming event. A match skips the auto verifier for that event.
+
+```javascript
+verifyExcludes : [ "stripe\.", "logout" ]
+```
+
+### `rotationTimeout`
+
+Tokens live for 30 minutes by default. Change it in minutes, or use `0` for tokens that never expire.
+
+### `enableEndpoint`
+
+Enables `GET /cbcsrf/generate` so AJAX and UI-only applications can fetch tokens for secured users. See the `/cbcsrf/generate` Endpoint section below.
+
+{% hint style="danger" %}
+The endpoint is protected with a `secured` annotation, so the firewall's annotation security must be enabled.
+{% endhint %}
+
+### `cacheStorage`
+
+The WireBox ID that stores tokens. The default is `CacheStorage@cbstorages`. Use any [cbstorages](https://forgebox.io/view/cbstorages) storage that matches its API, for example `SessionStorage@cbstorages`.
+
+### `enableAuthTokenRotator`
+
+On by default. Rotates a user's tokens when they log in or out through any authentication service registered with cbsecurity.
 
 ## Mixins
 
@@ -121,7 +187,7 @@ moduleSettings = {
 };
 ```
 
-If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbsrf.rotate()` method on the `@cbsrf` model and do the manual rotation yourself.
+If you are NOT using `cbAuth` then we recommend you leverage the `csrfRotate()` mixin or the `cbcsrf.rotate()` method on the `@cbsrf` model and do the manual rotation yourself.
 
 {% code title="handlers/security.cfc" %}
 ```javascript

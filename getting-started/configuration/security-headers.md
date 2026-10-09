@@ -22,7 +22,7 @@ securityHeaders : {
 	// site defacement, to malware distribution.
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 	"contentSecurityPolicy" : {
-		// Disabled by defautl as it is totally customizable
+		// Disabled by default as it is totally customizable
 		"enabled" : false,
 		// The custom policy to use, by default we don't include any
 		"policy"  : ""
@@ -92,7 +92,7 @@ Read more about content security policies
 
 ```javascript
 "contentSecurityPolicy" : {
-    // Disabled by defautl as it is totally customizable
+    // Disabled by default as it is totally customizable
     "enabled" : true,
     // The custom policy to use, by default we don't include any
     "policy"  : "default-src 'self' *.example.com; img-src *"

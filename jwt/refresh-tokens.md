@@ -14,48 +14,15 @@ The client application can get a new access token as long as the refresh token i
 
 ### Refresh Token Configuration
 
-In the `jwt` section of the `cbsecurity` configuration you will have the following settings dealing with refresh tokens (Please note that the other jwt configurations are also mandatory)
+Set these in the `jwt` section of your `cbsecurity` settings. The other [JWT settings](../getting-started/configuration/jwt.md) are still required.
 
-```javascript
-jwt : {
-
-    ...
-
-    // If true, enables refresh tokens, token creation methods will return a struct instead of just an access token string
-    // e.g. { access_token: "", refresh_token : "" }
-    "enableRefreshTokens"   : false,
-    // The default expiration for refresh tokens in minutes, defaults to 7 days
-    "refreshExpiration"     : 10080,
-    // The custom header to inspect for refresh tokens
-    "customRefreshHeader"    : "x-refresh-token",
-    // If enabled, the JWT validator will inspect the request for refresh tokens and expired access tokens
-    // It will then automatically refresh them for you and return them back as 
-    // response headers in the same request according to the `customRefreshHeader` and `customAuthHeader`
-    "enableAutoRefreshValidator" : false,
-    // Enable the POST > /cbsecurity/refreshtoken API endpoint
-    "enableRefreshEndpoint" : false
-}
-```
-
-#### EnableRefreshTokens
-
-This setting is used to turn on the refresh capabilities of the JWT Service. If this remains false, then exceptions will be thrown when trying to use refresh capabilities.
-
-#### RefreshExpiration
-
-The default time refresh tokens expire in. The default is 7 days or 10080 minutes
-
-#### CustomRefreshHeader
-
-The header to inspect for refresh tokens for automatic refreshment or our refresh endpoints. The default is `x-refresh-token`
-
-#### EnableAutoRefreshValidator
-
-If you enable the auto refresh validator setting, then cbsecurity will try to auto-refresh expired access tokens via the Validator security events. These events fire when a rule is detected or a secured annotation is detected.
-
-#### EnableRefreshEndpoint
-
-If enabled, the REST `cbsecurity/refreshToken` endpoint will be available for the application, so users can refresh their tokens.
+| Setting | Default | Description |
+| --- | --- | --- |
+| `enableRefreshTokens` | `false` | Turns on refresh tokens. Token creation methods then return a struct, `{ access_token, refresh_token }`, instead of a string. While it is `false`, using any refresh capability throws an exception. |
+| `refreshExpiration` | `10080` | Minutes until a refresh token expires. The default is 7 days. |
+| `customRefreshHeader` | `x-refresh-token` | The header inspected for refresh tokens, by the auto refresh validator and by the refresh endpoint. |
+| `enableAutoRefreshValidator` | `false` | The JWT validator tries to refresh expired access tokens by itself when a rule or secured annotation fires, and returns the new tokens as response headers (see below). |
+| `enableRefreshEndpoint` | `true` | Enables the `POST /cbsecurity/refreshtoken` endpoint so clients can refresh their tokens. |
 
 ## Token Creation
 

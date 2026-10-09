@@ -46,4 +46,4 @@ If you're using Microsoft SQL Server and experiencing SQL syntax errors in the D
 - [CBSecurity Documentation](https://coldbox-security.ortusbooks.com/)
 - [Source Code](https://github.com/coldbox-modules/cbsecurity)
 - [Issue Tracker](https://ortussolutions.atlassian.net/projects/BOX/issues)
-- [Database Configuration Guide](../../getting-started/configuration/firewall/rule-sources/untitled.md)
+- [Database Configuration Guide](../../getting-started/configuration/firewall/rule-sources/db-rules.md)
