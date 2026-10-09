@@ -11,7 +11,7 @@ cbsecurity registers itself from the `cbsecurity` key of your `moduleSettings` i
 
 ## Settings at a Glance
 
-This is every top-level key with the values most apps set. Each section links to its page for the full list of options.
+This is every top-level key with the values most apps set. Each section links to its page for the full list of options. If you want every setting with its default and a comment, see the [Full Configuration](full-configuration.md) reference.
 
 ```javascript
 moduleSettings = {
@@ -58,6 +58,7 @@ moduleSettings = {
 | `securityHeaders` | Host, IP, SSL, HSTS and other protections | [Security Headers](security-headers.md) |
 | `visualizer` | The rule debugging panel | [Visualizer](visualizer.md) |
 | `middleware`, `signedUrls` | Route middleware defaults and signed URLs | [Route Middleware](middleware.md) |
+| everything | All settings and defaults in one block | [Full Configuration](full-configuration.md) |
 
 ## ColdBox 7 Module Config File
 
