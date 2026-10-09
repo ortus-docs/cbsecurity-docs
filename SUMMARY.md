@@ -3,6 +3,7 @@
 * [Introduction](README.md)
   * [Release History](readme/release-history/README.md)
     * [What's new With 3.9.0](readme/release-history/whats-new-with-3.9.0.md)
+    * [What's new With 3.8.0](readme/release-history/whats-new-with-3.8.0.md)
     * [What's new With 3.7.0](readme/release-history/whats-new-with-3.7.0.md)
     * [What's New With 3.6.0](readme/release-history/whats-new-with-3.6.0.md)
     * [What's New With 3.5.0](readme/release-history/whats-new-with-3.5.0.md)
