@@ -53,7 +53,7 @@ moduleSettings = {
 | `authentication` | The service that logs users in and out | [Authentication](authentication.md) |
 | `firewall` | The validator, invalid actions, rules and logs | [Firewall](firewall/README.md) |
 | `jwt` | JSON Web Token creation, storage and refresh | [JWT](jwt.md) |
-| `csrf` | The `cbcsrf` module | [CSRF](csrf.md) |
+| `csrf` | The `cbcsrf` module | [Cross Site Request Forgery](../../usage/cross-site-request-forgery-cbcsrf.md) |
 | `basicAuth` | Basic Auth hashing and in-config users | [Basic Auth](basic-auth.md) |
 | `securityHeaders` | Host, IP, SSL, HSTS and other protections | [Security Headers](security-headers.md) |
 | `visualizer` | The rule debugging panel | [Visualizer](visualizer.md) |

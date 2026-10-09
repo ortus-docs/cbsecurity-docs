@@ -4,89 +4,20 @@ icon: bullhorn
 
 # JWT Interceptions
 
-The JWT Services will announce some key events for you to listen to
+The JWT services announce these events. Listen to them with an [interceptor](https://coldbox.ortusbooks.com/the-basics/interceptors) to audit, log or react to token activity. Each event passes the keys below in `interceptData`.
 
-* `cbSecurity_onJWTCreation` - Whenever a new token is generated for a user
-* `cbSecurity_onJWTInvalidation` - Whenever an invalidation occurs for a token
-* `cbSecurity_onJWTValidAuthentication` - Whenever a valid JWT token is parsed, tested and authenticated with the authentication services
-* `cbSecurity_onJWTInvalidUser` - When trying to find the token's subject and the user service returns null or not a valid user
-* `cbSecurity_onJWTInvalidClaims` - When the parsed token does not adhere to the required claims
-* `cbSecurity_onJWTExpiration` - When the parsed token has expired
-* `cbSecurity_onJWTStorageRejection` - When the parsed token is valid but cannot be found in the permanent storage
-* `cbSecurity_onJWTValidParsing` - When the parsed token has passed all validation procedures but has NOT been authenticated yet.
+| Event | Announced when | `interceptData` keys |
+| --- | --- | --- |
+| `cbSecurity_onJWTCreation` | A new token is generated for a user | `token`, `payload`, `user` |
+| `cbSecurity_onJWTInvalidation` | A token is invalidated | `token` |
+| `cbSecurity_onJWTValidAuthentication` | A valid token is parsed, tested and authenticated with the authentication services | `token`, `payload`, `user` |
+| `cbSecurity_onJWTInvalidUser` | The token's subject is not found: the user service returns null or an invalid user | `token`, `payload` |
+| `cbSecurity_onJWTInvalidClaims` | The parsed token does not have the required claims | `token`, `payload` |
+| `cbSecurity_onJWTExpiration` | The parsed token has expired | `token`, `payload` |
+| `cbSecurity_onJWTStorageRejection` | The parsed token is valid but is not in the permanent token storage | `token`, `payload` |
+| `cbSecurity_onJWTValidParsing` | The parsed token passed every validation but has NOT been authenticated yet | `token`, `payload` |
 
-## cbSecurity\_onJWTCreation
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                            |
-| --------- | -------------------------------------- |
-| `token`   | The JWT token                          |
-| `payload` | The payload that was used to create it |
-| `user`    | The user it belongs to                 |
-
-## cbSecurity\_onJWTInvalidation
-
-This event has the following data in the `interceptData` struct
-
-| Key     | Description                        |
-| ------- | ---------------------------------- |
-| `token` | The JWT token that was invalidated |
-
-## cbSecurity\_onJWTValidAuthentication
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                   |
-| --------- | ----------------------------- |
-| `token`   | The JWT token that was parsed |
-| `payload` | The payload that was decoded  |
-| `user`    | The authenticated user        |
-
-## cbSecurity\_onJWTInvalidUser
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                     |
-| --------- | ------------------------------- |
-| `token`   | The JWT token that was parsed   |
-| `payload` | The JWT payload that was parsed |
-
-## cbSecurity\_onJWTInvalidClaims
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                     |
-| --------- | ------------------------------- |
-| `token`   | The JWT token that was parsed   |
-| `payload` | The JWT payload that was parsed |
-
-## cbSecurity\_onJWTExpiration
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                     |
-| --------- | ------------------------------- |
-| `token`   | The JWT token that was parsed   |
-| `payload` | The JWT payload that was parsed |
-
-## cbSecurity\_onJWTStorageRejection
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                     |
-| --------- | ------------------------------- |
-| `token`   | The JWT token that was parsed   |
-| `payload` | The JWT payload that was parsed |
-
-## cbSecurity\_onJWTValidParsing
-
-This event has the following data in the `interceptData` struct
-
-| Key       | Description                     |
-| --------- | ------------------------------- |
-| `token`   | The JWT token that was parsed   |
-| `payload` | The JWT payload that was parsed |
+* `token` is the JWT string, `payload` is the decoded claims struct and `user` is the user the token belongs to.
 
 ## Example
 

@@ -42,7 +42,7 @@ moduleSettings = {
         },
 
         // --------------------------------------------------------------
-        // CSRF, passed to the cbcsrf module. See csrf.md
+        // CSRF, passed to the cbcsrf module. See usage/cross-site-request-forgery-cbcsrf.md
         // --------------------------------------------------------------
         csrf : {
             // Verify the token on every non GET request

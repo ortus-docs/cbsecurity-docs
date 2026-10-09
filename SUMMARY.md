@@ -27,7 +27,6 @@
 * [Configuration](getting-started/configuration/README.md)
   * [🔏 Authentication](getting-started/configuration/authentication.md)
   * [🥸 Basic Auth](getting-started/configuration/basic-auth.md)
-  * [🙈 CSRF](getting-started/configuration/csrf.md)
   * [🌐 JWT](getting-started/configuration/jwt.md)
   * [🧱 Firewall](getting-started/configuration/firewall/README.md)
     * [DB Rules](getting-started/configuration/firewall/rule-sources/untitled.md)

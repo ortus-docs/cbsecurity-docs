@@ -51,7 +51,7 @@ The validator will have the following validation process:
 * Verify the JWT exists via the `authorization` header or custom header `x-auth-token` or incoming `rc[ 'x-auth-token' ]`
 * Verify we can decode it
 * Verify if it has not expired from the token itself
-  * If you have enabled auto refresh tokens, check out the [refresh tokens process](refresh-tokens.md#enableautorefreshvalidator).
+  * If you have enabled auto refresh tokens, check out the [refresh tokens process](refresh-tokens.md#refresh-token-header-auto-refreshment).
 * Verify it has the required claims
 * If token storage is enabled, verify the token in the permanent storage
 * Verify the subject (`sub`) claim and try to retrieve the user it represents
